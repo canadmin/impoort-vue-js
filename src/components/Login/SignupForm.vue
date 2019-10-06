@@ -1,0 +1,164 @@
+<template>
+    <div class="container">
+  <transition name="slide" appear >          
+  <div v-if="currentPage == 1">       
+    <div class="row">
+        <div class="col">
+            <input type="text" class="form-control"
+            placeholder="First Name">            
+        </div>
+        <div class="col">
+            <input type="text" class="form-control"
+            placeholder="Last Name">            
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+              <input type="text" class="form-control"
+            placeholder="E-mail"> 
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+              <input type="text" class="form-control"
+            placeholder="Password"> 
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+              <input type="text" class="form-control"
+            placeholder="Re-Password"> 
+        </div>
+    </div>
+</div>
+</transition>
+<transition name="slide" appear>          
+<div v-if="currentPage == 2">       
+      <div class="row">
+        <div class="col">
+              <input type="tel" class="form-control"
+            placeholder="Phone Number"> 
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+              <input type="text" class="form-control"
+            placeholder="City"> 
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+              <input type="date" class="form-control"
+            placeholder="Date of Birth/established"> 
+        </div>
+    </div>
+     <div class="row mt-4">
+        <div class="col">
+            <h3>Gender</h3>
+             <div class="form-check-inline">
+                <input class="btn" type="button" id="MaleButton" @click="setGender('Male')" :class="selectedGender == 'Male' ? 'active': ''" value="  Male  ">
+            </div>
+            <div class="form-check-inline">
+                <input class="btn" type="button" id="MaleButton" @click="setGender('Famele')" :class="selectedGender == 'Famele' ? 'active': ''" value="Famale">
+            </div>
+            <div class="form-check-inline">
+                <input class="btn" type="button" id="MaleButton" @click="setGender('Optional')" :class="selectedGender == 'Optional' ? 'active': ''" value="Optional">
+            </div>
+            </p>
+        </div>
+    </div>
+</div>
+</transition>
+<transition name="slide" appear>          
+<div v-if="currentPage == 3">       
+      <div class="row">
+        <div class="col">
+              <input type="text" class="form-control"
+            placeholder="Ben bir neyim"> 
+        </div>
+    </div>
+     <div class="row mt-4">
+        <div class="col">
+              <input type="text" class="form-control"
+            placeholder="Sector"> 
+        </div>
+    </div>
+</div>
+</transition>
+    <div class="row mt-4">
+        <div class="col">
+          <button class="form-control btn btn-color" @click="nextPage(currentPage)">{{buttonPageName}}</button>
+        </div>
+    </div>
+    </div>
+</template>
+
+<script>
+export default {
+    data(){
+        return {
+            currentPage : 1,
+            buttonPageName : "Next",
+            selectedGender : "Optional"
+        }
+    },
+    methods : {
+        nextPage(currentPage){
+            if(currentPage>=2){
+                console.log("post gonderildi"+this.currentPage);
+                this.currentPage=3;
+                this.buttonPageName = "Complete"
+            }else{
+                this.currentPage++;
+                this.buttonPageName = "Next"
+            }
+        },
+        setGender(gender){
+            this.selectedGender = gender;
+        }
+    },
+   
+}
+</script>
+<style  scoped>
+.btn-color {
+    background-color: #60C4A9;
+    color: #ffffff;
+}
+
+
+.slide-enter{
+  opacity: 0;
+}
+
+.slide-enter-active{
+animation: slide-in 0.5s ease-out forwards;
+transition: opacity 0.5s;
+}
+
+.slide-leave{
+
+}
+.slide-leave-active{
+animation: slide-out 0s ease-out forwards;
+transition: opacity 0s;
+opacity: 0;
+
+}
+@keyframes slide-in{
+  from{
+    transform: translateX(400px);
+  }to{
+        transform: translateX(0px);
+
+  }
+}
+
+h3{
+ color: #60C4A9;  
+}
+.active{
+  color: #ffffff;
+  background-color: #60C4A9;
+}
+</style>
