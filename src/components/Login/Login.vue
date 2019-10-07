@@ -1,7 +1,8 @@
 <template>
-<div>
+
+<div class="">
+<app-nav class="pt-4 pb-4"></app-nav>
  <div class="mt-3"></div>    
-<app-nav></app-nav>
 <div class="back mt-2">
 <div class="container-fluid">
      <div class="mt-4">&nbsp</div>
@@ -32,8 +33,7 @@
  <div class="mt-4">&nbsp</div>
      <div class="mt-4">&nbsp</div>
 </div>
-
-
+<app-footer></app-footer>
 </div>
 </template>
 
@@ -41,6 +41,7 @@
 import LoginNav from "./LoginNav";
 import SignUpForm from "./SignupForm";
 import LoginForm from "./LoginForm";
+import LoginFooter from "./LoginFooter";
 export default {
     data(){
         return {
@@ -50,7 +51,8 @@ export default {
     components : {
         appNav : LoginNav,
         appSignup :SignUpForm,
-        appLogin : LoginForm
+        appLogin : LoginForm,
+        appFooter : LoginFooter
     },
     methods :{
         changeForm(activeForm){
@@ -87,6 +89,9 @@ export default {
 .image{
     opacity: 0.75;
 }
-
+.fill { 
+    min-height: 100%;
+    height: 100%;
+}
 
 </style>

@@ -8,7 +8,7 @@
     </div>
     <div class="row mt-4">
         <div class="col">
-              <input type="text" class="form-control"
+              <input type="password" class="form-control"
             placeholder="Password"> 
         </div>
     </div>

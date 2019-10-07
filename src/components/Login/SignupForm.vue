@@ -14,19 +14,19 @@
     </div>
     <div class="row mt-4">
         <div class="col">
-              <input type="text" class="form-control"
+              <input type="email" class="form-control"
             placeholder="E-mail"> 
         </div>
     </div>
     <div class="row mt-4">
         <div class="col">
-              <input type="text" class="form-control"
+              <input type="password" class="form-control"
             placeholder="Password"> 
         </div>
     </div>
     <div class="row mt-4">
         <div class="col">
-              <input type="text" class="form-control"
+              <input type="password" class="form-control"
             placeholder="Re-Password"> 
         </div>
     </div>
@@ -73,14 +73,19 @@
 <div v-if="currentPage == 3">       
       <div class="row">
         <div class="col">
-              <input type="text" class="form-control"
-            placeholder="Ben bir neyim"> 
+             <p>Ben bir
+            <select class="browser-default custom-select">
+                    <option value="1">Geliştiriciyim</option>
+                    <option value="2">Yatırımcıyım</option>
+                    <option value="3">Startup'ım</option>
+            </select>
+            </p>
         </div>
     </div>
      <div class="row mt-4">
         <div class="col">
               <input type="text" class="form-control"
-            placeholder="Sector"> 
+            placeholder="Sektör"> 
         </div>
     </div>
 </div>
@@ -147,7 +152,7 @@ opacity: 0;
 }
 @keyframes slide-in{
   from{
-    transform: translateX(400px);
+    transform: translateX(100px);
   }to{
         transform: translateX(0px);
 
@@ -155,6 +160,9 @@ opacity: 0;
 }
 
 h3{
+ color: #60C4A9;  
+}
+p{
  color: #60C4A9;  
 }
 .active{
