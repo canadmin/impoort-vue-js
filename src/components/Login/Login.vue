@@ -30,8 +30,7 @@
     </div>
   </div>
 </div>
- <div class="mt-4">&nbsp</div>
-     <div class="mt-4">&nbsp</div>
+ 
 </div>
 <app-footer></app-footer>
 </div>

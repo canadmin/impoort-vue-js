@@ -141,9 +141,7 @@ animation: slide-in 0.5s ease-out forwards;
 transition: opacity 0.5s;
 }
 
-.slide-leave{
 
-}
 .slide-leave-active{
 animation: slide-out 0s ease-out forwards;
 transition: opacity 0s;

@@ -16,6 +16,8 @@ export default {
 <style >
 .nav-bar{
     background: #FFFEFF;
+        cursor: pointer;
+
 }
 .element-p-color {
     color :#60C4A9;

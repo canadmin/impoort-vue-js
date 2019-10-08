@@ -1,14 +1,15 @@
 <template>
 <div>
- <app-login></app-login>
+  <router-view></router-view>
 </div>
 </template>
 
 <script>
-import Login from "./components/Login/Login";
+
+
 export default {
   components : {
-    appLogin : Login
+  
   }
 }
 </script>

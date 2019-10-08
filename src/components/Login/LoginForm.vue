@@ -14,7 +14,7 @@
     </div>
     <div class="row mt-4">
         <div class="col">
-          <button class="form-control btn btn-color">Kayit Ol</button>
+            <router-link to="/index" tag="button" class="form-control btn btn-color">Login</router-link>
         </div>
     </div>
 
@@ -23,7 +23,11 @@
 
 <script>
 export default {
-    
+    data(){
+        return {
+            navigationLink : {name : "index"}
+        }
+    }
 }
 </script>
 
