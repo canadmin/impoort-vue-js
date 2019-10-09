@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid last-watched-bg mt-5  mr text-center p-5">
+    <div class="container-fluid last-watched-bg  mr text-center p-5">
         <h3 class="title-text">Last Watched</h3>
     <img  src="../../assets/watched.png" height="30" width="30"/>
 
@@ -31,6 +31,8 @@ export default {
   position: sticky;
   top: 0;
   border-radius: 15px;
+display: flex;
+  flex-direction: column;
   opacity: 0.75;
 
 

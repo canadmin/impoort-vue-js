@@ -1,16 +1,14 @@
 <template>
 <div>
-    <app-header></app-header>
     <div class="container-fluid">
     <div class="row">
     <div class="col-3">
-             <sidebar-menu :menu="menu" :widthCollapsed="'80px'" :width="'300px'"  /> 
+     <sidebar-menu :menu="menu" :widthCollapsed="'80px'" :width="'300px'"  /> 
     </div>
-    <div class="col-6 mt-5 ">
+    <div class="col-6 ">
         <app-post v-for="a in 8"></app-post>
-        <div class="mt-5">&nbsp</div>
     </div>
-    <div class="col-3 mt-4">
+    <div class="col-3 ">
         <app-last-watched></app-last-watched>
     </div>
     </div>
@@ -132,7 +130,6 @@ export default {
 .icon-profile {
     background: url('../../assets/profile.png');
     height: 50px;
-    width: 50px;
 }
 .v-sidebar-menu .vsm--link_level-1 .vsm--icon {
     height: 50px;
