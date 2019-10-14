@@ -1,18 +1,17 @@
 <template>
     <div class="container ">
         <div class="row">
-            <div class="col-8 main-post mt-4 mb-2">
-                <div class="col p-3"></div>
-                    <img v-bind="mainProps" class="post-image" rounded="circle" alt="Circle image" src="../../assets/stonks.jpg"></img>
-                     
-                     <span > <b class="post-name">Barancan Yardımcı</b> </span> 
+            <div class="col-10 main-post mt-4 mb-2">
+                <div class="col p-2"></div>
+                    <img v-bind="mainProps" class="post-image" rounded="circle" alt="Circle image" src="../../assets/pp.jpeg"></img>
+
+                     <span > <b class="post-name">Barancan Yardımcı</b> </span>
                      <span class="float-right">5 gün önce</span>
-                     <p class="d-flex  justify-content-center">Java Developer</p>
                      <hr>
 
                      <div>
                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate velit, ut sequi aliquid id impedit pariatur hic soluta
-                          at accusamus error expedita, deserunt ex quam quis maxime autem numquam consequuntur. Deleniti soluta, maiores illum dicta sint 
+                          at accusamus error expedita, deserunt ex quam quis maxime autem numquam consequuntur. Deleniti soluta, maiores illum dicta sint
                           eniam tempora esse consequatur sed asperiores quasi eligendi eveniet cum doloribus excepturi molestias delectus.
                      </div>
                     <hr>
@@ -37,10 +36,10 @@
 export default {
     data() {
         return {
-           mainProps: { blank: true, blankColor: '#777', width: 75, height: 75, class: 'm1', },
+           mainProps: { blank: true, blankColor: '#777', width: 50, height: 50, class: 'm1', },
            like : false,
            watch : false,
-            
+
         }
     },
     methods : {
