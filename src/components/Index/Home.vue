@@ -2,10 +2,10 @@
   <div>
     <app-header></app-header>
     <div class="row">
-    <div :class="!isCollapse ? 'col-3' : 'col-1' ">
+    <div :class="!isCollapse ? 'col-2' : 'col-1' ">
       <app-side-bar @collapse="isCollapse = $event"></app-side-bar>
     </div>
-      <div :class="!isCollapse ? 'col-9' : 'col-11' ">
+      <div :class="!isCollapse ? 'col-10' : 'col-11' ">
         <router-view :isCollapse="isCollapse"></router-view>
       </div>
     </div>

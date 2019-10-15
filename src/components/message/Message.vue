@@ -1,6 +1,6 @@
 <template>
   <div class="row message-row mt-5">
-    <div class=" h-100 mt-5 message-box " :class="!isCollapse ? 'col-7' : 'col-9' ">
+    <div class=" h-100 mt-5 message-box " :class="!isCollapse ? 'col-8' : 'col-9' ">
       <div class="message-top-bar">
         <div class="text-center pt-2">
           <img src="../../assets/pp.jpeg" height="50" width="50" class="general-image">
@@ -90,35 +90,35 @@
               container.scrollTop = container.scrollHeight;
           },
             sendMessage(event){
-              let lastIndex=this.messagesList.length;
-              let key=this.messagesList[lastIndex-1].key;
+                let lastIndex=this.messagesList.length;
+                let key=this.messagesList[lastIndex-1].key;
                 this.messagesList.push({key :key, value : {byWho: "me",messagePayload : event.target.value}});
                 this.messagesList.push({key :key+1 , value : {byWho: "yusuf",messagePayload : "Merhaba Can Nasılsın"}});
                 this.messageText="";
-                var container = this.$el.querySelector(".message-messages-inline");
-                container.scrollTop = container.scrollHeight;
-
+                let container = this.$el.querySelector(".message-messages-inline");
+                container.scrollTop = container.scrollHeight+250;
             },
+
+
 
         },
         created(){
             this.initialMessage();
         },
+
         watch: {
             messageText(value) {
-                if (value != null && value === "") {
-                    this.showButton = false;
-
-                } else {
-                    this.showButton = true;
-                }
+                this.showButton = !(value != null && value === "");
             },
-        }
+
+        },
+
     }
 </script>
 <style scoped>
   .message-row {
     height: 95vh;
+
   }
 
   .message-general {
@@ -133,6 +133,7 @@
     height: 95%;
     position: fixed;
     background-color: #ffffff;
+
   }
 
   .general-name {
@@ -150,6 +151,11 @@
     width: 175px;
     padding-left: 15px;
     height: 35px;
+
+  }
+  .general-search:focus{
+    transition: width 500ms ease-in-out;
+    width: 250px;
   }
 
   .single-general {
@@ -172,6 +178,7 @@
     margin-top: 15px;
     background-color: #F8F1FA;
     overflow-y: scroll;
+
   }
 
   .message-messages-input {
@@ -179,6 +186,7 @@
     margin-top: 15px;
     background-color: #246590;
     opacity: 0.5;
+
   }
 
   .message-input {
@@ -189,6 +197,7 @@
     height: 50px;
     border-radius: 10px;
     border: 0;
+    transition: width 500ms ease-in-out;
     padding-left: 10px;
   }
 
