@@ -9,7 +9,7 @@
 
 export default {
   components : {
-  
+
   }
 }
 </script>
@@ -17,7 +17,8 @@ export default {
 <style>
 body{
       background-color: #F8F1FA;
-
 }
+  html{
+  }
 
 </style>
