@@ -5,7 +5,7 @@
         <div class="col p-2"></div>
         <img v-bind="mainProps" class="post-image" rounded="circle" alt="Circle image" src="../../assets/pp.jpeg"></img>
 
-        <span> <b class="post-name">Barancan Yardımcı</b> </span>
+        <span> <b class="post-name">Can Yardımcı</b> </span>
         <span class="float-right">5 gün önce</span>
         <hr>
 

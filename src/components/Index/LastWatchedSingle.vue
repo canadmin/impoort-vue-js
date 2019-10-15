@@ -1,7 +1,7 @@
 <template>
   <div class="  main-post  mt-4">
     <div>
-      <span class="watched-name"> <b>Barancan Yardımcı</b> (Java Developer) </span>
+      <span class="watched-name"> <b>Can Yardımcı</b> (Java Developer) </span>
     </div>
     <div class="watched-name">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
     <hr>

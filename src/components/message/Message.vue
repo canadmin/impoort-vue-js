@@ -4,7 +4,7 @@
       <div class="message-top-bar">
         <div class="text-center pt-2">
           <img src="../../assets/pp.jpeg" height="50" width="50" class="general-image">
-          <h3><p class="general-name mt-3">Barancan Yardımcı</p></h3>
+          <h3><p class="general-name mt-3">Can Yardımcı</p></h3>
         </div>
       </div>
       <div class="message-messages-inline">
@@ -43,7 +43,7 @@
         <div class="mt-4">
           <div class="p-1 single-general mt-2">
             <img src="../../assets/pp.jpeg" height="50" width="50" class="general-image">
-            <span class="general-name">Barancan yardımcı</span>
+            <span class="general-name">Can yardımcı</span>
           </div>
 
           <div class="p-1 single-general mt-2">

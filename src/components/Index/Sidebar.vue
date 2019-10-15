@@ -1,12 +1,13 @@
 <template>
   <div class="" :class="collapse ? 'sidebar-collapse' : 'sidebar' ">
+    <div class="w-100 text-center"><img class="profil-pp mt-5 " src="../../assets/pp.jpeg" height="80" width="80"/>
+    <p class="side-name mt-3">Can Yardımcı</p></div>
     <ul class="list-group mt-5">
       <li class="ml-2 mr-2" > <img  src="../../assets/mainpage.png" height="50" width="50"/><span v-if="!collapse" class="ml-5">Ana Sayfa</span></li>
       <li class="ml-2 mr-2"> <img  src="../../assets/search.png" height="50" width="50"/><span v-if="!collapse" class="ml-5">Arama</span></li>
       <li class="ml-2 mr-2"> <img  src="../../assets/share.png" height="50" width="50"/><span v-if="!collapse" class="ml-5">Paylas</span></li>
       <li class="ml-2 mr-2"> <img  src="../../assets/messages.png" height="50" width="50"/><span v-if="!collapse" class="ml-5">Mesajlarim</span></li>
       <li class="ml-2 mr-2"> <img  src="../../assets/watched.png" height="50" width="50"/><span v-if="!collapse" class="ml-5">Izlediklerim</span></li>
-      <li class="ml-2 mr-2"> <img class="profil-pp" src="../../assets/pp.jpeg" height="50" width="50"/><span v-if="!collapse" class="ml-5">Profil</span></li>
     </ul>
     <div class="toggle-button d-flex justify-content-center text-center"@click="collapseSide" >
       <span> <- </span>
@@ -75,7 +76,7 @@ li:hover{
     background: #1b1e21;
   }*/
 .sidebar-collapse{
-  width: 80px;
+  width: 90px;
   height: 100%;
   background: rgb(36,101,144);
   background: linear-gradient(180deg, rgba(36,101,144,1) 0%, rgba(41,110,146,1) 64%, rgba(95,194,169,0.7819502801120448) 100%);
@@ -88,4 +89,8 @@ li:hover{
 .profil-pp{
   border-radius: 50px;
 }
+  .side-name{
+    color: white;
+    font-size: 13px;
+  }
 </style>
