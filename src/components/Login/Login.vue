@@ -68,7 +68,7 @@
   }
 
   .bg-left {
-    background-image: linear-gradient(to top, #60c4a9, #30aeab, #0096a9, #007ea0, #246590);
+    background-color: #283e4a;
   }
 
 
