@@ -3,8 +3,6 @@
       <img src="../../assets/pp.jpeg" class="left-image" width="50" height="50" >
       <hr>
     </div>
-
-
 </template>
 
 <script>

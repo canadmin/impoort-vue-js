@@ -6,16 +6,34 @@
       </div>
       <hr>
       <div class="box-users">
-        <div class="box-user-single ">
+        <div class="box-user-single" @click="openNewMessageBox('Yusuf Ali Cezik')">
           <div class="p-2">
             <img src="../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
-            <span class="ml-2 ">Yusuf Ali Ezik</span>
+            <span class="ml-2 ">Yusuf Ali Cezik</span>
+          </div>
+        </div>
+        <div class="box-user-single" @click="openNewMessageBox('Can Yardımcı')">
+          <div class="p-2">
+            <img src="../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
+            <span class="ml-2 ">Can yardımcı</span>
           </div>
         </div>
 
       </div>
     </div>
-      <app-single-chat></app-single-chat>
+    <!--messageBox-->
+    <div v-for="(messageBox,index) in messageBoxList">
+      <div v-if="index === 0">
+      <div class="chatfalan" :style="{left:(index+1)*left+'px'}">
+        <app-single-chat v-if="messageBoxCount != 0" :messageBox="messageBox" :index="index"></app-single-chat>
+      </div>
+      </div>
+      <div v-else>
+        <div class="chatfalan" :style="{left:(index+1)*380+'px'}">
+          <app-single-chat v-if="messageBoxCount != 0" :messageBox="messageBox" :index="index"></app-single-chat>
+        </div>
+      </div>
+    </div>
   </div>
 
 </template>
@@ -25,11 +43,31 @@
     export default {
         data() {
             return {
-                isCollapseMessages: false
+                isCollapseMessages: false,
+                left :400,
+                messageBoxCount : 0,
+                messageBoxList : []
             }
         },
         components:  {
             appSingleChat:IndexSingleChatBox
+        },
+        methods : {
+            openNewMessageBox(value){
+               let messageBox = {isim : value};
+                let lengthOfList= this.getMessageBoxList;
+                this.$store.dispatch("addNewMessageBox",messageBox);
+                this.messageBoxCount=this.getMessageBoxList.length;
+                this.messageBoxList = this.getMessageBoxList;
+
+
+            },
+
+        },
+        computed : {
+            getMessageBoxList(){
+                return this.$store.getters.getMessageBox;
+            }
         }
     }
 </script>
@@ -82,6 +120,13 @@
   .message-toggle {
     cursor: pointer;
   }
+.chatfalan{
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
 
+
+
+}
 
 </style>

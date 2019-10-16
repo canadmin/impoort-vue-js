@@ -2,7 +2,7 @@
   <div>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-4 mt-5  ">
+        <div class="col-4 mt-5">
           <app-messages-box></app-messages-box>
         </div>
         <div class="col-4 mt-5">
