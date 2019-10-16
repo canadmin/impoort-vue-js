@@ -1,14 +1,12 @@
 <template>
   <div class="container ">
-    <div class="row">
-      <div class="col-12 main-post mt-4 mb-2">
-        <div class="col p-2"></div>
+    <div class="row ">
+      <div class="col-12 main-post  card-body mb-n4">
         <img v-bind="mainProps" class="post-image" rounded="circle" alt="Circle image" src="../../assets/pp.jpeg"></img>
 
         <span> <b class="post-name">Can Yardımcı</b> </span>
         <span class="float-right">5 gün önce</span>
         <hr>
-
         <div>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate velit, ut sequi aliquid id impedit pariatur
           hic soluta
@@ -18,15 +16,15 @@
           delectus.
         </div>
         <hr>
-        <div class="row p-1 text-center mt-n3">
+        <div class="row  text-center mt-n3 mb-n2">
           <div class="col-4" @click="like = !like">
-            <img :src="like ? getImageUrl('liked') : getImageUrl('like')" height="30" width="30">
+            <img :src="like ? getImageUrl('liked') : getImageUrl('like')" height="25" width="25">
           </div>
           <div class="col-4">
-            <img src="../../assets/comment.png" height="30" width="30"/>
+            <img src="../../assets/like.png" height="25" width="25"/>
           </div>
           <div class="col-4" @click="watch = !watch">
-            <img :src="watch ? getImageUrl('watched') : getImageUrl('watch')" height="30" width="30"/>
+            <img :src="watch ? getImageUrl('watched') : getImageUrl('like')" height="25" width="25"/>
           </div>
         </div>
       </div>
@@ -35,7 +33,7 @@
 </template>
 
 <script>
-    //v-bind:src="like ? '/src/assets/like.png' : ''"
+    //v-bind:src="like.png ? '/src/assets/like.png.png' : ''"
     export default {
         data() {
             return {
@@ -57,6 +55,7 @@
   .main-post {
     background-color: #ffffff;
     border-radius: 12px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
   }
 
   .post-image {

@@ -1,64 +1,65 @@
 <template>
-  <div class="row message-row mt-5">
-    <div class=" h-100 mt-5 message-box " :class="!isCollapse ? 'col-8' : 'col-9' ">
-      <div class="message-top-bar">
-        <div class="text-center pt-2">
-          <img src="../../assets/pp.jpeg" height="50" width="50" class="general-image">
-          <h3><p class="general-name mt-3">Can Yardımcı</p></h3>
-        </div>
-      </div>
-      <div class="message-messages-inline">
-        <div v-for="message in messagesList">
-          <div v-show="message.value.byWho != 'me'" >
-          <div class="d-inline-block ml-4 mt-4">
-            <img src="../../assets/pp.jpeg" height="50" width="50" class="general-image">
-          </div>
-          <div class="message-data d-inline-block">
-            <div class="message-payload-receive">{{message.value.messagePayload}}</div>
-          </div>
-        </div>
-        <div class="message-message-me mb-2" v-if="message.value.byWho == 'me'">
-          <span class="message-payload-me mr-4">{{message.value.messagePayload}}</span>
-        </div>
-        </div>
+  <div class="message-row h-100">
+    <div class="container ">
+      <div class="col-12 message-component mt-5">
+        <div class="row">
+            <div class="col-3  bg-white message-general">
+              <div class="mt-5 text-center">
+                <span class="">Messages</span>
+                <hr>
+              </div>
+              <div class="general-user mt-3 ml-4">
+                <div class="general-user-single mb-3">
+                    <img src="../../assets/pp.jpeg" class="general-user-single-img " width="50" height="50">
+                    <span class="ml-3 general-user-single-name">Can Yardımcı</span>
+                </div>
+                <div class="general-user-single mb-3">
+                    <img src="../../assets/pp.jpeg" class="general-user-single-img" width="50" height="50">
+                    <span class="ml-3 general-user-single-name">Yusuf Ali Ezik</span>
+                </div>
+                <div class="general-user-single mb-3">
+                  <img src="../../assets/pp.jpeg" class="general-user-single-img" width="50" height="50">
+                  <span class="ml-3 general-user-single-name">Hasan Cerit</span>
+                </div>
+                <div class="general-user-single mb-3">
+                  <img src="../../assets/pp.jpeg" class="general-user-single-img" width="50" height="50">
+                  <span class="ml-3 general-user-single-name">Mehmet Burak</span>
+                </div>
 
-      </div>
-      <div class=" message-messages-input">
-        <input type="text" placeholder="Mesajını gir" :class="showButton? 'message-input-withButton' : 'message-input'"
-               v-model="messageText" @keydown.enter="sendMessage">
-        <button v-show="showButton" class="message-send-button">Gonder</button>
-      </div>
-    </div>
+              </div>
+            </div>
+            <div class="col-9  bg-white message-box">
+              <!-- Message Box header-->
+              <div class="message-box-header mt-3 text-right mr-5">
+                  <img class="general-user-single-img" src="../../assets/pp.jpeg" width="50" height="50">
+                  <span class="mr-5 general-user-single-name">Can Yardımcı</span>
+              </div>
+              <hr>
+              <!-- mesajlar -->
+              <div class="messages-box ">
+                <div v-for="message in messagesList">
+                <!--- message to me -->
+                  <div class="mt-3 ml-3 other-user" v-show="message.value.byWho != 'me'" >
+                   <img class="general-user-single-img" src="../../assets/pp.jpeg" width="40" height="40">
+                    <div class="message-from-other ">
+                      <span class="ml-3 general-user-single-name">{{message.value.messagePayload}}</span>
+                    </div>
+                    <!--- message from me -->
+                    </div>
+                    <div class="user-me" v-if="message.value.byWho == 'me'">
+                    <div class="message-from-me  mt-3  float-right">
+                      <span class="mr-5 general-user-single-name">{{message.value.messagePayload}}</span>
+                    </div>
+                    </div>
+                </div>
+              </div>
+              <!-- mesaj input alanı -->
+               <div class="mt-3 ">
+                <input type="text"  v-model="messageText" @keydown.enter="sendMessage"  :class="!showButton ? 'message-input-text': 'message-input-with-button'" placeholder="Write a message ...">
+                <button class=" send-button ml-4" v-show="showButton"> Gönder </button>
+               </div>
 
-    <div class="col-2  message-general">
-      <div class="">
-        <div class="text-center mt-4">
-          <span class="general-name"> <h4>Messages</h4></span>
-        </div>
-        <hr>
-        <div class="d-flex justify-content-center ">
-          <input type="text" placeholder="Search" class="general-search"/>
-        </div>
-        <hr>
-        <div class="mt-4">
-          <div class="p-1 single-general mt-2">
-            <img src="../../assets/pp.jpeg" height="50" width="50" class="general-image">
-            <span class="general-name">Can yardımcı</span>
-          </div>
-
-          <div class="p-1 single-general mt-2">
-            <img src="../../assets/pp.jpeg" height="50" width="50" class="general-image">
-            <span class="general-name">Yusuf Ali Çezik</span>
-          </div>
-
-          <div class="p-1 single-general mt-2">
-            <img src="../../assets/pp.jpeg" height="50" width="50" class="general-image">
-            <span class="general-name">Hasan Cerit</span>
-          </div>
-          <div class="p-1 single-general mt-2">
-            <img src="../../assets/pp.jpeg" height="50" width="50" class="general-image">
-            <span class="general-name"> Burak Hammuşoğlu</span>
-          </div>
+            </div>
         </div>
       </div>
     </div>
@@ -72,40 +73,29 @@
             return {
                 showButton: false,
                 messageText: null,
-                messagesList : [
-              ]
+                messagesList: []
             }
         },
-        props : {
-            isCollapse : {
-                type : Boolean,
-                default : false
-            }
-        },
-        methods : {
-          initialMessage(){
-              this.messagesList.push({key :1 , value : {byWho: "yusuf",messagePayload : "Merhaba Can Nasılsın"}});
-              this.messagesList.push({key :2 , value : {byWho: "me",messagePayload : "Merhaba, Teşekkürler sen nasılsın"}});
-              var container = this.$el.querySelector(".message-messages-inline");
-              container.scrollTop = container.scrollHeight;
-          },
-            sendMessage(event){
-                let lastIndex=this.messagesList.length;
-                let key=this.messagesList[lastIndex-1].key;
-                this.messagesList.push({key :key, value : {byWho: "me",messagePayload : event.target.value}});
-                this.messagesList.push({key :key+1 , value : {byWho: "yusuf",messagePayload : "Merhaba Can Nasılsın"}});
-                this.messageText="";
-                let container = this.$el.querySelector(".message-messages-inline");
-                container.scrollTop = container.scrollHeight+250;
+        methods: {
+            initialMessage() {
+                this.messagesList.push({key: 1, value: {byWho: "yusuf", messagePayload: "Merhaba Can Nasılsı asdasdasdasdasd asd asd asd asda sdas dasd asn"}});
+                this.messagesList.push({
+                    key: 2,
+                    value: {byWho: "me", messagePayload: "Merhaba, Teşekkürler sen nasılsın"}
+                });
+
             },
-
-
-
+            sendMessage(event) {
+                let lastIndex = this.messagesList.length;
+                let key = this.messagesList[lastIndex - 1].key;
+                this.messagesList.push({key: key, value: {byWho: "me", messagePayload: event.target.value}});
+                this.messagesList.push({key: key + 1, value: {byWho: "yusuf", messagePayload: "Merhaba Can Nasılsın"}});
+                this.messageText = "";
+            },
         },
-        created(){
+        created() {
             this.initialMessage();
         },
-
         watch: {
             messageText(value) {
                 this.showButton = !(value != null && value === "");
@@ -116,136 +106,103 @@
     }
 </script>
 <style scoped>
-  .message-row {
-    height: 95vh;
-
-  }
-
   .message-general {
+    background-color: white;
+    height: 700px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
+    transition: box-shadow 83ms;
+  }
+  .message-box{
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
+    transition: box-shadow 83ms;
+  }
+
+  .message-row{
+    margin-top: 5rem;
+
+  }
+  .general-user{
     overflow-y: auto;
-    position: fixed;
-    height: 95vh;
-    right: 0;
-    background-color: #60C4A9;
-  }
-
-  .message-box {
-    height: 95%;
-    position: fixed;
-    background-color: #ffffff;
-
-  }
-
-  .general-name {
-    color: white;
-  }
-
-  .general-image {
-    border-radius: 50px;
-  }
-
-  .general-search {
-    border-radius: 10px;
-    border-color: #60C4A9;
-    border: 0;
-    width: 175px;
-    padding-left: 15px;
-    height: 35px;
-
-  }
-  .general-search:focus{
-    transition: width 500ms ease-in-out;
+    height: 500px;
     width: 250px;
   }
-
-  .single-general {
-    border-radius: 5px;
-  }
-
-  .single-general:hover {
-    background-color: #246590;
+  .general-user-single:hover{
+    background-color: #f5f5f5;
     cursor: pointer;
   }
-
-  .message-top-bar {
-    width: 100%;
-    height: 15%;
-    background-color: #60C4A9;
+  .general-user-single-img{
+    border-radius: 50%;
   }
-
-  .message-messages-inline {
-    height: 55%;
-    margin-top: 15px;
-    background-color: #F8F1FA;
-    overflow-y: scroll;
-
+  .general-user-single-name{
+    font-size: 13px;
   }
-
-  .message-messages-input {
-    height: 10%;
-    margin-top: 15px;
-    background-color: #246590;
-    opacity: 0.5;
-
-  }
-
-  .message-input {
-    width: 95%;
-    position: absolute;
-    margin-top: 15px;
-    margin-left: 15px;
-    height: 50px;
-    border-radius: 10px;
-    border: 0;
-    transition: width 500ms ease-in-out;
-    padding-left: 10px;
-  }
-
-  .message-input-withButton {
+  hr{
     width: 85%;
-    margin-top: 15px;
-    margin-left: 15px;
-    height: 50px;
-    border-radius: 10px;
-    border: 0;
-    padding-left: 10px;
   }
-
-  .message-send-button {
-    margin-left: 35px;
-    height: 50px;
-    border-radius: 15px;
-    border: 0;
+  .messages-box{
+    height: 500px;
+    overflow-y: visible;
+    overflow-x: hidden;
+    background-color: #F5F5F5;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
+    transition: box-shadow 83ms;
   }
-
-  .message-payload-receive {
+  .message-from-other{
     width: 250px;
+    display: inline-flex;
     background-color: #60C4A9;
-    height: auto;
-    min-height: 40px;
-    padding: 15px;
-    border-radius: 10px;
-    margin-left: 15px;
-    color: white;
-  }
-
-  .message-payload-me {
-    display: contents;
-
-  }
-
-  .message-message-me {
-    width: 300px;
-    margin-left: auto;
-    margin-right: 0;
-    background-color: #246590;
     padding: 10px;
     color: white;
-    min-height: 60px;
+    border-radius: 0  10px 10px 10px;
 
-    border-radius: 15px 0 15px 15px;
+  }
+  .message-from-me{
+    width: 250px;
+    display: inline-flex;
+    background-color: #283E4A;
+    margin-right: 15px;
+    padding: 10px;
+    color: white;
+    border-radius: 10px 0 10px 10px;
+  }
+  .message-input-text{
+    width: 100%;
+    border-radius: 5px;
+    border: 0;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
+    background-color: #f5f5f5;
+    height: 35px;
+    padding-left: 10px;
+  }
+  .message-input-with-button{
+    width: 85%;
+    border-radius: 5px;
+    border: 0;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
+    background-color: #f5f5f5;
+    height: 35px;
+    padding-left: 10px;
+  }
+  .send-button{
+    background-color: #f5f5f5;
+    border: 0;
+    height: 35px;
+    color: #283E4A;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
+  }
+  .send-button:hover{
+    background-color:#283E4A ;
+    color: #f5f5f5;
 
-
+  }
+  .other-user{
+    width: 700px;
+    display: inline-block;
+  }
+  .user-me{
+    width: 750px;
+    float: right;
+    display: inline-block;
   }
 </style>
 

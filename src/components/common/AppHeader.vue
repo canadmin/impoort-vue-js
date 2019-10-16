@@ -1,17 +1,17 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg fixed-top navbar-light background">
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <img class="asdfff" height="50" width="150" src="../../assets/logo.png">
+      <div class="collapse navbar-collapse">
+        <img src="../../assets/pp.jpeg" class="main-pp-image" width="45" height="45" >
 
-        <ul class="navbar-nav mr-auto">
+        <img src="../../assets/main.png" class="main-logo" width="25" height="25" >
+        <img src="../../assets/messages.png" class="messages-logo" width="25" height="25" >
+        <img src="../../assets/watch.png" class="messages-logo" width="25" height="25" >
+        <img src="../../assets/profil.png" class="messages-logo" width="25" height="25" >
 
-        </ul>
+        <img class="asdfff" height="35" width="135" src="../../assets/logo.png">
 
-        <form class="form-inline my-2 my-lg-0 mr-5 search-from">
-          <input class=" mr-sm-2 search-button" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <input class=" mr-sm-2 search-button" type="search" placeholder="Search" aria-label="Search">
 
       </div>
     </nav>
@@ -19,7 +19,8 @@
   </div>
 </template>
 <script>
-    export default {
+
+  export default {
         data() {
             return {
                 mainProps: {blank: true, blankColor: '#777', width: 40, height: 40, class: 'm1',},
@@ -30,8 +31,8 @@
 </script>
 <style>
   .background {
-    background-color: #246590;
-    height: 50px;
+    background-color: #283e4a;
+    height: 55px;
   }
 
   .post-image {
@@ -39,29 +40,42 @@
   }
 
   .asdfff {
-    margin-left: 50%;
     cursor: pointer;
+    margin-left:13%;
   }
 .search-button{
   width: 70px;
   border: 0;
-  height: 40px;
+  right: 0;
+  height: 30px;
   border-radius: 10px;
   padding-left: 5px;
 }
 .search-from{
-  margin-right:0!important;
+    margin-left: 50%;
+
 }
   .search-button{
     width: 250px;
     border: 0;
-    height: 40px;
-    border-radius: 10px;
-    padding-left: 5px;
+    height: 30px;
+    border-radius: 2px;
+  margin-left: 260px
   }
   .search-button:focus{
     width: 350px;
     transition: width 500ms ease-in-out;
   }
-
+  .main-logo{
+    margin-left: 35px;
+    cursor: pointer;
+  }
+  .messages-logo{
+    margin-left: 50px;
+    cursor: pointer;
+  }
+.main-pp-image{
+  border-radius: 50%;
+  margin-left: 300px;
+}
 </style>
