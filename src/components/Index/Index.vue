@@ -4,6 +4,7 @@
       <div class="row">
         <div class="col-4 mt-5">
           <app-messages-box></app-messages-box>
+          <app-left-side></app-left-side>
         </div>
         <div class="col-4 mt-5">
           <div class="share-new-post text-center mt-5 bg-white ">
@@ -17,7 +18,7 @@
           <app-post v-for="a in 8" class="mt-5"></app-post>
         </div>
         <div class="col-4 mt-5 text-center ">
-          <app-left-side ></app-left-side>
+          <app-right-side ></app-right-side>
         </div>
       </div>
     </div>
@@ -26,14 +27,16 @@
 
 <script>
     import Post from "../post/Post";
-    import IndexLeftSide from "./IndexRightSide";
-    import IndexMessagesBox from "./IndexMessagesBox";
+    import IndexRightSide from "./sideComponents/IndexRightSide";
+    import IndexMessagesBox from "./chatBox/IndexMessagesBox";
+    import IndexLeftSide from "./sideComponents/IndexLeftSide";
     export default {
 
         components: {
             appPost: Post,
-            appLeftSide:IndexLeftSide,
-            appMessagesBox: IndexMessagesBox
+            appRightSide:IndexRightSide,
+            appMessagesBox: IndexMessagesBox,
+            appLeftSide :IndexLeftSide
         },
 
 

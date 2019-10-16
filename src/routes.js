@@ -1,5 +1,5 @@
 import LoginPage from "./components/Login/Login";
-import Home from "./components/Index/Home";
+import Home from "./components/base/Home";
 import Index from "./components/Index/Index";
 import Message from "./components/message/Message"
 export const routes = [

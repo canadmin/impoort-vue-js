@@ -8,14 +8,26 @@
       <div class="box-users">
         <div class="box-user-single" @click="openNewMessageBox('Yusuf Ali Cezik')">
           <div class="p-2">
-            <img src="../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
+            <img src="../../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
             <span class="ml-2 ">Yusuf Ali Cezik</span>
           </div>
         </div>
         <div class="box-user-single" @click="openNewMessageBox('Can Yardımcı')">
           <div class="p-2">
-            <img src="../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
+            <img src="../../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
             <span class="ml-2 ">Can yardımcı</span>
+          </div>
+        </div>
+        <div class="box-user-single" @click="openNewMessageBox('Hasan Cerit')">
+          <div class="p-2">
+            <img src="../../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
+            <span class="ml-2 ">Hasan Cerit</span>
+          </div>
+        </div>
+        <div class="box-user-single" @click="openNewMessageBox('Mehmet Burak')">
+          <div class="p-2">
+            <img src="../../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
+            <span class="ml-2 ">Mehmet Burak</span>
           </div>
         </div>
 
@@ -29,7 +41,7 @@
       </div>
       </div>
       <div v-else>
-        <div class="chatfalan" :style="{left:(index+1)*380+'px'}">
+        <div class="chatfalan" :style="{left:(index+1)*360+'px'}">
           <app-single-chat v-if="messageBoxCount != 0" :messageBox="messageBox" :index="index"></app-single-chat>
         </div>
       </div>
@@ -44,7 +56,7 @@
         data() {
             return {
                 isCollapseMessages: false,
-                left :400,
+                left :350,
                 messageBoxCount : 0,
                 messageBoxList : []
             }
@@ -82,7 +94,7 @@
     float: left;
     background-color: #ffffff;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
-    z-index: 1;
+    z-index: 100;
   }
 
   .left-image {
@@ -93,12 +105,12 @@
     position: fixed;
     bottom: 0;
     position: -webkit-sticky;
-    width: 375px;
+    width: 300px;
     height: 600px;
     float: left;
     background-color: #ffffff;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
-    z-index: 1;
+    z-index: 100;
     cursor: pointer;
   }
 

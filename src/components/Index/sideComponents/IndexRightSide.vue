@@ -1,6 +1,6 @@
 <template>
-    <div class="left-side card-body mt-5  text-center">
-      <img src="../../assets/pp.jpeg" class="left-image" width="50" height="50" >
+    <div class="right-side card-body mt-5  text-center">
+      <img src="../../../assets/pp.jpeg" class="left-image" width="50" height="50" >
       <hr>
     </div>
 </template>
@@ -13,7 +13,7 @@
 
 <style scoped>
 
-.left-side{
+.right-side{
   position: sticky;
   top: 4em;
   position: -webkit-sticky;

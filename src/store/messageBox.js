@@ -16,11 +16,16 @@ const mutations = {
       }
     }
     if(!isContains){
-      state.messagesBox.push(messageBox);
+      if(state.messagesBox.length<3){
+        state.messagesBox.push(messageBox);
+      }else{
+        state.messagesBox.splice(0,1);
+        state.messagesBox.push(messageBox);
+      }
     }
   },
   deleteBox(state,deleteBoxName){
-      state.messagesBox.splice(state.messagesBox.indexOf({isim : deleteBoxName}),1);
+      state.messagesBox.splice(deleteBoxName,1);
 
 
   }

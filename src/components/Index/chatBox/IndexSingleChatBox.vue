@@ -51,11 +51,10 @@
         },
         methods : {
             closeThisBox(){
-                console.log()
-                this.$store.dispatch("deleteMessageBox",this.messageBox.isim);
+                this.$store.dispatch("deleteMessageBox",this.index);
             }
         },
-        props: ["messageBox"]
+        props: ["messageBox","index"]
     }
 </script>
 
