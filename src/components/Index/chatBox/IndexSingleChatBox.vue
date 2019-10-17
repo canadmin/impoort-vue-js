@@ -1,31 +1,34 @@
 <template>
-  <div class="singleChat">
-    <div class="text-center mt-3 box-user-name">
-      <span class="">Can Yardımcı</span>
+  <div class="" :class="!chatStatus ? 'singleChat-closed' : 'singleChat'"  >
+    <div class="text-center mt-5 box-user-name">
+      <span class="" @click="chatStatus=!chatStatus">{{messageBox.isim}}</span>
+      <button type="button" class="close mr-2" aria-label="Close">
+      <span aria-hidden="true" @click="closeThisBox">&times;</span>
+    </button>
       <hr>
     </div>
-    <div class="chat-area-index-box  mt-n3 ml-1 mr-1">
+    <div class="chat-area-index-box mt-n3 ml-1 mr-1">
       <div class="message-index-from">
         <div class="message-from-other">
-          asdasdadasdasdasd asd asd asd asd asd asdasdasdaasdads
+        Merhaba, nasılsın?
         </div>
       </div>
       <div class="message-index-me  ">
         <div class="message-me  float-right">
           <div>
-            asdasdadasdasdasd a
+            teşekkürler
           </div>
         </div>
       </div>
       <div class="message-index-from">
         <div>
-          asdasdadasdasdasd asd asd asd asd asd asdasdasdaasdads
+            asdasd
         </div>
       </div>
       <div class="message-index-me  ">
         <div class="message-me  float-right">
           <div>
-            asdasdadasdasdasd asd asd asd asd asd asdasdasdaasdads
+            asdasd
           </div>
         </div>
       </div>
@@ -41,28 +44,42 @@
 
 <script>
     export default {
+        data(){
+            return{
+                chatStatus : true
+            }
+        },
+        methods : {
+            closeThisBox(){
+                this.$store.dispatch("deleteMessageBox",this.index);
+            }
+        },
+        props: ["messageBox","index"]
     }
 </script>
 
 <style scoped>
 
   .singleChat {
-    position: fixed;
-    bottom: 0;
-    left: 400px;
-    z-index: 100;
     background-color: white;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
     width: 350px;
     height: 400px;
+  }
+  .singleChat-closed {
+    background-color: white;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
+    width: 350px;
+    height: 40px;
 
   }
 
   .box-user-name {
+
   }
 
   .chat-area-index-box {
-    height: 280px;
+    height: 300px;
     background-color: #f5f5f5;
     overflow-y: auto;
     overflow-x: hidden ;
@@ -99,7 +116,7 @@
   }
 
   .message-index-me {
-    width: 340px;
+    width: 350px;
     display: inline-block;
   }
 
