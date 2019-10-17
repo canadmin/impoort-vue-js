@@ -4,15 +4,16 @@
     <img src="../../assets/share.png">
     <hr>
     <div class="mb-3">
-      Yeni Gönderi Paylaş
+      Create New Post
     </div>
     <hr>
   </div>
   <div v-outside class="new-post text-center mt-5 bg-white" v-show="createNewPost===true"  >
-    <textarea class="post-description" placeholder="Write some thing..."></textarea>
+    <textarea class="post-description" placeholder=" write something..."></textarea>
+
     <hr>
     <div class="mb-3">
-    <button class="btn btn-primary">Share</button>
+    <button class="">Share</button>
     </div>
     <hr>
   </div>
@@ -33,9 +34,7 @@
         directives : {
             'outside' : {
                 bind: function (el, binding, vnode) {
-
                     el.addEventListener('click', (e) => {
-                        console.log('received NATIVE(blur) - event value:', e.target);
                         e.stopPropagation()
 
                     },);
@@ -73,5 +72,7 @@
 
 textarea{
   resize: none;
+  padding: 5px;
+  padding-left: 8px;
 }
 </style>
