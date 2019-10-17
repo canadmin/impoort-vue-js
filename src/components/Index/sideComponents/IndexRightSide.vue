@@ -3,10 +3,10 @@
       <div class="text-center">
         <img src="../../../assets/pp.jpeg" class="left-image" width="50" height="50" >
         <div class="mt-2">
-          <span class="right-name">Barancan Yardımcı</span>
+          <span class="right-name">Can Yardımcı</span>
         </div>
         <div class="text-center">
-          <span class="right-title">Geliştirici</span>
+          <span class="right-title">Developer</span>
         </div>
       </div>
       <hr>

@@ -42,7 +42,6 @@
         },
         watch : {
             searchStatus(value){
-                console.log(value)
             }
         },
       methods : {
@@ -54,7 +53,6 @@
               bind: function (el, binding, vnode) {
 
                   el.addEventListener('click', (e) => {
-                      console.log('received NATIVE(blur) - event value:', e.target);
                       e.stopPropagation()
 
                   },);
