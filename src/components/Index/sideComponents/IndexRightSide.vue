@@ -1,7 +1,31 @@
 <template>
-    <div class="right-side card-body mt-5  text-center">
-      <img src="../../../assets/pp.jpeg" class="left-image" width="50" height="50" >
+    <div class="right-side card-body mt-5  ">
+      <div class="text-center">
+        <img src="../../../assets/pp.jpeg" class="left-image" width="50" height="50" >
+        <div class="mt-2">
+          <span class="right-name">Barancan Yardımcı</span>
+        </div>
+        <div class="text-center">
+          <span class="right-title">Geliştirici</span>
+        </div>
+      </div>
       <hr>
+
+      <div class="mt-5">
+        <div class="text-left mt-2">
+          <span class="right-title">280 Watcher</span>
+        </div>
+        <div class="text-left mt-2">
+          <span class="right-title">214 Watching</span>
+        </div>
+        <div class="text-left mt-2">
+          <span class="right-title">17 Watched Post</span>
+        </div>
+        <div class="text-center discover">
+          <span class="right-name">+</span>
+          <span class="right-title">Discover New Product/Investment/Developer</span>
+        </div>
+      </div>
     </div>
 </template>
 
@@ -26,6 +50,15 @@
 }
   .left-image{
     border-radius: 50%;
+  }
+  .right-name{
+    font-size: 14px;
+  }
+  .right-title{
+    font-size: 13px;
+  }
+  .discover{
+    margin-top: 110px;
   }
 
 </style>

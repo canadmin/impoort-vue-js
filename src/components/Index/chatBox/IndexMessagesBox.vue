@@ -89,12 +89,14 @@
     position: fixed;
     bottom: 0;
     position: -webkit-sticky;
-    width: 375px;
+    width: 300px;
     height: 50px;
     float: left;
     background-color: #ffffff;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
     z-index: 100;
+    transition: height 500ms ease-in-out;
+
   }
 
   .left-image {
@@ -112,6 +114,9 @@
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
     z-index: 100;
     cursor: pointer;
+    transition: height 500ms ease-in-out;
+
+
   }
 
   .box-users {

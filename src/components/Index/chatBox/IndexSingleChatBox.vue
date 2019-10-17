@@ -116,7 +116,7 @@
   }
 
   .message-index-me {
-    width: 340px;
+    width: 350px;
     display: inline-block;
   }
 

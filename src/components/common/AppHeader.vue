@@ -11,10 +11,28 @@
 
         <img class="asdfff" height="35" width="135" src="../../assets/logo.png">
 
-        <input class=" mr-sm-2 search-button" type="search" placeholder="Search" aria-label="Search">
+        <div >
+        <input class=" mr-sm-2 " @click="deneme" placeholder="Search" :class="searchStatus ? 'search-button-focus' :'search-button'"  >
+          <div class="search-field"   v-show="searchStatus" >
+            <button class="search-filter-button">Startup</button>
+            <button class="search-filter-button">Developer</button>
+            <button class="search-filter-button">Investor</button>
+            <button class="search-filter-button">Looking for a Team</button>
+            <button class="search-filter-button">Just a User</button>
+            <div class="search-field-button text-center">
+              <button class="search-field-button-search">Search</button>
 
+
+            </div>
+            <button type="button" class="close mt-n3"  aria-label="Close">
+              <span aria-hidden="true" @click="searchStatus=false">&times;</span>
+            </button>
+          </div>
+
+        </div>
       </div>
     </nav>
+
 
   </div>
 </template>
@@ -24,9 +42,19 @@
         data() {
             return {
                 mainProps: {blank: true, blankColor: '#777', width: 40, height: 40, class: 'm1',},
-
+                searchStatus : false
             }
-        }
+        },
+        watch : {
+            searchStatus(value){
+                console.log(value)
+            }
+        },
+      methods : {
+          deneme(){
+              this.searchStatus=true;
+          }
+      }
     }
 </script>
 <style>
@@ -60,10 +88,14 @@
     border: 0;
     height: 30px;
     border-radius: 2px;
-  margin-left: 260px
+      margin-left: 260px
   }
-  .search-button:focus{
+  .search-button-focus{
     width: 350px;
+    border: 0;
+    height: 30px;
+    border-radius: 2px;
+    margin-left: 260px;
     transition: width 500ms ease-in-out;
   }
   .main-logo{
@@ -78,4 +110,33 @@
   border-radius: 50%;
   margin-left: 300px;
 }
+  .search-field{
+    margin-top: 15px;
+    width: 420px;
+    z-index: 100;
+    padding: 20px;
+    margin-left: 220px;
+    background-color: white;
+    position: fixed;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
+
+  }
+  .search-filter-button{
+    font-size: 12px;
+    background-color: #f4f4f4;
+    color: #283e4a;
+    border: 0;
+    padding: 5px;
+    margin-top: 5px;
+  }
+  .search-field-button{
+    border: 0;
+  }
+  .search-field-button-search{
+    border: 0;
+    background-color: #283e4a;
+    color: #f5f5f5;
+    margin-top: 10px;
+    padding: 8px;
+  }
 </style>
