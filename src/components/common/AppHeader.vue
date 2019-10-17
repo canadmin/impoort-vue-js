@@ -11,9 +11,9 @@
 
         <img class="asdfff" height="35" width="135" src="../../assets/logo.png">
 
-        <div >
+        <div v-outside>
         <input class=" mr-sm-2 " @click="deneme" placeholder="Search" :class="searchStatus ? 'search-button-focus' :'search-button'"  >
-          <div class="search-field"   v-show="searchStatus" >
+          <div class="search-field text-center"   v-show="searchStatus" >
             <button class="search-filter-button">Startup</button>
             <button class="search-filter-button">Developer</button>
             <button class="search-filter-button">Investor</button>
@@ -21,12 +21,7 @@
             <button class="search-filter-button">Just a User</button>
             <div class="search-field-button text-center">
               <button class="search-field-button-search">Search</button>
-
-
             </div>
-            <button type="button" class="close mt-n3"  aria-label="Close">
-              <span aria-hidden="true" @click="searchStatus=false">&times;</span>
-            </button>
           </div>
 
         </div>
@@ -53,6 +48,20 @@
       methods : {
           deneme(){
               this.searchStatus=true;
+          }
+      },directives : {
+          'outside' : {
+              bind: function (el, binding, vnode) {
+
+                  el.addEventListener('click', (e) => {
+                      console.log('received NATIVE(blur) - event value:', e.target);
+                      e.stopPropagation()
+
+                  },);
+                  window.addEventListener('click',function (event) {
+                      vnode.context.searchStatus=false;
+                  })
+              },
           }
       }
     }
@@ -88,7 +97,9 @@
     border: 0;
     height: 30px;
     border-radius: 2px;
-      margin-left: 260px
+      margin-left: 260px;
+    transition: width 500ms ease-in-out;
+
   }
   .search-button-focus{
     width: 350px;
