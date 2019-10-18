@@ -12,7 +12,7 @@
         <img class="asdfff" height="35" width="135" src="../../assets/logo.png">
 
         <div v-outside>
-        <input class=" mr-sm-2 " @click="deneme" placeholder="Search" :class="searchStatus ? 'search-button-focus' :'search-button'"  >
+        <input class=" mr-sm-2 " @click="openSearch" placeholder="Search" :class="searchStatus ? 'search-button-focus' :'search-button'"  >
           <div class="search-field text-center"   v-show="searchStatus" >
             <button class="search-filter-button">Startup</button>
             <button class="search-filter-button">Developer</button>
@@ -45,7 +45,7 @@
             }
         },
       methods : {
-          deneme(){
+          openSearch(){
               this.searchStatus=true;
           }
       },directives : {
