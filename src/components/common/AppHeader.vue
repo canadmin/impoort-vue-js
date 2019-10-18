@@ -2,7 +2,22 @@
   <div>
     <nav class="navbar navbar-expand-lg fixed-top navbar-light background">
       <div class="collapse navbar-collapse">
-        <img src="../../assets/pp.jpeg" class="main-pp-image" width="45" height="45" >
+        <div v-outside>
+        <img src="../../assets/pp.jpeg" class="main-pp-image" @click="ppBarImageAction=true" width="45" height="45" >
+        <div class="pp-bar-image-action" v-show="ppBarImageAction">
+          <div class=" mt-3">
+            <div class="">
+              Profile
+            </div>
+            <div class="mt-2">
+              Settings
+            </div>
+            <div class="mt-2">
+              Logout
+            </div>
+          </div>
+        </div>
+        </div>
         <router-link
         active-class="active"
         to = "/index"
@@ -30,7 +45,7 @@
 
         </router-link>
 
-        <img class="asdfff" height="35" width="135" src="../../assets/logo.png">
+        <img class="brand" height="35" width="135" src="../../assets/logo.png">
 
         <div v-outside>
         <input class=" mr-sm-2 " @click="openSearch" placeholder="Search" :class="searchStatus ? 'search-button-focus' :'search-button'"  >
@@ -57,7 +72,8 @@
         data() {
             return {
                 mainProps: {blank: true, blankColor: '#777', width: 40, height: 40, class: 'm1',},
-                searchStatus : false
+                searchStatus : false,
+                ppBarImageAction :false
             }
         },
         watch : {
@@ -78,6 +94,7 @@
                   },);
                   window.addEventListener('click',function (event) {
                       vnode.context.searchStatus=false;
+                      vnode.context.ppBarImageAction=false;
                   })
               },
           }
@@ -94,7 +111,7 @@
     border-radius: 50px;
   }
 
-  .asdfff {
+  .brand {
     cursor: pointer;
     margin-left:13%;
   }
@@ -138,6 +155,7 @@
 .main-pp-image{
   border-radius: 50%;
   margin-left: 300px;
+  cursor: pointer;
 }
   .search-field{
     margin-top: 15px;
@@ -167,5 +185,16 @@
     color: #f5f5f5;
     margin-top: 10px;
     padding: 8px;
+  }
+  .pp-bar-image-action{
+    width: 250px;
+    height: 130px;
+    padding-left: 10px;
+    position: fixed;
+    left: 200px;
+    margin-top: 10px;
+    background-color: white;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
+
   }
 </style>

@@ -1,9 +1,10 @@
 <template>
   <div>
+    <app-message-box class="ml-3"></app-message-box>
     <div class="container-fluid profile-general ">
       <div class="row mt-4 ml-5">
         <div class="col-3 mt-5">
-            <div class="profile-info">
+          <div class="profile-info">
                 <div class=" mt-2">
                   <div class="text-center">
                     <img src="../../assets/stonks.jpg" width="80" height="80"  class="pp-profile-img">
@@ -75,15 +76,18 @@
 <script>
   import Post from "../post/Post";
   import User from "../common/User";
-    export default {
+  import IndexMessagesBox from "../Index/chatBox/IndexMessagesBox";
+
+  export default {
         data(){
             return {
                 activeTab : true
             }
         },
         components : {
-            appPost:Post,
-            appUser:User
+            appPost : Post,
+            appUser : User,
+            appMessageBox : IndexMessagesBox
         }
     }
 </script>
