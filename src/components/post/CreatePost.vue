@@ -10,10 +10,16 @@
   </div>
   <div v-outside class="new-post text-center mt-5 bg-white" v-show="createNewPost===true"  >
     <textarea class="post-description" placeholder=" write something..."></textarea>
+    <button class="delete-image-button"@click="postSelectImage=null" v-if="postSelectImage!=null">X</button>
+    <p class=""><img height="75" class="img-responsive text-center mt-2"
+      src="../../assets/pp.jpeg" v-show="postSelectImage != null" :src="postSelectImage" >
 
+    </p>
+    <input ref="file" type="file" style="display: none;"  @change="onChange($event)" class="form-control">
+    <button class="add-image-button" v-if="postSelectImage==null" type="button" v-text="'+'" @click="$refs.file.click()"></button>
     <hr>
     <div class="mb-3">
-    <button class="">Share</button>
+    <button class="share-button ">Share</button>
     </div>
     <hr>
   </div>
@@ -21,39 +27,44 @@
 </template>
 
 <script>
+  //:src="product.selectedImage == null ? '/src/assets/default.png' : product.selectedImage"
     export default {
-        data(){
-            return{
-                createNewPost : false,
-                closeNewPost : true
+        data() {
+            return {
+                createNewPost: false,
+                closeNewPost: true,
+                postSelectImage: null
             }
         },
-        methods : {
+        methods: {
+                onChange(e) {
+                    const file = e.target.files[0];
+                    this.postSelectImage = URL.createObjectURL(file);
+                }
+            },
+            directives: {
+                'outside': {
+                    bind: function (el, binding, vnode) {
+                        el.addEventListener('click', (e) => {
+                            e.stopPropagation()
 
-        },
-        directives : {
-            'outside' : {
-                bind: function (el, binding, vnode) {
-                    el.addEventListener('click', (e) => {
-                        e.stopPropagation()
-
-                    },);
-                    window.addEventListener('click',function (event) {
-                        if(vnode.context.createNewPost===true){
-                            vnode.context.createNewPost=false
-                        }
-                    })
-                },
+                        },);
+                        window.addEventListener('click', function (event) {
+                            if (vnode.context.createNewPost === true) {
+                                vnode.context.createNewPost = false
+                            }
+                        })
+                    },
+                }
             }
-        }
     }
 </script>
 
 <style scoped>
   .share-new-post{
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
-    transition: box-shadow 83ms;
     cursor: pointer;
+
   }
 
   .share-new-post:hover{
@@ -68,13 +79,40 @@
 }
 
   .post-description{
-    width: 100%;
     height: 250px;
+    width: 100%;
+    margin-top: 0;
   }
 
 textarea{
   resize: none;
   padding: 5px;
-  padding-left: 8px;
 }
+  .share-button{
+    border: 0;
+    color: white;
+    background-color: #60C4A9;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+  }
+  .share-button:active{
+    background-color: #2a2a2e;
+  }
+  .add-image-button{
+    border: 0;
+    color: white;
+    background-color: #2a2a2e;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+  }
+  .add-image-button:active{
+    background-color: #2a2a2e;
+  }
+  .delete-image-button{
+    background-color: #2a2a2e;
+    border: 0;
+    color: white;
+  }
 </style>

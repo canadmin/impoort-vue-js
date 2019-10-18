@@ -47,16 +47,18 @@
         <div class="col-4 mt-5">
             <div class="text-center ">
             </div>
-            <app-post v-for="i in 2" class="mb-5"></app-post>
+          <div  v-for="i in 6">
+            <app-post class="mb-5"></app-post>
+          </div>
         </div>
         <div class="col-1 mt-5 ">
           <div class="social-info">
             <div class="container-fluid">
               <div class="row">
-                <div class="watcher-tab col-6">
+                <div class="watcher-tab  col-6" :class="activeTab ? 'active-tab' :''" @click="activeTab = !activeTab">
                   Watcher
                 </div>
-                <div class="watching-tab col-6 ">
+                <div class="watching-tab col-6 " :class="!activeTab ? 'active-tab' : ''" @click="activeTab =! activeTab">
                   Watching
                 </div>
               </div>
@@ -74,6 +76,11 @@
   import Post from "../post/Post";
   import User from "../common/User";
     export default {
+        data(){
+            return {
+                activeTab : true
+            }
+        },
         components : {
             appPost:Post,
             appUser:User
@@ -136,7 +143,6 @@ hr{
     height: 70px;
     text-align: center;
     cursor: pointer;
-    background-color: #f5f5f5;
     padding: 20px;
     box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
 
@@ -148,4 +154,7 @@ hr{
   padding: 20px;
   box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
 }
+  .active-tab{
+    background-color: #f5f5f5;
+  }
 </style>

@@ -3,11 +3,32 @@
     <nav class="navbar navbar-expand-lg fixed-top navbar-light background">
       <div class="collapse navbar-collapse">
         <img src="../../assets/pp.jpeg" class="main-pp-image" width="45" height="45" >
+        <router-link
+        active-class="active"
+        to = "/index"
+        exact>
+          <img src="../../assets/main.png" class="main-logo" width="25" height="25" >
+        </router-link>
+        <router-link
+          active-class="active"
+          to = "/messages"
+          exact>
+          <img src="../../assets/messages.png" class="messages-logo" width="25" height="25" >
 
-        <img src="../../assets/main.png" class="main-logo" width="25" height="25" >
-        <img src="../../assets/messages.png" class="messages-logo" width="25" height="25" >
-        <img src="../../assets/watch.png" class="messages-logo" width="25" height="25" >
-        <img src="../../assets/profil.png" class="messages-logo" width="25" height="25" >
+        </router-link>
+        <router-link
+          active-class="active"
+          to = "/index"
+          exact>
+          <img src="../../assets/watch.png" class="messages-logo" width="25" height="25" >
+        </router-link>
+        <router-link
+        active-class="active"
+        to = "/profile-me"
+        exact>
+          <img src="../../assets/profil.png" class="messages-logo" width="25" height="25" >
+
+        </router-link>
 
         <img class="asdfff" height="35" width="135" src="../../assets/logo.png">
 
@@ -23,7 +44,6 @@
               <button class="search-field-button-search">Search</button>
             </div>
           </div>
-
         </div>
       </div>
     </nav>
