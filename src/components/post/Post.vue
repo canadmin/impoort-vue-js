@@ -7,7 +7,7 @@
         <span> <b class="post-name">Can Yardımcı</b> </span>
         <span class="float-right">5 gün önce</span>
         <hr>
-        <div>
+        <div class="description-post">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate velit, ut sequi aliquid id impedit pariatur
           hic soluta
           at accusamus error expedita, deserunt ex quam quis maxime autem numquam consequuntur. Deleniti soluta, maiores
@@ -37,7 +37,7 @@
     export default {
         data() {
             return {
-                mainProps: {blank: true, blankColor: '#777', width: 50, height: 50, class: 'm1',},
+                mainProps: {blank: true, blankColor: '#777', width: 40, height: 40, class: 'm1',},
                 like: false,
                 watch: false,
 
@@ -64,9 +64,13 @@
 
   .post-name {
     margin-top: 15px;
+    font-size: 12px;
   }
 
   img {
     cursor: pointer;
+  }
+  .description-post{
+    font-size: 14px;
   }
 </style>

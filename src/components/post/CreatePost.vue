@@ -55,9 +55,11 @@
     transition: box-shadow 83ms;
     cursor: pointer;
   }
+
   .share-new-post:hover{
     box-shadow: 0 0 0 1px #0b2e13, 0 2px 3px rgba(0, 0, 0, .2);
   }
+
 .new-post{
   box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
   z-index: 100;
