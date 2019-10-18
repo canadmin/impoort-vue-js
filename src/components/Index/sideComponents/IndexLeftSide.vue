@@ -1,17 +1,24 @@
 <template>
   <div class="left-side card-body mt-5  text-center">
-
+   <div>
+    Suggested
+    <hr>
+    <!---<app-user ></app-user>-->
+   </div>
   </div>
 </template>
 
 <script>
+  import User from "../../common/User";
     export default {
 
+        components : {
+            appUser:User
+        }
     }
 </script>
 
 <style scoped>
-
   .left-side{
     top: 4em;
     width: 250px;
@@ -24,5 +31,4 @@
   .left-image{
     border-radius: 50%;
   }
-
 </style>

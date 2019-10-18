@@ -4,7 +4,8 @@
     <div class="text-center mt-3 watch-single">
      <img src="../../assets/stonks.jpg" width="40" height="40" class="watch-image">
       <span class="watch-name-single">Can Yardımcı</span>
-      <button class="watch-button ml-5">+ WATCH</button>    </div>
+      <button class="watch-button ml-5">+ WATCH</button>
+    </div>
   </div>
 </div>
 </template>

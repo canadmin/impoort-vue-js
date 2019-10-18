@@ -8,9 +8,12 @@
         </div>
         <div class="col-4 mt-5">
           <app-create-post></app-create-post>
-          <app-post v-for="a in 8" class="mt-5"></app-post>
+          <div >
+          <app-post v-for="a in postList" class="mt-5"></app-post>
+          </div>
+
         </div>
-        <div class="col-4 mt-5 text-center ">
+        <div class="col-4 mt-5 text-center" >
           <app-right-side ></app-right-side>
         </div>
       </div>
@@ -25,7 +28,36 @@
     import IndexLeftSide from "./sideComponents/IndexLeftSide";
     import CreatePost from "../post/CreatePost";
     export default {
+        data(){
+            return{
+              postList :[],
+              bottom : true
+            }
+        },
+        methods : {
+          paging(postList){
+                  if(postList.length < 1) {
+                      this.loadData(postList)
+                  }
+                  window.onscroll = () => {
+                  let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight;
+                  if(bottomOfWindow ){
+                     this.loadData(postList);
+                  }
+              }
+          },
+          loadData(postList){
+              for(let i = 0; i < 5;i++){
+                  postList.push("item" + i)
+              }
 
+          }
+
+        },
+        mounted() {
+            this.paging(this.postList);
+
+        },
         components: {
             appPost: Post,
             appRightSide:IndexRightSide,
@@ -33,6 +65,9 @@
             appLeftSide :IndexLeftSide,
             appCreatePost :CreatePost
         },
+
+
+
     }
 </script>
 
