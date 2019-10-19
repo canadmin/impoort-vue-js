@@ -3,53 +3,54 @@
     <nav class="navbar navbar-expand-lg fixed-top navbar-light background">
       <div class="collapse navbar-collapse">
         <div v-outside>
-        <img src="../../assets/pp.jpeg" class="main-pp-image" @click="ppBarImageAction=true" width="45" height="45" >
-        <div class="pp-bar-image-action" v-show="ppBarImageAction">
-          <div class=" mt-3">
-            <div class="">
-              Profile
-            </div>
-            <div class="mt-2">
-              Settings
-            </div>
-            <div class="mt-2">
-              Logout
+          <img src="../../assets/pp.jpeg" class="main-pp-image" @click="ppBarImageAction=true" width="45" height="45">
+          <div class="pp-bar-image-action" v-show="ppBarImageAction">
+            <div class=" mt-3">
+              <div class="">
+                Profile
+              </div>
+              <div class="mt-2">
+                Settings
+              </div>
+              <div class="mt-2">
+                Logout
+              </div>
             </div>
           </div>
         </div>
-        </div>
         <router-link
-        active-class="active"
-        to = "/index"
-        exact>
-          <img src="../../assets/main.png" class="main-logo" width="25" height="25" >
+          active-class="active"
+          to="/index"
+          exact>
+          <img src="../../assets/main.png" class="main-logo" width="25" height="25">
         </router-link>
         <router-link
           active-class="active"
-          to = "/messages"
+          to="/messages"
           exact>
-          <img src="../../assets/messages.png" class="messages-logo" width="25" height="25" >
+          <img src="../../assets/messages.png" class="messages-logo" width="25" height="25">
 
         </router-link>
         <router-link
           active-class="active"
-          to = "/index"
+          to="/index"
           exact>
-          <img src="../../assets/watch.png" class="messages-logo" width="25" height="25" >
+          <img src="../../assets/watch.png" class="messages-logo" width="25" height="25">
         </router-link>
         <router-link
-        active-class="active"
-        to = "/profile-me"
-        exact>
-          <img src="../../assets/profil.png" class="messages-logo" width="25" height="25" >
+          active-class="active"
+          to="/profile-me"
+          exact>
+          <img src="../../assets/profil.png" class="messages-logo" width="25" height="25">
 
         </router-link>
 
         <img class="brand" height="35" width="135" src="../../assets/logo.png">
 
         <div v-outside>
-        <input class=" mr-sm-2 " @click="openSearch" placeholder="Search" :class="searchStatus ? 'search-button-focus' :'search-button'"  >
-          <div class="search-field text-center"   v-show="searchStatus" >
+          <input class=" mr-sm-2 " @click="openSearch" placeholder="Search"
+                 :class="searchStatus ? 'search-button-focus' :'search-button'">
+          <div class="search-field text-center" v-show="searchStatus">
             <button class="search-filter-button">Startup</button>
             <button class="search-filter-button">Developer</button>
             <button class="search-filter-button">Investor</button>
@@ -68,37 +69,37 @@
 </template>
 <script>
 
-  export default {
+    export default {
         data() {
             return {
                 mainProps: {blank: true, blankColor: '#777', width: 40, height: 40, class: 'm1',},
-                searchStatus : false,
-                ppBarImageAction :false
+                searchStatus: false,
+                ppBarImageAction: false
             }
         },
-        watch : {
-            searchStatus(value){
+        watch: {
+            searchStatus(value) {
             }
         },
-      methods : {
-          openSearch(){
-              this.searchStatus=true;
-          }
-      },directives : {
-          'outside' : {
-              bind: function (el, binding, vnode) {
+        methods: {
+            openSearch() {
+                this.searchStatus = true;
+            }
+        }, directives: {
+            'outside': {
+                bind: function (el, binding, vnode) {
 
-                  el.addEventListener('click', (e) => {
-                      e.stopPropagation()
+                    el.addEventListener('click', (e) => {
+                        e.stopPropagation()
 
-                  },);
-                  window.addEventListener('click',function (event) {
-                      vnode.context.searchStatus=false;
-                      vnode.context.ppBarImageAction=false;
-                  })
-              },
-          }
-      }
+                    },);
+                    window.addEventListener('click', function (event) {
+                        vnode.context.searchStatus = false;
+                        vnode.context.ppBarImageAction = false;
+                    })
+                },
+            }
+        }
     }
 </script>
 <style>
@@ -113,30 +114,34 @@
 
   .brand {
     cursor: pointer;
-    margin-left:13%;
+    margin-left: 13%;
   }
-.search-button{
-  width: 70px;
-  border: 0;
-  right: 0;
-  height: 30px;
-  border-radius: 10px;
-  padding-left: 5px;
-}
-.search-from{
+
+  .search-button {
+    width: 70px;
+    border: 0;
+    right: 0;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 5px;
+  }
+
+  .search-from {
     margin-left: 50%;
 
-}
-  .search-button{
+  }
+
+  .search-button {
     width: 250px;
     border: 0;
     height: 30px;
     border-radius: 2px;
-      margin-left: 260px;
+    margin-left: 260px;
     transition: width 500ms ease-in-out;
 
   }
-  .search-button-focus{
+
+  .search-button-focus {
     width: 350px;
     border: 0;
     height: 30px;
@@ -144,20 +149,24 @@
     margin-left: 260px;
     transition: width 500ms ease-in-out;
   }
-  .main-logo{
+
+  .main-logo {
     margin-left: 35px;
     cursor: pointer;
   }
-  .messages-logo{
+
+  .messages-logo {
     margin-left: 50px;
     cursor: pointer;
   }
-.main-pp-image{
-  border-radius: 50%;
-  margin-left: 300px;
-  cursor: pointer;
-}
-  .search-field{
+
+  .main-pp-image {
+    border-radius: 50%;
+    margin-left: 300px;
+    cursor: pointer;
+  }
+
+  .search-field {
     margin-top: 15px;
     width: 420px;
     z-index: 100;
@@ -168,7 +177,8 @@
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
 
   }
-  .search-filter-button{
+
+  .search-filter-button {
     font-size: 12px;
     background-color: #f4f4f4;
     color: #283e4a;
@@ -176,17 +186,20 @@
     padding: 5px;
     margin-top: 5px;
   }
-  .search-field-button{
+
+  .search-field-button {
     border: 0;
   }
-  .search-field-button-search{
+
+  .search-field-button-search {
     border: 0;
     background-color: #283e4a;
     color: #f5f5f5;
     margin-top: 10px;
     padding: 8px;
   }
-  .pp-bar-image-action{
+
+  .pp-bar-image-action {
     width: 250px;
     height: 130px;
     padding-left: 10px;

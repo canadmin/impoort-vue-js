@@ -36,6 +36,7 @@
     export default {
         data() {
             return {
+
                 selected: "appLogin",
             }
         },
@@ -45,7 +46,7 @@
         },
         methods: {
             changeForm(activeForm) {
-                if (activeForm == "appSignup") {
+                if (activeForm === "appSignup") {
                     this.selected = "appLogin";
                 } else {
                     this.selected = "appSignup";
