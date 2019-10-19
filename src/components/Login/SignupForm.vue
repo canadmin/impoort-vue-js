@@ -1,54 +1,54 @@
 <template>
   <div class="container w-50">
     <transition name="slide" appear>
-      <div v-if="currentPage == 1">
+      <div v-if="currentPage === 1">
         <div class="row">
           <div class="col">
-            <input type="text" class="form-control form-control-lg"
+            <input type="text" class="form-control form-control-lg" v-model="registerUser[0].firstName"
                    placeholder="First Name">
           </div>
           <div class="col">
-            <input type="text" class="form-control form-control-lg"
+            <input type="text" class="form-control form-control-lg" v-model="registerUser[0].lastName"
                    placeholder="Last Name">
           </div>
         </div>
         <div class="row mt-4">
           <div class="col">
-            <input type="email" class="form-control form-control-lg"
+            <input type="email" class="form-control form-control-lg" v-model="registerUser[0].email"
                    placeholder="E-mail">
           </div>
         </div>
         <div class="row mt-4">
           <div class="col">
-            <input type="password" class="form-control form-control-lg"
+            <input type="password" class="form-control form-control-lg" v-model="registerUser[0].password"
                    placeholder="Password">
           </div>
         </div>
         <div class="row mt-4">
           <div class="col">
-            <input type="password" class="form-control form-control-lg"
+            <input type="password" class="form-control form-control-lg" v-model="registerUser[0].password"
                    placeholder="Re-Password">
           </div>
         </div>
       </div>
     </transition>
     <transition name="slide" appear>
-      <div v-if="currentPage == 2">
+      <div v-if="currentPage === 2">
         <div class="row">
           <div class="col">
-            <input type="tel" class="form-control form-control-lg "
+            <input type="tel" class="form-control form-control-lg " v-model="registerUser[0].phoneNumber"
                    placeholder="Phone Number">
           </div>
         </div>
         <div class="row mt-4">
           <div class="col">
-            <input type="text" class="form-control form-control-lg"
+            <input type="text" class="form-control form-control-lg" v-model="registerUser[0].city"
                    placeholder="City">
           </div>
         </div>
         <div class="row mt-4">
           <div class="col">
-            <input type="date" class="form-control form-control-lg"
+            <input type="date" class="form-control form-control-lg" v-model="registerUser[0].birthDate"
                    placeholder="Date of Birth/established">
           </div>
         </div>
@@ -57,15 +57,15 @@
             <h3>Gender</h3>
             <div class="form-check-inline ">
               <input class="btn" type="button" id="MaleButton" @click="setGender('Male')"
-                     :class="selectedGender == 'Male' ? 'active': ''" value="  Male  ">
+                     :class="selectedGender === 'Male' ? 'active': ''" value="  Male  ">
             </div>
             <div class="form-check-inline">
               <input class="btn" type="button" id="MaleButton" @click="setGender('Famele')"
-                     :class="selectedGender == 'Famele' ? 'active': ''" value="Famale">
+                     :class="selectedGender === 'Famele' ? 'active': ''" value="Famale">
             </div>
             <div class="form-check-inline">
               <input class="btn" type="button" id="MaleButton" @click="setGender('Optional')"
-                     :class="selectedGender == 'Optional' ? 'active': ''" value="Optional">
+                     :class="selectedGender === 'Optional' ? 'active': ''" value="Optional">
             </div>
             </p>
           </div>
@@ -73,7 +73,7 @@
       </div>
     </transition>
     <transition name="slide" appear>
-      <div v-if="currentPage == 3">
+      <div v-if="currentPage === 3">
         <div class="row">
           <div class="col">
             <p>Ben bir
@@ -87,8 +87,8 @@
         </div>
         <div class="row mt-4">
           <div class="col">
-            <input type="text" class="form-control form-control-lg"
-                   placeholder="Sektör">
+            <input type="text" class="form-control form-control-lg" v-model="registerUser[0].sector"
+                   placeholder="Title">
           </div>
         </div>
       </div>
@@ -105,6 +105,24 @@
     export default {
         data() {
             return {
+                registerUser : [
+                    {
+                    description : null,
+                    sector : null,
+                    userType : 1,
+                    firstName : null,
+                    lastName : null,
+                    email : null,
+                    city  : null,
+                    birthDate  : null,
+                    gender  : "male",
+                    password  : null,
+                    phoneNumber  : null,
+                    experienceYear : null,
+                    experienceCompanies : null,
+                    employeeCount : null
+             }
+                ],
                 currentPage: 1,
                 buttonPageName: "Next",
                 selectedGender: "Optional"
@@ -113,9 +131,10 @@
         methods: {
             nextPage(currentPage) {
                 if (currentPage >= 2) {
-                    console.log("post gonderildi" + this.currentPage);
                     this.currentPage = 3;
                     this.buttonPageName = "Complete"
+                    this.$store.dispatch("registerUser", this.registerUser[0]);
+
                 } else {
                     this.currentPage++;
                     this.buttonPageName = "Next"

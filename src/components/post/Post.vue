@@ -2,7 +2,7 @@
   <div class="container ">
     <div class="row ">
       <div class="col-12 main-post  card-body mb-n4">
-        <img v-bind="mainProps" class="post-image" rounded="circle" alt="Circle image" src="../../assets/pp.jpeg"></img>
+        <img v-bind="mainProps" class="post-image" rounded="circle" alt="Circle image" src="../../assets/pp.jpeg"/>
 
         <span> <b class="post-name">Can Yardımcı</b> </span>
         <span class="float-right">5 gün önce</span>

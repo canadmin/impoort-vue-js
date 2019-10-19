@@ -2,19 +2,20 @@
   <div class="container w-50 ">
     <div class="row">
       <div class="col">
-        <input type="text" class="form-control form-control-lg"
+        <input type="text" class="form-control form-control-lg" v-model="loginUser[0].email"
                placeholder="E-Mail">
       </div>
     </div>
     <div class="row mt-4">
       <div class="col">
-        <input type="password" class="form-control form-control-lg"
+        <input type="password" class="form-control form-control-lg" v-model="loginUser[0].password"
                placeholder="Password">
       </div>
     </div>
     <div class="row mt-4">
       <div class="col">
-        <router-link to="/index" tag="button" class="form-control btn btn-color">Login</router-link>
+       <!--- <router-link to="/index" tag="button" class="form-control btn btn-color" @click="login">Login</router-link> -->
+        <button class="form-control btn btn-color" @click="login">Login</button>
       </div>
     </div>
   </div>
@@ -24,7 +25,17 @@
     export default {
         data() {
             return {
+                loginUser :[{
+                    email : null,
+                    password : null
+                }],
                 navigationLink: {name: "index"}
+            }
+        },
+        methods : {
+            login(){
+                this.$store.dispatch("loginUser", this.loginUser[0]);
+
             }
         }
     }
