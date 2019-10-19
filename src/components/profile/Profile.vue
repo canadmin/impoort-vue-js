@@ -1,9 +1,10 @@
 <template>
   <div>
+    <app-message-box class="ml-3"></app-message-box>
     <div class="container-fluid profile-general ">
       <div class="row mt-4 ml-5">
         <div class="col-3 mt-5">
-            <div class="profile-info">
+          <div class="profile-info">
                 <div class=" mt-2">
                   <div class="text-center">
                     <img src="../../assets/stonks.jpg" width="80" height="80"  class="pp-profile-img">
@@ -55,15 +56,17 @@
           <div class="social-info">
             <div class="container-fluid">
               <div class="row">
-                <div class="watcher-tab  col-6" :class="activeTab ? 'active-tab' :''" @click="activeTab = !activeTab">
+                <div class="watcher-tab  col-6" :class="activeTab ? 'active-tab' :''" @click="activeTab = true">
                   Watcher
                 </div>
-                <div class="watching-tab col-6 " :class="!activeTab ? 'active-tab' : ''" @click="activeTab =! activeTab">
+                <div class="watching-tab col-6 " :class="!activeTab ? 'active-tab' : ''" @click="activeTab = false">
                   Watching
                 </div>
               </div>
             </div>
-
+          <div class="text-center mt-2">
+            <input type="text" placeholder="search watcher" class="search-watch-user" >
+          </div>
           <app-user v-for="i in 4"></app-user>
           </div>
         </div>
@@ -75,15 +78,18 @@
 <script>
   import Post from "../post/Post";
   import User from "../common/User";
-    export default {
+  import IndexMessagesBox from "../Index/chatBox/IndexMessagesBox";
+
+  export default {
         data(){
             return {
                 activeTab : true
             }
         },
         components : {
-            appPost:Post,
-            appUser:User
+            appPost : Post,
+            appUser : User,
+            appMessageBox : IndexMessagesBox
         }
     }
 </script>
@@ -156,5 +162,10 @@ hr{
 }
   .active-tab{
     background-color: #f5f5f5;
+  }
+  .search-watch-user{
+    border: 0;
+    padding-left: 5px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
   }
 </style>
