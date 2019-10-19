@@ -7,8 +7,12 @@
               <div class="mt-5 text-center">
                 <span class="">Messages</span>
                 <hr>
+                <div class="text-center  mt-2 mb-3-">
+                  <input type="text" placeholder="search watcher" class="search-watch-user " >
+                </div>
               </div>
               <div class="general-user mt-3 ml-4">
+
                 <div class="general-user-single mb-3">
                     <img src="../../assets/pp.jpeg" class="general-user-single-img " width="50" height="50">
                     <span class="ml-3 general-user-single-name">Can Yardımcı</span>
@@ -203,6 +207,11 @@
     width: 750px;
     float: right;
     display: inline-block;
+  }
+  .search-watch-user{
+    border: 0;
+    padding-left: 5px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
   }
 </style>
 

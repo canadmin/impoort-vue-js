@@ -56,15 +56,17 @@
           <div class="social-info">
             <div class="container-fluid">
               <div class="row">
-                <div class="watcher-tab  col-6" :class="activeTab ? 'active-tab' :''" @click="activeTab = !activeTab">
+                <div class="watcher-tab  col-6" :class="activeTab ? 'active-tab' :''" @click="activeTab = true">
                   Watcher
                 </div>
-                <div class="watching-tab col-6 " :class="!activeTab ? 'active-tab' : ''" @click="activeTab =! activeTab">
+                <div class="watching-tab col-6 " :class="!activeTab ? 'active-tab' : ''" @click="activeTab = false">
                   Watching
                 </div>
               </div>
             </div>
-
+          <div class="text-center mt-2">
+            <input type="text" placeholder="search watcher" class="search-watch-user" >
+          </div>
           <app-user v-for="i in 4"></app-user>
           </div>
         </div>
@@ -160,5 +162,10 @@ hr{
 }
   .active-tab{
     background-color: #f5f5f5;
+  }
+  .search-watch-user{
+    border: 0;
+    padding-left: 5px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
   }
 </style>
