@@ -55,7 +55,7 @@
   .main-post {
     background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
   }
 
   .post-image {
@@ -70,7 +70,8 @@
   img {
     cursor: pointer;
   }
-  .description-post{
+
+  .description-post {
     font-size: 14px;
   }
 </style>

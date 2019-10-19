@@ -36,13 +36,13 @@
     <!--messageBox-->
     <div v-for="(messageBox,index) in messageBoxList">
       <div v-if="index === 0">
-      <div class="chatfalan" :style="{left:(index+1)*left+'px'}">
-        <app-single-chat v-if="messageBoxCount != 0" :messageBox="messageBox" :index="index"></app-single-chat>
-      </div>
+        <div class="chatfalan" :style="{left:(index+1)*left+'px'}">
+          <app-single-chat v-if="messageBoxCount !== 0" :messageBox="messageBox" :index="index"></app-single-chat>
+        </div>
       </div>
       <div v-else>
         <div class="chatfalan" :style="{left:(index+1)*360+'px'}">
-          <app-single-chat v-if="messageBoxCount != 0" :messageBox="messageBox" :index="index"></app-single-chat>
+          <app-single-chat v-if="messageBoxCount !== 0" :messageBox="messageBox" :index="index"></app-single-chat>
         </div>
       </div>
     </div>
@@ -51,33 +51,32 @@
 </template>
 
 <script>
-  import IndexSingleChatBox from "./IndexSingleChatBox";
+    import IndexSingleChatBox from "./IndexSingleChatBox";
+
     export default {
         data() {
             return {
                 isCollapseMessages: false,
-                left :350,
-                messageBoxCount : 0,
-                messageBoxList : []
+                left: 350,
+                messageBoxCount: 0,
+                messageBoxList: []
             }
         },
-        components:  {
-            appSingleChat:IndexSingleChatBox
+        components: {
+            appSingleChat: IndexSingleChatBox
         },
-        methods : {
-            openNewMessageBox(value){
-               let messageBox = {isim : value};
-                let lengthOfList= this.getMessageBoxList;
-                this.$store.dispatch("addNewMessageBox",messageBox);
-                this.messageBoxCount=this.getMessageBoxList.length;
+        methods: {
+            openNewMessageBox(value) {
+                let messageBox = {name: value};
+                let lengthOfList = this.getMessageBoxList;
+                this.$store.dispatch("addNewMessageBox", messageBox);
+                this.messageBoxCount = this.getMessageBoxList.length;
                 this.messageBoxList = this.getMessageBoxList;
-
-
             },
 
         },
-        computed : {
-            getMessageBoxList(){
+        computed: {
+            getMessageBoxList() {
                 return this.$store.getters.getMessageBox;
             }
         }
@@ -122,7 +121,6 @@
   .box-users {
     height: 500px;
     overflow-y: auto;
-
   }
 
   .index-message-box-image {
@@ -137,13 +135,11 @@
   .message-toggle {
     cursor: pointer;
   }
-.chatfalan{
-  position: fixed;
-  z-index: 100;
-  bottom: 0;
 
-
-
-}
+  .chatfalan {
+    position: fixed;
+    z-index: 100;
+    bottom: 0;
+  }
 
 </style>

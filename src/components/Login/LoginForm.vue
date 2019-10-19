@@ -17,7 +17,6 @@
         <router-link to="/index" tag="button" class="form-control btn btn-color">Login</router-link>
       </div>
     </div>
-
   </div>
 </template>
 

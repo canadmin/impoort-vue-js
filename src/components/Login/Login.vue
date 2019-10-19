@@ -45,7 +45,7 @@
         },
         methods: {
             changeForm(activeForm) {
-                if (activeForm == "appSignup") {
+                if (activeForm === "appSignup") {
                     this.selected = "appLogin";
                 } else {
                     this.selected = "appSignup";

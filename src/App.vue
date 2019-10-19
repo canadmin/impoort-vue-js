@@ -1,24 +1,17 @@
 <template>
-<div>
-  <router-view></router-view>
-</div>
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-
-
-export default {
-  components : {
-
-  }
-}
+    export default {
+        components: {}
+    }
 </script>
 
 <style>
-body{
-      background-color: #f5f5f5;
-}
-  html{
+  body {
+    background-color: #f5f5f5;
   }
-
 </style>

@@ -1,16 +1,16 @@
 <template>
-  <div class="" :class="!chatStatus ? 'singleChat-closed' : 'singleChat'"  >
+  <div class="" :class="!chatStatus ? 'singleChat-closed' : 'singleChat'">
     <div class="text-center mt-5 box-user-name">
-      <span class="" @click="chatStatus=!chatStatus">{{messageBox.isim}}</span>
+      <span class="" @click="chatStatus=!chatStatus">{{messageBox.name}}</span>
       <button type="button" class="close mr-2" aria-label="Close">
-      <span aria-hidden="true" @click="closeThisBox">&times;</span>
-    </button>
+        <span aria-hidden="true" @click="closeThisBox">&times;</span>
+      </button>
       <hr>
     </div>
     <div class="chat-area-index-box mt-n3 ml-1 mr-1">
       <div class="message-index-from">
         <div class="message-from-other">
-        Merhaba, nasılsın?
+          Merhaba, nasılsın?
         </div>
       </div>
       <div class="message-index-me  ">
@@ -22,7 +22,7 @@
       </div>
       <div class="message-index-from">
         <div>
-            asdasd
+          asdasd
         </div>
       </div>
       <div class="message-index-me  ">
@@ -32,8 +32,6 @@
           </div>
         </div>
       </div>
-
-
     </div>
     <div class="chat-box-index-input-area">
       <input type="tex" class="chat-index-input">
@@ -44,17 +42,17 @@
 
 <script>
     export default {
-        data(){
-            return{
-                chatStatus : true
+        data() {
+            return {
+                chatStatus: true
             }
         },
-        methods : {
-            closeThisBox(){
-                this.$store.dispatch("deleteMessageBox",this.index);
+        methods: {
+            closeThisBox() {
+                this.$store.dispatch("deleteMessageBox", this.index);
             }
         },
-        props: ["messageBox","index"]
+        props: ["messageBox", "index"]
     }
 </script>
 
@@ -66,6 +64,7 @@
     width: 350px;
     height: 400px;
   }
+
   .singleChat-closed {
     background-color: white;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
@@ -75,14 +74,13 @@
   }
 
   .box-user-name {
-
   }
 
   .chat-area-index-box {
     height: 300px;
     background-color: #f5f5f5;
     overflow-y: auto;
-    overflow-x: hidden ;
+    overflow-x: hidden;
 
   }
 
@@ -133,7 +131,7 @@
     margin-right: 18px;
   }
 
-  .message-from-other{
+  .message-from-other {
     width: 180px;
     padding: 10px;
   }
