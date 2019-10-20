@@ -26,8 +26,6 @@ const mutations = {
   },
   deleteBox(state, deleteBoxName) {
     state.messagesBox.splice(deleteBoxName, 1);
-
-
   }
 };
 

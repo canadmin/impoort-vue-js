@@ -122,12 +122,14 @@
     height: 700px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
     transition: box-shadow 83ms;
+    overflow-x: auto;
 
   }
 
   .message-box {
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
     transition: box-shadow 83ms;
+
   }
 
   .message-row {
@@ -166,6 +168,7 @@
     background-color: #F5F5F5;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
     transition: box-shadow 83ms;
+    padding-bottom: 45px;
   }
 
   .message-from-other {
