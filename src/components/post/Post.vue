@@ -21,25 +21,47 @@
             <img :src="like ? getImageUrl('like') : getImageUrl('liked')" height="25" width="25">
           </div>
           <div class="col-4">
-            <img src="../../assets/comment.png" height="25" width="25"/>
+            <img src="../../assets/comment.png"  @click="expandComment =! expandComment" height="25" width="25"/>
           </div>
           <div class="col-4" @click="watch = !watch">
             <img :src="watch ? getImageUrl('watched') : getImageUrl('liked')" height="25" width="25"/>
           </div>
         </div>
+        <!-- eger posta yorum yapılmışsa veya yorun yapılacaksa-->
+        <div>
+          <div v-show="expandComment">
+          <div class="text-center mt-4" >
+            <span v-text="'Comments'"></span>
+          </div>
+          <div class="comments-back pt-2">
+            <app-comment v-for="i in 2"></app-comment>
+          </div>
+          </div>
+          <!--- eğer yorum yapılacaksa-->
+           <hr>
+          <div class="add-comment mt-4">
+            <div class="">
+              <input type="text" class="comment-input" placeholder="Yorum yaz">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+
 </template>
 
 <script>
     //v-bind:src="like.png ? '/src/assets/like.png.png' : ''"
+    import Comment from "./Comment";
     export default {
         data() {
             return {
                 mainProps: {blank: true, blankColor: '#777', width: 40, height: 40, class: 'm1',},
                 like: false,
                 watch: false,
+                expandComment :false
 
             }
         },
@@ -47,7 +69,11 @@
             getImageUrl(image) {
                 var images = require.context('../../assets', false, /\.png$/);
                 return images('./' + image + '.png');
-            }
+            },
+
+        },
+        components : {
+            appComment:Comment
         }
     }
 </script>
@@ -73,5 +99,17 @@
 
   .description-post {
     font-size: 14px;
+  }
+  .comment-input{
+    width: 100%;
+    border-radius: 5px;
+    border: 0;
+    background-color: #f5f5f5;
+    padding-left: 15px;
+    height: 35px;
+  }
+  .comments-back{
+    background-color: #f5f5f5;
+    border-radius: 5px;
   }
 </style>
