@@ -24,7 +24,7 @@
 <script>
     import Post from "../post/Post";
     import IndexRightSide from "./sideComponents/IndexRightSide";
-    import IndexMessagesBox from "./chatBox/IndexMessagesBox";
+    import IndexMessagesBox from "../chatBox/IndexMessagesBox";
     import IndexLeftSide from "./sideComponents/IndexLeftSide";
     import CreatePost from "../post/CreatePost";
 

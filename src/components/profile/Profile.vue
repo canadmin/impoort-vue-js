@@ -81,7 +81,7 @@
 <script>
     import Post from "../post/Post";
     import User from "../common/User";
-    import IndexMessagesBox from "../Index/chatBox/IndexMessagesBox";
+    import IndexMessagesBox from "../chatBox/IndexMessagesBox";
 
     export default {
         data() {
