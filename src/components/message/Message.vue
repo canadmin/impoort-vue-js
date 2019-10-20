@@ -1,6 +1,6 @@
 <template>
   <div class="message-row h-100 pl-5 pr-5">
-    <div class="container-fluid pl-5 pr-5 ">
+    <div class="container-fluid  pl-5 pr-5 ">
       <div class="col-12 message-component mt-5">
         <div class="row">
           <div class="col-3  bg-white message-general">
@@ -134,6 +134,8 @@
 
   .message-row {
     margin-top: 5rem;
+    margin-left: 150px;
+    margin-right: 150px;
 
   }
 

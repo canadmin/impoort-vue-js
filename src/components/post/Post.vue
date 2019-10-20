@@ -18,13 +18,13 @@
         <hr>
         <div class="row  text-center mt-n3 mb-n2">
           <div class="col-4" @click="like = !like">
-            <img :src="like ? getImageUrl('liked') : getImageUrl('like')" height="25" width="25">
+            <img :src="like ? getImageUrl('like') : getImageUrl('liked')" height="25" width="25">
           </div>
           <div class="col-4">
-            <img src="../../assets/like.png" height="25" width="25"/>
+            <img src="../../assets/comment.png" height="25" width="25"/>
           </div>
           <div class="col-4" @click="watch = !watch">
-            <img :src="watch ? getImageUrl('watched') : getImageUrl('like')" height="25" width="25"/>
+            <img :src="watch ? getImageUrl('watched') : getImageUrl('liked')" height="25" width="25"/>
           </div>
         </div>
       </div>

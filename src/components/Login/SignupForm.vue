@@ -91,6 +91,12 @@
                    placeholder="Title">
           </div>
         </div>
+        <div class="row mt-4">
+          <div class="col">
+            <textarea type="text" class="form-control form-control-lg" v-model="registerUser[0].description"
+                      placeholder="Description"> </textarea>
+          </div>
+        </div>
       </div>
     </transition>
     <div class="row mt-4">
@@ -130,18 +136,18 @@
         },
         methods: {
             nextPage(currentPage) {
-                if (currentPage >= 2) {
-                    this.currentPage = 3;
-                    this.buttonPageName = "Complete"
-                    this.$store.dispatch("registerUser", this.registerUser[0]);
-
-                } else {
+                    if(currentPage < 2){
                     this.currentPage++;
                     this.buttonPageName = "Next"
-                }
-            },
+                    }else if(currentPage === 2){
+                        this.currentPage++;
+                        this.buttonPageName = "Complete"
+                        this.$store.dispatch("registerUser", this.registerUser[0]);
+                    }
+                },
             setGender(gender) {
                 this.selectedGender = gender;
+                this.registerUser[0].description = gender;
             }
         },
     }
@@ -191,5 +197,8 @@
   .active {
     color: #ffffff;
     background-color: #60C4A9;
+  }
+  textarea{
+    resize: none;
   }
 </style>

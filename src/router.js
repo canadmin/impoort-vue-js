@@ -8,12 +8,12 @@ import Message from "./components/message/Message"
 import Profile from "./components/profile/Profile";
 
 Vue.use(VueRouter);
-
 export const routes = [
   {path: "/", component: LoginPage},
-
   {
-    path: "/index", component: Home, children: [
+    path: "/index", component: Home,beforeEnter : (to,from,next) => {
+      next();
+    },children: [
       {path: "/messages", component: Message},
       {path: "/profile-me", component: Profile},
       {path: "", component: Index}
@@ -26,3 +26,5 @@ export const router =new VueRouter({
   routes,
   mode :"history"
 });
+
+

@@ -65,6 +65,9 @@
             appLeftSide: IndexLeftSide,
             appCreatePost: CreatePost
         },
+        created(){
+            console.log(this.$store.getters.getSessionToken);
+        }
 
 
     }
