@@ -41,8 +41,8 @@
                   <span>Experience</span>
                   <hr>
                 </div>
-                <div>
-                  <span class="profile-description">Intern Java Developer - Ozgur Yazilim A.Ş.</span>
+                <div class="mb-2">
+                  <span class="profile-description ">Intern Java Developer - Ozgur Yazilim A.Ş.</span>
                 </div>
               </div>
             </div>
@@ -99,11 +99,11 @@
 
 <style scoped>
   .profile-info {
-    height: 800px;
-    width: 450px;
+   /* width: 450px;*/
     float: right;
     background-color: #ffffff;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
+    display: inline-flex;
   }
 
   .social-info {

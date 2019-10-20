@@ -43,7 +43,6 @@ export const store = new Vuex.Store({
             router.replace("/index");
             }
           });
-
       }
   },
 

@@ -14,8 +14,8 @@
     </div>
     <div class="row mt-4">
       <div class="col">
-       <!--- <router-link to="/index" tag="button" class="form-control btn btn-color" @click="login">Login</router-link> -->
-        <button class="form-control btn btn-color" @click="login">Login</button>
+     <router-link to="/index" tag="button" class="form-control btn btn-color" @click="login">Login</router-link>
+        <!---  <button class="form-control btn btn-color" @click="login">Login</button>-->
       </div>
     </div>
   </div>
