@@ -13,30 +13,30 @@
             </div>
             <div class="general-user mt-3 ml-4">
 
-              <div class="general-user-single mb-3">
+              <div class="general-user-single mb-3" @click="selectUserForMessage('Can Yardımcı')">
                 <img src="../../assets/pp.jpeg" class="general-user-single-img " width="50" height="50">
                 <span class="ml-3 general-user-single-name">Can Yardımcı</span>
               </div>
-              <div class="general-user-single mb-3">
+              <div class="general-user-single mb-3" @click="selectUserForMessage('Yusuf Ali Ezik')">
                 <img src="../../assets/pp.jpeg" class="general-user-single-img" width="50" height="50">
                 <span class="ml-3 general-user-single-name">Yusuf Ali Ezik</span>
               </div>
-              <div class="general-user-single mb-3">
+              <div class="general-user-single mb-3" @click="selectUserForMessage('Hasan Cerit')">
                 <img src="../../assets/pp.jpeg" class="general-user-single-img" width="50" height="50">
                 <span class="ml-3 general-user-single-name">Hasan Cerit</span>
               </div>
-              <div class="general-user-single mb-3">
+              <div class="general-user-single mb-3" @click="selectUserForMessage('Mehmet Burak')">
                 <img src="../../assets/pp.jpeg" class="general-user-single-img" width="50" height="50">
                 <span class="ml-3 general-user-single-name">Mehmet Burak</span>
               </div>
 
             </div>
           </div>
-          <div class="col-9  bg-white message-box">
+          <div class="col-9  bg-white message-box" v-if="user != null">
             <!-- Message Box header-->
             <div class="message-box-header mt-3 text-right mr-5">
               <img class="general-user-single-img" src="../../assets/pp.jpeg" width="50" height="50">
-              <span class="mr-5 general-user-single-name">Can Yardımcı</span>
+              <span class="mr-5 general-user-single-name">{{user.selectedUserName}}</span>
             </div>
             <hr>
             <!-- mesajlar -->
@@ -66,6 +66,9 @@
             </div>
 
           </div>
+          <div class="col-9  bg-white message-box" v-else>
+            Hemen mesajlaşmaya başlayın
+          </div>
         </div>
       </div>
     </div>
@@ -79,10 +82,20 @@
             return {
                 showButton: false,
                 messageText: null,
-                messagesList: []
+                messagesList: [],
+                user : null
             }
         },
         methods: {
+
+            selectUserForMessage(user){
+
+                    this.user={
+                        selectedUserId : "123",
+                        selectedUserName : user,
+                    }
+
+            },
             initialMessage() {
                 this.messagesList.push({key: 1,
                     value: {
