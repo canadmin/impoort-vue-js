@@ -81,7 +81,7 @@
 <script>
     import Post from "../post/Post";
     import User from "../common/User";
-    import IndexMessagesBox from "../Index/chatBox/IndexMessagesBox";
+    import IndexMessagesBox from "../chatBox/IndexMessagesBox";
 
     export default {
         data() {
@@ -161,7 +161,6 @@
     cursor: pointer;
     padding: 20px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
-
   }
 
   .watching-tab {
