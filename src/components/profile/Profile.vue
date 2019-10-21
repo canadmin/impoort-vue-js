@@ -93,6 +93,9 @@
             appPost: Post,
             appUser: User,
             appMessageBox: IndexMessagesBox
+        },
+        created() {
+            this.$store.dispatch("activePPImage",true);
         }
     }
 </script>

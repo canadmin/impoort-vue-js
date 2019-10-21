@@ -34,7 +34,6 @@ const actions = {
     commit('openNewMessageBox', message);
   },
   deleteMessageBox({commit}, deletedBoxName) {
-    console.log(deletedBoxName)
     commit('deleteBox', deletedBoxName);
   }
 };

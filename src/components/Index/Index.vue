@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="index" ref="index" >
     <div class="container-fluid">
       <div class="row">
         <div class="col-4 mt-5">
@@ -32,7 +32,8 @@
         data() {
             return {
                 postList: [],
-                bottom: true
+                isIndex: true,
+
             }
         },
         methods: {
@@ -40,23 +41,26 @@
                 if (postList.length < 1) {
                     this.loadData(postList)
                 }
-                window.onscroll = () => {
-                    let currentScrollHeight = document.documentElement.scrollTop;
-                    if(currentScrollHeight>170){
-                        this.$store.dispatch("activePPImage",true);
-                    }else{
-                        this.$store.dispatch("activePPImage",false)
-                    }
-                    console.log(currentScrollHeight);
-                    let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight;
-                    if (bottomOfWindow) {
-                        this.loadData(postList);
-                    }
-                }
+                  window.onscroll = () => {
+
+                      let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight;
+                      if (bottomOfWindow) {
+                          this.loadData(postList);
+                      }
+                  }
+
             },
             loadData(postList) {
                 for (let i = 0; i < 5; i++) {
                     postList.push("item" + i)
+                }
+            },
+            scrollPage(event){
+                let currentScrollHeight = document.documentElement.scrollTop;
+                if(currentScrollHeight>170){
+                    this.$store.dispatch("activePPImage",true);
+                }else{
+                    this.$store.dispatch("activePPImage",false)
                 }
             }
 
@@ -65,6 +69,7 @@
             this.paging(this.postList);
 
         },
+
         components: {
             appPost: Post,
             appRightSide: IndexRightSide,
@@ -72,8 +77,14 @@
             appLeftSide: IndexLeftSide,
             appCreatePost: CreatePost
         },
-        created(){
-            console.log(this.$store.getters.getSessionUser);
+        created() {
+            this.$store.dispatch("activePPImage",false);
+            window.addEventListener('scroll', this.scrollPage);
+        },
+
+        destroyed() {
+            window.removeEventListener('scroll', this.scrollPage);
+
         }
 
 

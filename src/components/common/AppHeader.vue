@@ -3,7 +3,9 @@
     <nav class="navbar navbar-expand-lg fixed-top navbar-light background">
       <div class="collapse navbar-collapse">
         <div v-outside>
+          <div :class="barPhotoStatus ?  'pp-image-place' : ''">
           <img src="../../assets/pp.jpeg" v-if="barPhotoStatus" class="main-pp-image" @click="ppBarImageAction=true" width="45" height="45">
+          </div>
           <div class="pp-bar-image-action" v-show="ppBarImageAction">
             <div class=" mt-3">
               <div class="">
@@ -75,7 +77,6 @@
                 mainProps: {blank: true, blankColor: '#777', width: 40, height: 40, class: 'm1',},
                 searchStatus: false,
                 ppBarImageAction : false
-
             }
         },
         computed: {
@@ -88,7 +89,8 @@
             openSearch() {
                 this.searchStatus = true;
             }
-        }, directives: {
+        },
+        directives: {
             'outside': {
                 bind: function (el, binding, vnode) {
 
@@ -102,7 +104,8 @@
                     })
                 },
             }
-        }
+        },
+
     }
 </script>
 <style>
@@ -170,10 +173,13 @@
 
   .main-pp-image {
     border-radius: 50%;
-    margin-left: 300px;
     cursor: pointer;
   }
+  .pp-image-place{
+    margin-left: 300px;
 
+
+  }
   .search-field {
     margin-top: 15px;
     width: 420px;
@@ -218,4 +224,7 @@
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
 
   }
+
+
+
 </style>
