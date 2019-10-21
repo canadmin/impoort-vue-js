@@ -106,7 +106,7 @@
         },
         created() {
             this.initialMessage();
-
+            this.$store.dispatch("activePPImage",true);
         },
         watch: {
             messageText(value) {
