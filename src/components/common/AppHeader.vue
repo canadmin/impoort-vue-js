@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg fixed-top navbar-light background">
       <div class="collapse navbar-collapse">
         <div v-outside>
-          <img src="../../assets/pp.jpeg" class="main-pp-image" @click="ppBarImageAction=true" width="45" height="45">
+          <img src="../../assets/pp.jpeg" v-if="barPhotoStatus" class="main-pp-image" @click="ppBarImageAction=true" width="45" height="45">
           <div class="pp-bar-image-action" v-show="ppBarImageAction">
             <div class=" mt-3">
               <div class="">
@@ -22,7 +22,7 @@
           active-class="active"
           to="/index"
           exact>
-          <img src="../../assets/main.png" class="main-logo" width="25" height="25">
+          <img src="../../assets/main.png" :class="barPhotoStatus ?'main-logo' : 'main-logo-visible-pp-image'" width="25" height="25">
         </router-link>
         <router-link
           active-class="active"
@@ -74,12 +74,15 @@
             return {
                 mainProps: {blank: true, blankColor: '#777', width: 40, height: 40, class: 'm1',},
                 searchStatus: false,
-                ppBarImageAction: false
+                ppBarImageAction : false
+
             }
         },
-        watch: {
-            searchStatus(value) {
+        computed: {
+            barPhotoStatus(){
+               return this.$store.getters.getHeaderProfileStatus;
             }
+
         },
         methods: {
             openSearch() {
@@ -153,6 +156,11 @@
   .main-logo {
     margin-left: 35px;
     cursor: pointer;
+  }
+  .main-logo-visible-pp-image{
+    margin-left: 380px;
+    cursor: pointer;
+
   }
 
   .messages-logo {

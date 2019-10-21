@@ -36,9 +36,7 @@
 <style scoped>
 
   .right-side {
-    position: sticky;
     top: 4em;
-    position: -webkit-sticky;
     width: 250px;
     height: 450px;
     float: left;

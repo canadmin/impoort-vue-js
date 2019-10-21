@@ -106,6 +106,7 @@
         },
         created() {
             this.initialMessage();
+
         },
         watch: {
             messageText(value) {

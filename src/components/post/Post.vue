@@ -15,6 +15,11 @@
           eniam tempora esse consequatur sed asperiores quasi eligendi eveniet cum doloribus excepturi molestias
           delectus.
         </div>
+        <div class="post-description-image">
+          <img src="../../assets/stonks.jpg" width="100%"
+          height="300">
+        </div>
+
         <hr>
         <div class="row  text-center mt-n3 mb-n2">
           <div class="col-4" @click="like = !like">

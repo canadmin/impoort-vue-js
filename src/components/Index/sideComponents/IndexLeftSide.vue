@@ -21,6 +21,8 @@
 
 <style scoped>
   .left-side {
+    position: sticky;
+    position: -webkit-sticky;
     top: 4em;
     width: 250px;
     height: 450px;

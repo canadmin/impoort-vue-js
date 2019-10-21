@@ -59,7 +59,7 @@
                 isCollapseMessages: false,
                 left: 350,
                 messageBoxCount: 0,
-                messageBoxList: []
+                messageBoxList: [],
             }
         },
         components: {
@@ -79,7 +79,8 @@
             getMessageBoxList() {
                 return this.$store.getters.getMessageBox;
             }
-        }
+        },
+
     }
 </script>
 

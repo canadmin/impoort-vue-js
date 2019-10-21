@@ -41,6 +41,13 @@
                     this.loadData(postList)
                 }
                 window.onscroll = () => {
+                    let currentScrollHeight = document.documentElement.scrollTop;
+                    if(currentScrollHeight>170){
+                        this.$store.dispatch("activePPImage",true);
+                    }else{
+                        this.$store.dispatch("activePPImage",false)
+                    }
+                    console.log(currentScrollHeight);
                     let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight;
                     if (bottomOfWindow) {
                         this.loadData(postList);
@@ -66,7 +73,7 @@
             appCreatePost: CreatePost
         },
         created(){
-            console.log(this.$store.getters.getSessionToken);
+            console.log(this.$store.getters.getSessionUser);
         }
 
 
