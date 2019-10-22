@@ -66,8 +66,8 @@
             </div>
 
           </div>
-          <div class="col-9  bg-white message-box" v-else>
-            Hemen mesajlaşmaya başlayın
+          <div class="col-9   bg-white message-box text-center " v-else>
+
           </div>
         </div>
       </div>
@@ -147,7 +147,7 @@
   }
 
   .message-row {
-    margin-top: 5rem;
+    margin-top: 4.5rem;
     margin-left: 150px;
     margin-right: 150px;
 

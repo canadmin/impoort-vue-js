@@ -8,25 +8,25 @@
       <div class="box-users">
         <div class="box-user-single" @click="openNewMessageBox('Yusuf Ali Cezik')">
           <div class="p-2">
-            <img src="../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
+            <img src="../../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
             <span class="ml-2 ">Yusuf Ali Cezik</span>
           </div>
         </div>
         <div class="box-user-single" @click="openNewMessageBox('Can Yardımcı')">
           <div class="p-2">
-            <img src="../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
+            <img src="../../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
             <span class="ml-2 ">Can yardımcı</span>
           </div>
         </div>
         <div class="box-user-single" @click="openNewMessageBox('Hasan Cerit')">
           <div class="p-2">
-            <img src="../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
+            <img src="../../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
             <span class="ml-2 ">Hasan Cerit</span>
           </div>
         </div>
         <div class="box-user-single" @click="openNewMessageBox('Mehmet Burak')">
           <div class="p-2">
-            <img src="../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
+            <img src="../../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
             <span class="ml-2 ">Mehmet Burak</span>
           </div>
         </div>
@@ -36,12 +36,12 @@
     <!--messageBox-->
     <div v-for="(messageBox,index) in messageBoxList">
       <div v-if="index === 0">
-        <div class="chatfalan" :style="{left:(index+1)*left+'px'}">
+        <div class="chat-box" :style="{left:(index+1)*left+'px'}">
           <app-single-chat v-if="messageBoxCount !== 0" :messageBox="messageBox" :index="index"></app-single-chat>
         </div>
       </div>
       <div v-else>
-        <div class="chatfalan" :style="{left:(index+1)*360+'px'}">
+        <div class="chat-box" :style="{left:(index+1)*360+'px'}">
           <app-single-chat v-if="messageBoxCount !== 0" :messageBox="messageBox" :index="index"></app-single-chat>
         </div>
       </div>
@@ -137,7 +137,7 @@
     cursor: pointer;
   }
 
-  .chatfalan {
+  .chat-box {
     position: fixed;
     z-index: 100;
     bottom: 0;

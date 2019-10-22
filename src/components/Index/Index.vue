@@ -2,18 +2,18 @@
   <div id="index" ref="index" >
     <div class="container-fluid">
       <div class="row">
-        <div class="col-4 mt-5">
+        <div class="col-4 mt-4">
           <app-messages-box></app-messages-box>
           <app-left-side></app-left-side>
         </div>
-        <div class="col-4 mt-5">
+        <div class="col-4 mt-4">
           <app-create-post></app-create-post>
           <div>
             <app-post v-for="a in postList" class="mt-5"></app-post>
           </div>
 
         </div>
-        <div class="col-4 mt-5 text-center">
+        <div class="col-4 mt-4 text-center">
           <app-right-side></app-right-side>
         </div>
       </div>
@@ -24,7 +24,7 @@
 <script>
     import Post from "../post/Post";
     import IndexRightSide from "./sideComponents/IndexRightSide";
-    import IndexMessagesBox from "../chatBox/IndexMessagesBox";
+    import IndexMessagesBox from "../common/chatBox/IndexMessagesBox";
     import IndexLeftSide from "./sideComponents/IndexLeftSide";
     import CreatePost from "../post/CreatePost";
 

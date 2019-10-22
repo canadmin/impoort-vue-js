@@ -6,7 +6,7 @@
         <span class="right-name">Can Yardımcı</span>
       </div>
       <div class="text-center">
-        <span class="right-title">Developer</span>
+        <span class="right-title">Full Stack Developer</span>
       </div>
     </div>
     <hr>

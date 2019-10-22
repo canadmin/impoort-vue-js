@@ -1,6 +1,6 @@
 <template>
-  <div class="pl-2">
-    <img src="../../assets/pp.jpeg" width="25" height="25" class="comment-user-image">
+  <div class="p-1">
+    <img src="../../assets/pp.jpeg" width="25" height="25"   class="comment-user-image">
     <span class="comment-user-name">Ebu muhiddin</span>
     <div class="mt-1">
       Gerçekten harika olmuş, elinize sağlık.
@@ -19,5 +19,6 @@
 }
   .comment-user-name{
     font-size: 12px;
+    cursor: pointer;
   }
 </style>

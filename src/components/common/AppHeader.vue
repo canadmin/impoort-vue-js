@@ -1,72 +1,86 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-light background">
-      <div class="collapse navbar-collapse">
-        <div v-outside>
-          <div :class="barPhotoStatus ?  'pp-image-place' : ''">
-          <img src="../../assets/pp.jpeg" v-if="barPhotoStatus" class="main-pp-image" @click="ppBarImageAction=true" width="45" height="45">
-          </div>
-          <div class="pp-bar-image-action" v-show="ppBarImageAction">
-            <div class=" mt-3">
-              <div class="">
-                Profile
+    <nav class="fixed-top  background  ">
+      <div class="d-inline-flex col-12   ">
+        <div class="col-4 mt-2 col-md-4 col-sm-4">
+          <div class="d-lg-inline-flex  float-right">
+            <div v-outside>
+              <div :class="barPhotoStatus ?  'pp-image-place' : ''">
+                <transition name="slide">
+                <img src="../../assets/pp.jpeg" v-if="barPhotoStatus" class="main-pp-image"
+                     @click="ppBarImageAction=true" width="45" height="45">
+                </transition>
               </div>
-              <div class="mt-2">
-                Settings
+              <div class="pp-bar-image-action" v-show="ppBarImageAction">
+                <div class=" mt-3">
+                  <div class="">
+                    Profile
+                  </div>
+                  <div class="mt-2">
+                    Settings
+                  </div>
+                  <div class="mt-2">
+                    Logout
+                  </div>
+                </div>
               </div>
-              <div class="mt-2">
-                Logout
-              </div>
+            </div>
+            <div class="mt-2 float-right d-lg-inline-flex">
+              <router-link
+                active-class="active-page"
+                to="/index"
+                tag="div"
+                exact>
+                <img src="../../assets/main.png" class="main-logo" width="25" height="25">
+              </router-link>
+              <router-link
+                active-class="active"
+                to="/messages"
+                tag="div"
+                exact>
+                <img src="../../assets/messages.png" class="messages-logo" width="25" height="25">
+
+
+              </router-link>
+              <router-link
+                active-class="active"
+                to="/index"
+                tag="div"
+                exact>
+                <img src="../../assets/watch.png" class="messages-logo" width="25" height="25">
+              </router-link>
+              <router-link
+                active-class="active"
+                to="/profile-me"
+                tag="div"
+                exact>
+                <img src="../../assets/profil.png" class="messages-logo" width="25" height="25">
+
+              </router-link>
             </div>
           </div>
         </div>
-        <router-link
-          active-class="active"
-          to="/index"
-          exact>
-          <img src="../../assets/main.png" :class="barPhotoStatus ?'main-logo' : 'main-logo-visible-pp-image'" width="25" height="25">
-        </router-link>
-        <router-link
-          active-class="active"
-          to="/messages"
-          exact>
-          <img src="../../assets/messages.png" class="messages-logo" width="25" height="25">
-
-        </router-link>
-        <router-link
-          active-class="active"
-          to="/index"
-          exact>
-          <img src="../../assets/watch.png" class="messages-logo" width="25" height="25">
-        </router-link>
-        <router-link
-          active-class="active"
-          to="/profile-me"
-          exact>
-          <img src="../../assets/profil.png" class="messages-logo" width="25" height="25">
-
-        </router-link>
-
-        <img class="brand" height="35" width="135" src="../../assets/logo.png">
-
-        <div v-outside>
-          <input class=" mr-sm-2 " @click="openSearch" placeholder="Search"
-                 :class="searchStatus ? 'search-button-focus' :'search-button'">
-          <div class="search-field text-center" v-show="searchStatus">
-            <button class="search-filter-button">Startup</button>
-            <button class="search-filter-button">Developer</button>
-            <button class="search-filter-button">Investor</button>
-            <button class="search-filter-button">Looking for a Team</button>
-            <button class="search-filter-button">Just a User</button>
-            <div class="search-field-button text-center">
-              <button class="search-field-button-search">Search</button>
+        <div class="col-4 mt-2 text-center ">
+          <img class="brand" height="35" width="135" src="../../assets/logo.png">
+        </div>
+        <div class="col-4 mt-2 ml-1">
+          <div v-outside>
+            <input class="" @click="openSearch" placeholder="Search"
+                   :class="searchStatus ? 'search-button-focus' :'search-button'">
+            <div class="search-field text-center" v-show="searchStatus">
+              <button class="search-filter-button">Startup</button>
+              <button class="search-filter-button">Developer</button>
+              <button class="search-filter-button">Investor</button>
+              <button class="search-filter-button">Looking for a Team</button>
+              <button class="search-filter-button">Just a User</button>
+              <div class="search-field-button text-center">
+                <button class="search-field-button-search">Search</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </nav>
-
-
   </div>
 </template>
 <script>
@@ -76,12 +90,12 @@
             return {
                 mainProps: {blank: true, blankColor: '#777', width: 40, height: 40, class: 'm1',},
                 searchStatus: false,
-                ppBarImageAction : false
+                ppBarImageAction: false
             }
         },
         computed: {
-            barPhotoStatus(){
-               return this.$store.getters.getHeaderProfileStatus;
+            barPhotoStatus() {
+                return this.$store.getters.getHeaderProfileStatus;
             }
 
         },
@@ -120,20 +134,17 @@
 
   .brand {
     cursor: pointer;
-    margin-left: 13%;
   }
 
   .search-button {
     width: 70px;
-    border: 0;
-    right: 0;
+
     height: 30px;
     border-radius: 10px;
     padding-left: 5px;
   }
 
   .search-from {
-    margin-left: 50%;
 
   }
 
@@ -142,7 +153,6 @@
     border: 0;
     height: 30px;
     border-radius: 2px;
-    margin-left: 260px;
     transition: width 500ms ease-in-out;
 
   }
@@ -152,41 +162,33 @@
     border: 0;
     height: 30px;
     border-radius: 2px;
-    margin-left: 260px;
     transition: width 500ms ease-in-out;
   }
 
   .main-logo {
-    margin-left: 35px;
     cursor: pointer;
-  }
-  .main-logo-visible-pp-image{
-    margin-left: 380px;
-    cursor: pointer;
-
+    margin-left: 25px;
   }
 
   .messages-logo {
-    margin-left: 50px;
     cursor: pointer;
+    margin-left: 25px;
+
   }
 
   .main-pp-image {
     border-radius: 50%;
     cursor: pointer;
-  }
-  .pp-image-place{
-    margin-left: 300px;
-
 
   }
+
   .search-field {
     margin-top: 15px;
     width: 420px;
     z-index: 100;
     padding: 20px;
-    margin-left: 220px;
     background-color: white;
+    margin-left: -30px;
     position: fixed;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
 
@@ -218,13 +220,45 @@
     height: 130px;
     padding-left: 10px;
     position: fixed;
-    left: 200px;
     margin-top: 10px;
     background-color: white;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
-
   }
 
 
+  .slide-enter{
+    opacity: 0;
+  }
 
+  .slide-enter-active{
+    animation: slide-in 1s ease-out forwards;
+    transition: opacity 0.5s;
+  }
+
+  .slide-leave{
+
+  }
+  .slide-leave-active{
+    animation: slide-out 1s ease-out forwards;
+    transition: opacity 0.5s;
+    opacity: 0;
+
+  }
+
+  @keyframes slide-in{
+    from{
+      transform: translateY(-100px);
+    }to{
+       transform: translateY(0px);
+
+     }
+  }
+
+  @keyframes slide-out{
+    from{
+      transform: translateY(0px);
+    }to{
+       transform: translateY(-100px);
+     }
+  }
 </style>

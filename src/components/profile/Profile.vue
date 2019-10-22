@@ -70,7 +70,7 @@
             <div class="text-center mt-2">
               <input type="text" placeholder="search watcher" class="search-watch-user">
             </div>
-            <app-user v-for="i in 4"></app-user>
+            <app-user v-for="i in 4" :useByComponent="'profile'"></app-user>
           </div>
         </div>
       </div>
@@ -81,7 +81,7 @@
 <script>
     import Post from "../post/Post";
     import User from "../common/User";
-    import IndexMessagesBox from "../chatBox/IndexMessagesBox";
+    import IndexMessagesBox from "../common/chatBox/IndexMessagesBox";
 
     export default {
         data() {
