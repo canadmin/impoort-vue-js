@@ -17,7 +17,6 @@
 <style scoped>
   .watch-image {
     border-radius: 50%;
-
   }
 
   .watch-button {

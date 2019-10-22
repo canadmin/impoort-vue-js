@@ -66,8 +66,8 @@
             </div>
 
           </div>
-          <div class="col-9  bg-white message-box" v-else>
-            Hemen mesajlaşmaya başlayın
+          <div class="col-9   bg-white message-box text-center " v-else>
+
           </div>
         </div>
       </div>

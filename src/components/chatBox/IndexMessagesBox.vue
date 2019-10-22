@@ -36,12 +36,12 @@
     <!--messageBox-->
     <div v-for="(messageBox,index) in messageBoxList">
       <div v-if="index === 0">
-        <div class="chatfalan" :style="{left:(index+1)*left+'px'}">
+        <div class="chat-box" :style="{left:(index+1)*left+'px'}">
           <app-single-chat v-if="messageBoxCount !== 0" :messageBox="messageBox" :index="index"></app-single-chat>
         </div>
       </div>
       <div v-else>
-        <div class="chatfalan" :style="{left:(index+1)*360+'px'}">
+        <div class="chat-box" :style="{left:(index+1)*360+'px'}">
           <app-single-chat v-if="messageBoxCount !== 0" :messageBox="messageBox" :index="index"></app-single-chat>
         </div>
       </div>
@@ -137,7 +137,7 @@
     cursor: pointer;
   }
 
-  .chatfalan {
+  .chat-box {
     position: fixed;
     z-index: 100;
     bottom: 0;

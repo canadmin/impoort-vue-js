@@ -12,7 +12,6 @@ const mutations = {
     for (let i = 0; i < state.messagesBox.length; i++) {
       if (state.messagesBox[i].name === messageBox.name) {
         isContains = true;
-        console.log(state.messagesBox[i].name)
       }
     }
     if (!isContains) {

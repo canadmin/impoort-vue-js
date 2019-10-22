@@ -141,8 +141,10 @@
                     this.buttonPageName = "Next"
                     }else if(currentPage === 2){
                         this.currentPage++;
+                    }else{
                         this.buttonPageName = "Complete"
                         this.$store.dispatch("registerUser", this.registerUser[0]);
+
                     }
                 },
             setGender(gender) {

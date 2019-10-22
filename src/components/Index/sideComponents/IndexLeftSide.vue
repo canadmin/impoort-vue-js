@@ -3,7 +3,7 @@
     <div>
       Suggested
       <hr>
-      <!---<app-user ></app-user>-->
+      <app-user ></app-user>
     </div>
   </div>
 </template>
