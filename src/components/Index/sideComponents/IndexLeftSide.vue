@@ -3,7 +3,10 @@
     <div>
       Suggested
       <hr>
-      <app-user ></app-user>
+      <app-user :useByComponent="'index'" v-for="i in 5"></app-user>
+      <div class="mt-4">
+       <span class="see-more">See More</span>
+      </div>
     </div>
   </div>
 </template>
@@ -34,5 +37,8 @@
 
   .left-image {
     border-radius: 50%;
+  }
+  .see-more{
+    font-size: 13px;
   }
 </style>

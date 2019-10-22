@@ -4,14 +4,23 @@
       <div class="text-center mt-3 watch-single">
         <img src="../../assets/stonks.jpg" width="40" height="40" class="watch-image">
         <span class="watch-name-single">Can Yardımcı</span>
-        <button class="watch-button ml-5">+ WATCH</button>
+        <button class="watch-button ml-5" v-text="useByComponent === 'index' ? '+' : '+ Watch'">+</button>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
-    export default {}
+    export default {
+        data(){
+            return {
+
+            }
+        },
+        props : ["useByComponent"],
+    }
+
 </script>
 
 <style scoped>

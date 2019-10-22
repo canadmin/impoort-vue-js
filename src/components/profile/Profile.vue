@@ -70,7 +70,7 @@
             <div class="text-center mt-2">
               <input type="text" placeholder="search watcher" class="search-watch-user">
             </div>
-            <app-user v-for="i in 4"></app-user>
+            <app-user v-for="i in 4" :useByComponent="'profile'"></app-user>
           </div>
         </div>
       </div>
