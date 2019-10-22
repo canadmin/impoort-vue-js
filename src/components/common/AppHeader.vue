@@ -1,13 +1,15 @@
 <template>
   <div>
-    <nav class="fixed-top  background ">
-      <div class="d-inline-flex col-12 ">
-        <div class="col-4 mt-2 ">
+    <nav class="fixed-top  background  ">
+      <div class="d-inline-flex col-12   ">
+        <div class="col-4 mt-2 col-md-4 col-sm-4">
           <div class="d-lg-inline-flex  float-right">
             <div v-outside>
               <div :class="barPhotoStatus ?  'pp-image-place' : ''">
+                <transition name="slide">
                 <img src="../../assets/pp.jpeg" v-if="barPhotoStatus" class="main-pp-image"
                      @click="ppBarImageAction=true" width="45" height="45">
+                </transition>
               </div>
               <div class="pp-bar-image-action" v-show="ppBarImageAction">
                 <div class=" mt-3">
@@ -23,29 +25,34 @@
                 </div>
               </div>
             </div>
-            <div class="mt-2 float-right">
+            <div class="mt-2 float-right d-lg-inline-flex">
               <router-link
-                active-class="active"
+                active-class="active-page"
                 to="/index"
+                tag="div"
                 exact>
                 <img src="../../assets/main.png" class="main-logo" width="25" height="25">
               </router-link>
               <router-link
                 active-class="active"
                 to="/messages"
+                tag="div"
                 exact>
                 <img src="../../assets/messages.png" class="messages-logo" width="25" height="25">
+
 
               </router-link>
               <router-link
                 active-class="active"
                 to="/index"
+                tag="div"
                 exact>
                 <img src="../../assets/watch.png" class="messages-logo" width="25" height="25">
               </router-link>
               <router-link
                 active-class="active"
                 to="/profile-me"
+                tag="div"
                 exact>
                 <img src="../../assets/profil.png" class="messages-logo" width="25" height="25">
 
@@ -53,10 +60,10 @@
             </div>
           </div>
         </div>
-        <div class="col-4 mt-2 text-center">
+        <div class="col-4 mt-2 text-center ">
           <img class="brand" height="35" width="135" src="../../assets/logo.png">
         </div>
-        <div class="col-4 mt-2  ml-1">
+        <div class="col-4 mt-2 ml-1">
           <div v-outside>
             <input class="" @click="openSearch" placeholder="Search"
                    :class="searchStatus ? 'search-button-focus' :'search-button'">
@@ -74,8 +81,6 @@
         </div>
       </div>
     </nav>
-
-
   </div>
 </template>
 <script>
@@ -174,7 +179,6 @@
   .main-pp-image {
     border-radius: 50%;
     cursor: pointer;
-    margin-left: 25px;
 
   }
 
@@ -219,8 +223,42 @@
     margin-top: 10px;
     background-color: white;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
-
   }
 
 
+  .slide-enter{
+    opacity: 0;
+  }
+
+  .slide-enter-active{
+    animation: slide-in 1s ease-out forwards;
+    transition: opacity 0.5s;
+  }
+
+  .slide-leave{
+
+  }
+  .slide-leave-active{
+    animation: slide-out 1s ease-out forwards;
+    transition: opacity 0.5s;
+    opacity: 0;
+
+  }
+
+  @keyframes slide-in{
+    from{
+      transform: translateY(-100px);
+    }to{
+       transform: translateY(0px);
+
+     }
+  }
+
+  @keyframes slide-out{
+    from{
+      transform: translateY(0px);
+    }to{
+       transform: translateY(-100px);
+     }
+  }
 </style>
