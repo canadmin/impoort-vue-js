@@ -147,7 +147,7 @@
   }
 
   .message-row {
-    margin-top: 5rem;
+    margin-top: 4.5rem;
     margin-left: 150px;
     margin-right: 150px;
 

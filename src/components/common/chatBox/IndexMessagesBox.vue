@@ -8,25 +8,25 @@
       <div class="box-users">
         <div class="box-user-single" @click="openNewMessageBox('Yusuf Ali Cezik')">
           <div class="p-2">
-            <img src="../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
+            <img src="../../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
             <span class="ml-2 ">Yusuf Ali Cezik</span>
           </div>
         </div>
         <div class="box-user-single" @click="openNewMessageBox('Can Yardımcı')">
           <div class="p-2">
-            <img src="../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
+            <img src="../../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
             <span class="ml-2 ">Can yardımcı</span>
           </div>
         </div>
         <div class="box-user-single" @click="openNewMessageBox('Hasan Cerit')">
           <div class="p-2">
-            <img src="../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
+            <img src="../../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
             <span class="ml-2 ">Hasan Cerit</span>
           </div>
         </div>
         <div class="box-user-single" @click="openNewMessageBox('Mehmet Burak')">
           <div class="p-2">
-            <img src="../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
+            <img src="../../../assets/stonks.jpg" class="index-message-box-image ml-3" width="30" height="30">
             <span class="ml-2 ">Mehmet Burak</span>
           </div>
         </div>
