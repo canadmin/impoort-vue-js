@@ -1,7 +1,7 @@
 <template>
   <div>
     <app-message-box class="ml-3"></app-message-box>
-    <div class="container-fluid profile-general ">
+    <div class=" profile-general ">
       <div class="row mt-4 ml-5">
         <div class="col-3 mt-5">
           <div class="profile-info">

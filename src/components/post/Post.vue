@@ -16,7 +16,7 @@
           delectus.
         </div>
         <div class="post-description-image">
-          <img src="../../assets/stonks.jpg" width="100%"
+          <img src="../../assets/stonks.jpeg" width="100%"
           height="300">
         </div>
 
