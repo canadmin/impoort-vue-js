@@ -264,5 +264,5 @@
       transform: translateY(-100px);
     }
   }
-  /*İmage animation */
+  /*İmage animation asd */
 </style>
