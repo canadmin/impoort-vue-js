@@ -264,4 +264,5 @@
       transform: translateY(-100px);
     }
   }
+  /*İmage animation */
 </style>
