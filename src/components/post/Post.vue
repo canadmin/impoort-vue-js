@@ -58,7 +58,6 @@
 </template>
 
 <script>
-    //v-bind:src="like.png ? '/src/assets/like.png.png' : ''"
     import Comment from "./Comment";
 
     export default {
