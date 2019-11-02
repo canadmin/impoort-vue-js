@@ -8,9 +8,11 @@ import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 import {store} from "./store/store";
 import VueResource from "vue-resource";
 import {router} from "./router";
-
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(VueResource);
 Vue.use(BootstrapVue);
+Vue.use(ElementUI);
 
 
 Vue.config.productionTip = false;

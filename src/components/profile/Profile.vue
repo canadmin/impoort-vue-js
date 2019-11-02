@@ -37,13 +37,22 @@
                 <div class="social-info-left">
                   <span>21 Watching Post</span>
                 </div>
-                <div class="text-center mt-4">
-                  <span>Experience</span>
-                  <hr>
+                <div class=" mt-4">
+                  <div class="text-center"><span>Experience</span></div>
+                  <el-divider><i class="el-icon-star-on"></i></el-divider>
+                  <div class="block">
+                  <el-timeline :reverse="reverse">
+                    <el-timeline-item
+                      v-for="(activity, index) in activities"
+                      :key="index"
+                      :color="activity.color"
+                      :timestamp="activity.timestamp">
+                      {{activity.content}}
+                    </el-timeline-item>
+                  </el-timeline>
+                  </div>
                 </div>
-                <div class="mb-2">
-                  <span class="profile-description ">Intern Java Developer - Ozgur Yazilim A.Ş.</span>
-                </div>
+
               </div>
             </div>
           </div>
@@ -86,7 +95,16 @@
     export default {
         data() {
             return {
-                activeTab: true
+                activeTab: true,
+                reverse: true,
+                activities: [{
+                    content: 'Java Developer at Özgür Yazilim A.Ş.',
+                }, {
+                    content: 'Full Stack Developer at Impoort',
+                }, {
+                    content: 'Co - Founder Impoort',
+                    color: '#0bbd87'
+                }]
             }
         },
         components: {
