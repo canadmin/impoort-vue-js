@@ -20,7 +20,7 @@
             <p class="mt-n3 element-p element-p-color">Şifremi unuttum</p>
           </div>
           <div v-show="selected=='appSignup'">
-            <p class="element-p-color element-p" @click="changeForm(selected)">Zaten bir hesabın var mı?</p>
+
           </div>
         </div>
       </div>
@@ -38,6 +38,7 @@
             return {
 
                 selected: "appLogin",
+                active: 0
             }
         },
         components: {

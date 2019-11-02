@@ -83,21 +83,22 @@
                 showButton: false,
                 messageText: null,
                 messagesList: [],
-                user : null
+                user: null
             }
         },
         methods: {
 
-            selectUserForMessage(user){
+            selectUserForMessage(user) {
 
-                    this.user={
-                        selectedUserId : "123",
-                        selectedUserName : user,
-                    }
+                this.user = {
+                    selectedUserId: "123",
+                    selectedUserName: user,
+                }
 
             },
             initialMessage() {
-                this.messagesList.push({key: 1,
+                this.messagesList.push({
+                    key: 1,
                     value: {
                         byWho: "yusuf",
                         messagePayload: "Merhaba Can Nasılsı asdasdasdasdasd asd asd asd asda sdas dasd asn"
@@ -119,7 +120,7 @@
         },
         created() {
             this.initialMessage();
-            this.$store.dispatch("activePPImage",true);
+            this.$store.dispatch("activePPImage", true);
         },
         watch: {
             messageText(value) {

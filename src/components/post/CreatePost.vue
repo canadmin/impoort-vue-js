@@ -16,8 +16,16 @@
                        src="../../assets/pp.jpeg" v-show="postSelectImage != null" :src="postSelectImage">
       </p>
       <input ref="file" type="file" style="display: none;" @change="onChange($event)" class="form-control">
-      <button class="add-image-button" v-if="postSelectImage==null" type="button" v-text="'+'"
-              @click="$refs.file.click()"></button>
+      <el-upload
+        action="https://jsonplaceholder.typicode.com/posts/"
+        list-type="picture-card"
+        :on-preview="handlePictureCardPreview"
+        :on-remove="handleRemove">
+        <i class="el-icon-plus"></i>
+      </el-upload>
+      <el-dialog :visible.sync="dialogVisible">
+        <img width="100%" :src="dialogImageUrl" alt="">
+      </el-dialog>
       <hr>
       <div class="mb-3">
         <button class="share-button ">Share</button>

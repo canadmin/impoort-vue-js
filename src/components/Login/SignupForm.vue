@@ -1,5 +1,6 @@
 <template>
   <div class="container w-50">
+
     <transition name="slide" appear>
       <div v-if="currentPage === 1">
         <div class="row">
@@ -104,6 +105,15 @@
         <button class="form-control btn btn-color" @click="nextPage(currentPage)">{{buttonPageName}}</button>
       </div>
     </div>
+    <p class="element-p-color element-p" @click="changeForm(selected)">Zaten bir hesabın var mı?</p>
+
+    <div class="mt-5  text-left">
+      <el-steps :active="active" finish-status="success">
+        <el-step title="Step 1"></el-step>
+        <el-step title="Step 2"></el-step>
+        <el-step title="Step 3"></el-step>
+      </el-steps>
+    </div>
   </div>
 </template>
 
@@ -131,7 +141,9 @@
                 ],
                 currentPage: 1,
                 buttonPageName: "Next",
-                selectedGender: "Optional"
+                selectedGender: "Optional",
+                active: 0
+
             }
         },
         methods: {
@@ -146,10 +158,15 @@
                         this.$store.dispatch("registerUser", this.registerUser[0]);
 
                     }
+                    this.next()
                 },
             setGender(gender) {
                 this.selectedGender = gender;
                 this.registerUser[0].description = gender;
+            },
+
+            next() {
+                if (this.active++ > 2) this.active = 0;
             }
         },
     }

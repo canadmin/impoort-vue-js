@@ -7,8 +7,8 @@
             <div v-outside>
               <div :class="barPhotoStatus ?  'pp-image-place' : ''">
                 <transition name="slide">
-                <img src="../../assets/pp.jpeg" v-if="barPhotoStatus" class="main-pp-image"
-                     @click="ppBarImageAction=true" width="45" height="45">
+                  <img src="../../assets/pp.jpeg" v-if="barPhotoStatus" class="main-pp-image"
+                       @click="ppBarImageAction=true" width="45" height="45">
                 </transition>
               </div>
               <div class="pp-bar-image-action" v-show="ppBarImageAction">
@@ -226,39 +226,43 @@
   }
 
 
-  .slide-enter{
+  .slide-enter {
     opacity: 0;
   }
 
-  .slide-enter-active{
+  .slide-enter-active {
     animation: slide-in 1s ease-out forwards;
     transition: opacity 0.5s;
   }
 
-  .slide-leave{
+  .slide-leave {
 
   }
-  .slide-leave-active{
+
+  .slide-leave-active {
     animation: slide-out 1s ease-out forwards;
     transition: opacity 0.5s;
     opacity: 0;
 
   }
 
-  @keyframes slide-in{
-    from{
+  @keyframes slide-in {
+    from {
       transform: translateY(-100px);
-    }to{
-       transform: translateY(0px);
-
-     }
-  }
-
-  @keyframes slide-out{
-    from{
+    }
+    to {
       transform: translateY(0px);
-    }to{
-       transform: translateY(-100px);
-     }
+
+    }
   }
+
+  @keyframes slide-out {
+    from {
+      transform: translateY(0px);
+    }
+    to {
+      transform: translateY(-100px);
+    }
+  }
+  /*İmage animation asd */
 </style>
