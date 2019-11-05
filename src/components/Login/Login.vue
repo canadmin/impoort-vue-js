@@ -22,6 +22,8 @@
           <div v-show="selected=='appSignup'">
 
           </div>
+          <p v-show="selected=='appSignup'" class="element-p-color element-p" @click="changeForm(selected)">Zaten bir hesabın var mı?</p>
+
         </div>
       </div>
     </div>
