@@ -1,4 +1,5 @@
 <template>
+
   <div class="container w-50">
 
     <transition name="slide" appear>
@@ -105,7 +106,6 @@
         <button class="form-control btn btn-color" @click="nextPage(currentPage)">{{buttonPageName}}</button>
       </div>
     </div>
-    <p class="element-p-color element-p" @click="changeForm(selected)">Zaten bir hesabın var mı?</p>
 
     <div class="mt-5  text-left">
       <el-steps :active="active" finish-status="success">
