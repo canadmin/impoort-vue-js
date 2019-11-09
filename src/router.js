@@ -6,7 +6,7 @@ import Home from "./components/base/Home";
 import Index from "./components/Index/Index";
 import Message from "./components/message/Message"
 import Profile from "./components/profile/Profile";
-
+import UserProfile from "./components/profile/UserProfile";
 Vue.use(VueRouter);
 export const routes = [
   {path: "/", component: LoginPage},
@@ -16,6 +16,7 @@ export const routes = [
     },children: [
       {path: "/messages", component: Message},
       {path: "/profile-me", component: Profile},
+      {path: "/profile-me2", component: UserProfile},
       {path: "", component: Index}
     ]
   },
