@@ -1,9 +1,7 @@
 <template>
-
   <div class="container w-50">
-
     <transition name="slide" appear>
-      <div v-if="currentPage === 1">
+      <div v-show="currentPage === 1">
         <div class="row">
           <div class="col">
             <input type="text" class="form-control form-control-lg" v-model="registerUser[0].firstName"
@@ -35,7 +33,7 @@
       </div>
     </transition>
     <transition name="slide" appear>
-      <div v-if="currentPage === 2">
+      <div v-show="currentPage === 2">
         <div class="row">
           <div class="col">
             <input type="tel" class="form-control form-control-lg " v-model="registerUser[0].phoneNumber"
@@ -75,7 +73,7 @@
       </div>
     </transition>
     <transition name="slide" appear>
-      <div v-if="currentPage === 3">
+      <div v-show="currentPage === 3">
         <div class="row">
           <div class="col">
             <p>Ben bir
@@ -103,7 +101,7 @@
     </transition>
     <div class="row mt-4">
       <div class="col">
-        <button class="form-control btn btn-color" @click="nextPage(currentPage)">{{buttonPageName}}</button>
+        <button class=" btn btn-color" @click="nextPage(currentPage)">{{buttonPageName}}</button>
       </div>
     </div>
 
@@ -142,7 +140,8 @@
                 currentPage: 1,
                 buttonPageName: "Next",
                 selectedGender: "Optional",
-                active: 0
+                active: 0,
+
 
             }
         },

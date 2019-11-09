@@ -10,6 +10,9 @@ import VueResource from "vue-resource";
 import {router} from "./router";
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import 'bootstrap-css-only/css/bootstrap.min.css'
+import 'mdbvue/lib/css/mdb.min.css'
+import '@fortawesome/fontawesome-free/css/all.min.css'
 Vue.use(VueResource);
 Vue.use(BootstrapVue);
 Vue.use(ElementUI);
