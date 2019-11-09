@@ -17,7 +17,7 @@
       </p>
       <input ref="file" type="file" style="display: none;" @change="onChange($event)" class="form-control">
       <el-upload
-        action="https://jsonplacehoslder.typicosdde.com/asd/"
+        action="https://jsonplaceholder.typicode.com/posts/"
         list-type="picture-card"
         :on-preview="handlePictureCardPreview"
         :on-remove="handleRemove">
