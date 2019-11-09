@@ -2,15 +2,15 @@
   <div>
   <div class="card-background">
   </div>
-
       <div class="inner-card container-fluid">
         <div class="row ">
           <div class="col-3 pt-5">
           <div class="left-card pt-4 ">
             <div>
-
             </div>
             <div class="block">
+              <div class="text-center"><span>Experience</span></div>
+            <el-divider><i class="el-icon-star-on"></i></el-divider>
               <el-timeline :reverse="reverse" class="ml-n3">
                 <el-timeline-item
                   v-for="(activity, index) in activities"
@@ -71,12 +71,17 @@
                     color: '#0bbd87'
                 }],
                 reverse: true,
-
             }
+        },
+        methods :{
+
         },
         created() {
             this.$store.dispatch("activePPImage", true);
-
+            this.$store.dispatch("changeHeaderBackground",false);
+        },
+        destroyed() {
+            this.$store.dispatch("changeHeaderBackground",true);
         }
     }
 </script>
@@ -158,7 +163,6 @@
 .watch-select{
   padding: 12px;
   width: 200px;
-  border-radius: 12px;
   margin-left: 12px;
   color: #283E4A;
   cursor: pointer;

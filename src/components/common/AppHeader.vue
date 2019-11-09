@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="fixed-top  background  ">
+    <nav class="fixed-top" :class="showBackground ? 'background':'background-op'">
       <div class="d-inline-flex col-12   ">
         <div class="col-4 mt-2 col-md-4 col-sm-4">
           <div class="d-lg-inline-flex  float-right">
@@ -67,6 +67,7 @@
           <div v-outside>
             <input class="" @click="openSearch" placeholder="Search"
                    :class="searchStatus ? 'search-button-focus' :'search-button'">
+            <transition name="el-zoom-in-top">
             <div class="search-field text-center" v-show="searchStatus">
               <button class="search-filter-button">Startup</button>
               <button class="search-filter-button">Developer</button>
@@ -74,9 +75,14 @@
               <button class="search-filter-button">Looking for a Team</button>
               <button class="search-filter-button">Just a User</button>
               <div class="search-field-button text-center">
+                <el-collapse-transition>
+
                 <button class="search-field-button-search">Search</button>
+                </el-collapse-transition>
+
               </div>
             </div>
+            </transition>
           </div>
         </div>
       </div>
@@ -90,12 +96,16 @@
             return {
                 mainProps: {blank: true, blankColor: '#777', width: 40, height: 40, class: 'm1',},
                 searchStatus: false,
-                ppBarImageAction: false
+                ppBarImageAction: false,
+
             }
         },
         computed: {
             barPhotoStatus() {
                 return this.$store.getters.getHeaderProfileStatus;
+            },
+            showBackground(){
+                return this.$store.getters.getHeaderBackground;
             }
 
         },
@@ -125,6 +135,9 @@
 <style>
   .background {
     background-color: #283e4a;
+    height: 55px;
+  }
+  .background-op{
     height: 55px;
   }
 
