@@ -49,17 +49,24 @@
                     Watching (195)
                   </div>
                 </div>
+                <div class="spinner-border spinner-color" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
               </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+<!--    <div class="common-board">-->
+
+<!--    </div>-->
   </div>
 </template>
 
 <script>
     export default {
+        name: 'UserProfile',
         data(){
             return{
                 activities: [{
@@ -82,6 +89,8 @@
         },
         destroyed() {
             this.$store.dispatch("changeHeaderBackground",true);
+        },
+        components:{
         }
     }
 </script>
@@ -171,6 +180,9 @@
   background-color: #f4f4f4;
   border: 1px;
 }
+.spinner-color{
+  color: #283E4A;
+}
 @-webkit-keyframes AnimationName {
   0%{background-position:0% 71%}
   50%{background-position:100% 30%}
@@ -191,4 +203,17 @@
   50%{background-position:100% 30%}
   100%{background-position:0% 71%}
 }
+
+  .common-board{
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 100; /* Stay on top */
+    top: 0;
+    right: 0;
+    margin-top: 58px;
+    width: 700px;
+    height: 100%;
+    position: -webkit-sticky;
+    opacity: 0.75;
+    background: #f4f5f4;
+  }
 </style>

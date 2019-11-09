@@ -101,7 +101,7 @@
     </transition>
     <div class="row mt-4">
       <div class="col">
-        <button class="form-control btn btn-color" @click="nextPage(currentPage)">{{buttonPageName}}</button>
+        <button class=" btn btn-color" @click="nextPage(currentPage)">{{buttonPageName}}</button>
       </div>
     </div>
 

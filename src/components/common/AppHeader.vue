@@ -1,30 +1,31 @@
 <template>
   <div>
-    <nav class="fixed-top" :class="showBackground ? 'background':'background-op'">
+    <b-navbar toggleable="lg" class="fixed-top custom-header" :class="showBackground ? 'background':'background-op'">
       <div class="d-inline-flex col-12   ">
-        <div class="col-4 mt-2 col-md-4 col-sm-4">
+        <div class="col-4  col-md-4 col-sm-4">
           <div class="d-lg-inline-flex  float-right">
             <div v-outside>
               <div :class="barPhotoStatus ?  'pp-image-place' : ''">
                 <transition name="slide">
                   <img src="../../assets/pp.jpeg" v-if="barPhotoStatus" class="main-pp-image"
-                       @click="ppBarImageAction=true" width="45" height="45">
+                       @click="ppBarImageAction=true" width="40" height="40">
                 </transition>
               </div>
               <div class="pp-bar-image-action" v-show="ppBarImageAction">
-                <div class=" mt-3">
+                <div class=" ">
                   <div class="">
                     Profile
                   </div>
-                  <div class="mt-2">
+                  <div class="">
                     Settings
                   </div>
-                  <div class="mt-2">
+                  <div class="">
                     Logout
                   </div>
                 </div>
               </div>
             </div>
+            <b-collapse id="nav-collapse" is-nav>
             <div class="mt-2 float-right d-lg-inline-flex">
               <router-link
                 active-class="active-page"
@@ -58,12 +59,16 @@
 
               </router-link>
             </div>
+            </b-collapse>
           </div>
         </div>
-        <div class="col-4 mt-2 text-center ">
+        <div class="col-4  text-center ">
           <img class="brand" height="35" width="135" src="../../assets/logo.png">
         </div>
-        <div class="col-4 mt-2 ml-1">
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+        <b-collapse id="nav-collapse" is-nav>
+        <div class="col-4  ml-1">
           <div v-outside>
             <input class="" @click="openSearch" placeholder="Search"
                    :class="searchStatus ? 'search-button-focus' :'search-button'">
@@ -85,12 +90,13 @@
             </transition>
           </div>
         </div>
+        </b-collapse>
       </div>
-    </nav>
+    </b-navbar>
   </div>
 </template>
 <script>
-
+    import { BNavbar } from 'bootstrap-vue'
     export default {
         data() {
             return {
@@ -129,16 +135,21 @@
                 },
             }
         },
+        components : {
+           BNavbar
+        }
 
     }
 </script>
 <style>
+
+  .custom-header{
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .2);
+  }
   .background {
     background-color: #283e4a;
-    height: 55px;
   }
   .background-op{
-    height: 55px;
   }
 
   .post-image {

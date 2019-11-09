@@ -7,6 +7,7 @@ import Index from "./components/Index/Index";
 import Message from "./components/message/Message"
 import Profile from "./components/profile/Profile";
 import UserProfile from "./components/profile/UserProfile";
+import test from "./components/test";
 Vue.use(VueRouter);
 export const routes = [
   {path: "/", component: LoginPage},
@@ -17,6 +18,7 @@ export const routes = [
       {path: "/messages", component: Message},
       {path: "/profile-me", component: Profile},
       {path: "/profile-me2", component: UserProfile},
+      {path: "/test", component: test},
       {path: "", component: Index}
     ]
   },
