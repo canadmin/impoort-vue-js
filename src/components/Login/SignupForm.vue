@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-50">
+  <div class="container w-75">
     <transition name="slide" appear>
       <div v-show="currentPage === 1">
         <div class="row">
