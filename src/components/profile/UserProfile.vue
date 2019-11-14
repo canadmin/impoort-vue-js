@@ -7,6 +7,7 @@
         <div class="col-3 pt-5">
           <div class="left-card pt-4 ">
             <div>
+              <p>Aydın,Türkiye</p>
             </div>
             <div class="block">
               <div class="text-center"><span>Experience</span></div>
@@ -29,29 +30,29 @@
             <div class="img-div">
               <img src="../../assets/pp.jpeg">
               <div class="text-center">
+                <button class="mt-1 btn watch-button">Watch +</button>
                 <p class="user-name">Can Yardımcı</p>
                 <p>@Developer</p>
               </div>
             </div>
 
-            <div class="row  d-flex justify-content-center text-center">
-              <div class=" watch-select" @click="selectedTabs('about')">
-                About (12)
+            <div class="row   mt-5 d-flex justify-content-center text-center">
+              <div :class="activeTab === 'about'? 'active-tab':'watch-select'" @click="selectedTabs('about')">
+                About
               </div>
-              <div class=" watch-select" @click="selectedTabs('posts')">
+              <div :class="activeTab === 'posts'? 'active-tab':'watch-select'" @click="selectedTabs('posts')">
                 Posts (12)
               </div>
-              <div class=" watch-select" @click="selectedTabs('watcher')">
+              <div :class="activeTab === 'watcher'? 'active-tab':'watch-select'" @click="selectedTabs('watcher')">
                 Watcher (256)
               </div>
-              <div class=" watch-select" @click="selectedTabs('watching')">
+              <div :class="activeTab === 'watching'? 'active-tab':'watch-select'" @click="selectedTabs('watching')">
                 Watching (195)
               </div>
             </div>
 
           </div>
           <div class="text-center">
-            <h3>{{showTab | capitalize}}</h3>
             <hr class="common-hr">
           </div>
 
@@ -61,7 +62,7 @@
             </div>
           </div>
 
-          <div class="text-center  d-flex justify-content-center" v-if="showTab == 'about'">
+          <div class="text-center   d-flex justify-content-center" v-if="showTab == 'about'">
             <div class="user-description ">
               <p class="desc"> Lorem Ipsum is dummy text used in the typesetting and printing industry. Lorem Ipsum has
                 been used as industry-standard counterfeit texts since the 1500s, when an unknown printer took a gallery
@@ -72,12 +73,12 @@
             </div>
           </div>
 
-        <div class="show-post"  v-if="showTab == 'posts'">
-          <div class="" v-for="i in 4">
-            <app-post class="mt-5"></app-post>
+          <div class="show-post" v-if="showTab == 'posts'">
+            <div class="" v-for="i in 4">
+              <app-post class="mt-5"></app-post>
+            </div>
           </div>
-        </div>
-          <div class="show-post"  v-if="showTab == 'watcher'">
+          <div class="show-post" v-if="showTab == 'watcher'">
             <div class="" v-for="i in 4">
               <app-user :useByComponent="'profile'"></app-user>
             </div>
@@ -93,10 +94,10 @@
 
 <script>
 
-  import Post from "../post/Post";
-  import User from "../common/User";
+    import Post from "../post/Post";
+    import User from "../common/User";
 
-  export default {
+    export default {
         name: 'UserProfile',
         data() {
             return {
@@ -109,30 +110,32 @@
                     color: '#0bbd87'
                 }],
                 reverse: true,
-                loadingActive : false,
-                showTab : "about"
+                loadingActive: false,
+                showTab: "about"
             }
         },
         methods: {
-            selectedTabs(value){
+            selectedTabs(value) {
                 this.activeTab = value;
-                    setTimeout(()=>{
-                        this.loadingActive = false;
-                        this.showTab = value;
+                this.showTab = "";
+                setTimeout(() => {
+                    this.loadingActive = false;
+                    this.showTab = value;
 
-                    },2000);
-                    this.loadingActive = true;
+                }, 2000);
+                this.loadingActive = true;
             },
-            scrollPage(event){
+            scrollPage(event) {
                 let currentScrollHeight = document.documentElement.scrollTop;
-                if(currentScrollHeight>120){
+                if (currentScrollHeight > 120) {
                     this.$store.dispatch("changeHeaderBackground", true);
-                }else{
+                } else {
                     this.$store.dispatch("changeHeaderBackground", false);
                 }
             }
         },
         created() {
+            this.activeTab = "about";
             this.$store.dispatch("activePPImage", true);
             this.$store.dispatch("changeHeaderBackground", false);
             window.addEventListener('scroll', this.scrollPage);
@@ -144,7 +147,7 @@
 
         },
         components: {
-            appPost :Post,
+            appPost: Post,
             appUser: User,
 
         }
@@ -164,6 +167,16 @@
     -o-animation: AnimationName 54s ease infinite;
     animation: AnimationName 54s ease infinite;
   }
+
+  .active-tab {
+    padding: 12px;
+    width: 150px;
+    margin-left: 12px;
+    color: #ffffff;
+    background-color: #283e4a;
+    cursor: pointer;
+  }
+
   .inner-card {
     margin-top: -50px;
     margin-left: auto;
@@ -176,12 +189,14 @@
     -moz-box-shadow: 0px 0px 21px -8px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 21px -8px rgba(0, 0, 0, 0.75);
   }
+
   img {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     margin-top: -110px;
   }
+
   .img-div {
     margin-left: auto;
     margin-right: auto;
@@ -189,6 +204,7 @@
     border-radius: 50%;
     height: 150px;
   }
+
   .left-card {
     height: 650px;
     position: sticky;
@@ -199,17 +215,22 @@
     -moz-box-shadow: 0px 0px 21px 11px rgba(40, 62, 74, 0.25);
     box-shadow: 0px 0px 21px 11px rgba(40, 62, 74, 0.25);
   }
+
   .center-card {
     margin-left: -140px;
   }
+
   .user-description {
     width: 60%;
     color: rgb(153, 153, 153);
   }
+
   .desc {
   }
+
   .block {
   }
+
   .common-hr {
     width: 70%;
   }
@@ -228,18 +249,31 @@
     color: #283E4A;
     cursor: pointer;
   }
+
   .watch-select:hover {
     background-color: #f4f4f4;
     border: 1px;
   }
+
   .spinner-color {
     color: #283E4A;
   }
-.show-post{
-  width: 750px;
-  margin-left: auto;
-  margin-right: auto;
-}
+
+  .show-post {
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .watch-button {
+    border-radius: 5px;
+  }
+
+  .watch-button:hover {
+    background-color: #60C4A9;
+    color: #fffeff;
+  }
+
   @-webkit-keyframes AnimationName {
     0% {
       background-position: 0% 71%
