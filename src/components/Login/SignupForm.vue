@@ -1,32 +1,40 @@
 <template>
   <div class="container w-75">
+    <div class="mt-5  text-left">
+      <el-steps :active="active" finish-status="success">
+        <el-step title="Step 1"></el-step>
+        <el-step title="Step 2"></el-step>
+        <el-step title="Step 3"></el-step>
+      </el-steps>
+    </div>
+    <div class="singup-content">
     <transition name="slide" appear>
       <div v-show="currentPage === 1">
-        <div class="row">
-          <div class="col">
-            <input type="text" class="form-control form-control-lg" v-model="registerUser[0].firstName"
+        <div class="row mt-2">
+          <div class="col ">
+            <input type="text" class="form-control form-control-lg normal-input " v-model="registerUser[0].firstName"
                    placeholder="First Name">
           </div>
           <div class="col">
-            <input type="text" class="form-control form-control-lg" v-model="registerUser[0].lastName"
+            <input type="text" class="form-control form-control-lg normal-input " v-model="registerUser[0].lastName"
                    placeholder="Last Name">
           </div>
         </div>
         <div class="row mt-4">
           <div class="col">
-            <input type="email" class="form-control form-control-lg" v-model="registerUser[0].email"
+            <input type="email" class="form-control form-control-lg normal-input" v-model="registerUser[0].email"
                    placeholder="E-mail">
           </div>
         </div>
         <div class="row mt-4">
           <div class="col">
-            <input type="password" class="form-control form-control-lg" v-model="registerUser[0].password"
+            <input type="password" class="form-control form-control-lg normal-input" v-model="registerUser[0].password"
                    placeholder="Password">
           </div>
         </div>
         <div class="row mt-4">
           <div class="col">
-            <input type="password" class="form-control form-control-lg" v-model="registerUser[0].password"
+            <input type="password" class="form-control form-control-lg normal-input" v-model="registerUser[0].password"
                    placeholder="Re-Password">
           </div>
         </div>
@@ -35,36 +43,36 @@
     <transition name="slide" appear>
       <div v-show="currentPage === 2">
         <div class="row">
-          <div class="col">
-            <input type="tel" class="form-control form-control-lg " v-model="registerUser[0].phoneNumber"
+          <div class="col mt-2">
+            <input type="tel" class="form-control form-control-lg normal-input" v-model="registerUser[0].phoneNumber"
                    placeholder="Phone Number">
           </div>
         </div>
         <div class="row mt-4">
           <div class="col">
-            <input type="text" class="form-control form-control-lg" v-model="registerUser[0].city"
+            <input type="text" class="form-control form-control-lg normal-input" v-model="registerUser[0].city"
                    placeholder="City">
           </div>
         </div>
         <div class="row mt-4">
           <div class="col">
-            <input type="date" class="form-control form-control-lg" v-model="registerUser[0].birthDate"
+            <input type="date" class="form-control form-control-lg normal-input" v-model="registerUser[0].birthDate"
                    placeholder="Date of Birth/established">
           </div>
         </div>
         <div class="row mt-4">
           <div class="col">
             <h3>Gender</h3>
-            <div class="form-check-inline ">
-              <input class="btn" type="button" id="MaleButton" @click="setGender('Male')"
+            <div class="form-check-inline  ">
+              <input class="btn gender-element " type="button" id="MaleButton" @click="setGender('Male')"
                      :class="selectedGender === 'Male' ? 'active': ''" value="  Male  ">
             </div>
             <div class="form-check-inline">
-              <input class="btn" type="button" id="MaleButton" @click="setGender('Famele')"
+              <input class="btn gender-element" type="button" id="MaleButton" @click="setGender('Famele')"
                      :class="selectedGender === 'Famele' ? 'active': ''" value="Famale">
             </div>
             <div class="form-check-inline">
-              <input class="btn" type="button" id="MaleButton" @click="setGender('Optional')"
+              <input class="btn gender-element" type="button" id="MaleButton" @click="setGender('Optional')"
                      :class="selectedGender === 'Optional' ? 'active': ''" value="Optional">
             </div>
             </p>
@@ -75,9 +83,9 @@
     <transition name="slide" appear>
       <div v-show="currentPage === 3">
         <div class="row">
-          <div class="col">
+          <div class="col mt-2">
             <p>Ben bir
-              <select class="browser-default custom-select ">
+              <select class="browser-default custom-select  normal-input">
                 <option value="1">Geliştiriciyim</option>
                 <option value="2">Yatırımcıyım</option>
                 <option value="3">Startup'ım</option>
@@ -85,9 +93,9 @@
             </p>
           </div>
         </div>
-        <div class="row mt-4">
+        <div class="row mt-2">
           <div class="col">
-            <input type="text" class="form-control form-control-lg" v-model="registerUser[0].sector"
+            <input type="text" class="form-control form-control-lg normal-input" v-model="registerUser[0].sector"
                    placeholder="Title">
           </div>
         </div>
@@ -99,19 +107,16 @@
         </div>
       </div>
     </transition>
+    </div>
+    <!----->
     <div class="row mt-4">
       <div class="col">
         <button class=" btn btn-color" @click="nextPage(currentPage)">{{buttonPageName}}</button>
       </div>
     </div>
 
-    <div class="mt-5  text-left">
-      <el-steps :active="active" finish-status="success">
-        <el-step title="Step 1"></el-step>
-        <el-step title="Step 2"></el-step>
-        <el-step title="Step 3"></el-step>
-      </el-steps>
-    </div>
+
+
   </div>
 </template>
 
@@ -147,17 +152,16 @@
         },
         methods: {
             nextPage(currentPage) {
-                    if(currentPage < 2){
-                    this.currentPage++;
-                    this.buttonPageName = "Next"
-                    }else if(currentPage === 2){
-                        this.currentPage++;
+                    if(currentPage <= 2){
+                    this.currentPage+=1;
+                    this.buttonPageName = "Next";
+                    this.next();
                     }else{
-                        this.buttonPageName = "Complete"
+                        this.buttonPageName = "Complete";
                         this.$store.dispatch("registerUser", this.registerUser[0]);
+                        this.next();
 
                     }
-                    this.next()
                 },
             setGender(gender) {
                 this.selectedGender = gender;
@@ -165,7 +169,9 @@
             },
 
             next() {
-                if (this.active++ > 2) this.active = 0;
+                if(this.active !== 3){
+                    this.active +=1;
+                }
             }
         },
     }
@@ -218,5 +224,24 @@
   }
   textarea{
     resize: none;
+
+  }
+  .input-name{
+    width: 300px;
+    height: 40px;
+    padding-left:10px ;
+  }
+  .normal-input{
+    height: 40px;
+    padding-left:10px ;
+  }
+
+  .singup-content{
+    height: 250px;
+    margin-bottom: 85px;
+  }
+
+  .gender-element{
+    width: 150px;
   }
 </style>

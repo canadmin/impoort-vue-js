@@ -6,9 +6,7 @@
       <div class="row ">
         <div class="col-3 pt-5">
           <div class="left-card pt-4 ">
-            <div>
-              <p>Aydın,Türkiye</p>
-            </div>
+
             <div class="block">
               <div class="text-center"><span>Experience</span></div>
               <el-divider><i class="el-icon-star-on"></i></el-divider>
