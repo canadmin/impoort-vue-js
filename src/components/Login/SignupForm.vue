@@ -126,20 +126,20 @@
             return {
                 registerUser : [
                     {
-                    description : null,
-                    sector : null,
-                    userType : 1,
-                    firstName : null,
-                    lastName : null,
-                    email : null,
-                    city  : null,
-                    birthDate  : null,
-                    gender  : "male",
-                    password  : null,
-                    phoneNumber  : null,
-                    experienceYear : null,
-                    experienceCompanies : null,
-                    employeeCount : null
+                    description : "",
+                    sector : "",
+                    userType : 0,
+                    firstName : "",
+                    lastName : "",
+                    email : "",
+                    city  : "",
+                    birthDate  : "",
+                    gender  : "",
+                    password  : "",
+                    phoneNumber  : "",
+                    experienceYear : "",
+                    experienceCompanies : "",
+                    employeeCount : ""
              }
                 ],
                 currentPage: 1,
