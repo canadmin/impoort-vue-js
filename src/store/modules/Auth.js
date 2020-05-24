@@ -23,13 +23,15 @@ const mutations = {
 
 const actions = {
   registerUser({commit},payload){
-    Vue.http.post("http://localhost:8081/auth/signUp",payload)
+    Vue.http.post("http://18.156.7.211/auth/signUp",payload)
       .then((response)=>{
+        console.log(response)
       });
   },
   loginUser({commit},payload){
-    Vue.http.post("http://localhost:8081/auth/login",payload)
+    Vue.http.post("http://18.156.7.211/auth/login",payload)
       .then((response)=>{
+        console.log(response)
         commit('updateAuthInfo', response.data);
         router.replace("/index");
       });
