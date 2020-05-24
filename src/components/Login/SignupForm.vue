@@ -8,105 +8,107 @@
       </el-steps>
     </div>
     <div class="singup-content">
-    <transition name="slide" appear>
-      <div v-show="currentPage === 1">
-        <div class="row mt-2">
-          <div class="col ">
-            <input type="text" class="form-control form-control-lg normal-input " v-model="registerUser[0].firstName"
-                   placeholder="First Name">
-          </div>
-          <div class="col">
-            <input type="text" class="form-control form-control-lg normal-input " v-model="registerUser[0].lastName"
-                   placeholder="Last Name">
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col">
-            <input type="email" class="form-control form-control-lg normal-input" v-model="registerUser[0].email"
-                   placeholder="E-mail">
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col">
-            <input type="password" class="form-control form-control-lg normal-input" v-model="registerUser[0].password"
-                   placeholder="Password">
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col">
-            <input type="password" class="form-control form-control-lg normal-input" v-model="registerUser[0].password"
-                   placeholder="Re-Password">
-          </div>
-        </div>
-      </div>
-    </transition>
-    <transition name="slide" appear>
-      <div v-show="currentPage === 2">
-        <div class="row">
-          <div class="col mt-2">
-            <input type="tel" class="form-control form-control-lg normal-input" v-model="registerUser[0].phoneNumber"
-                   placeholder="Phone Number">
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col">
-            <input type="text" class="form-control form-control-lg normal-input" v-model="registerUser[0].city"
-                   placeholder="City">
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col">
-            <input type="date" class="form-control form-control-lg normal-input" v-model="registerUser[0].birthDate"
-                   placeholder="Date of Birth/established">
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col">
-            <h3>Gender</h3>
-            <div class="form-check-inline  ">
-              <input class="btn gender-element " type="button" id="MaleButton" @click="setGender('Male')"
-                     :class="selectedGender === 'Male' ? 'active': ''" value="  Male  ">
+      <transition name="slide" appear>
+        <div v-show="currentPage === 1">
+          <div class="row mt-2">
+            <div class="col ">
+              <input type="text" class="form-control form-control-lg normal-input " v-model="registerUser[0].firstName"
+                     placeholder="First Name">
             </div>
-            <div class="form-check-inline">
-              <input class="btn gender-element" type="button" id="MaleButton" @click="setGender('Famele')"
-                     :class="selectedGender === 'Famele' ? 'active': ''" value="Famale">
+            <div class="col">
+              <input type="text" class="form-control form-control-lg normal-input " v-model="registerUser[0].lastName"
+                     placeholder="Last Name">
             </div>
-            <div class="form-check-inline">
-              <input class="btn gender-element" type="button" id="MaleButton" @click="setGender('Optional')"
-                     :class="selectedGender === 'Optional' ? 'active': ''" value="Optional">
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+              <input type="email" class="form-control form-control-lg normal-input" v-model="registerUser[0].email"
+                     placeholder="E-mail">
             </div>
-            </p>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+              <input type="password" class="form-control form-control-lg normal-input"
+                     v-model="registerUser[0].password"
+                     placeholder="Password">
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+              <input type="password" class="form-control form-control-lg normal-input"
+                     v-model="registerUser[0].password"
+                     placeholder="Re-Password">
+            </div>
           </div>
         </div>
-      </div>
-    </transition>
-    <transition name="slide" appear>
-      <div v-show="currentPage === 3">
-        <div class="row">
-          <div class="col mt-2">
-            <p>Ben bir
-              <select class="browser-default custom-select  normal-input">
-                <option value="1">Geliştiriciyim</option>
-                <option value="2">Yatırımcıyım</option>
-                <option value="3">Startup'ım</option>
-              </select>
-            </p>
+      </transition>
+      <transition name="slide" appear>
+        <div v-show="currentPage === 2">
+          <div class="row">
+            <div class="col mt-2">
+              <input type="tel" class="form-control form-control-lg normal-input" v-model="registerUser[0].phoneNumber"
+                     placeholder="Phone Number">
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+              <input type="text" class="form-control form-control-lg normal-input" v-model="registerUser[0].city"
+                     placeholder="City">
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+              <input type="date" class="form-control form-control-lg normal-input" v-model="registerUser[0].birthDate"
+                     placeholder="Date of Birth/established">
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+              <h3>Gender</h3>
+              <div class="form-check-inline  ">
+                <input class="btn gender-element " type="button" id="MaleButton" @click="setGender('Male')"
+                       :class="selectedGender === 'Male' ? 'active': ''" value="  Male  ">
+              </div>
+              <div class="form-check-inline">
+                <input class="btn gender-element" type="button" id="MaleButton" @click="setGender('Famele')"
+                       :class="selectedGender === 'Famele' ? 'active': ''" value="Famale">
+              </div>
+              <div class="form-check-inline">
+                <input class="btn gender-element" type="button" id="MaleButton" @click="setGender('Optional')"
+                       :class="selectedGender === 'Optional' ? 'active': ''" value="Optional">
+              </div>
+              </p>
+            </div>
           </div>
         </div>
-        <div class="row mt-2">
-          <div class="col">
-            <input type="text" class="form-control form-control-lg normal-input" v-model="registerUser[0].sector"
-                   placeholder="Title">
+      </transition>
+      <transition name="slide" appear>
+        <div v-show="currentPage === 3">
+          <div class="row">
+            <div class="col mt-2">
+              <p>Ben bir
+                <select class="browser-default custom-select  normal-input">
+                  <option value="1">Geliştiriciyim</option>
+                  <option value="2">Yatırımcıyım</option>
+                  <option value="3">Startup'ım</option>
+                </select>
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col">
+          <div class="row mt-2">
+            <div class="col">
+              <input type="text" class="form-control form-control-lg normal-input" v-model="registerUser[0].sector"
+                     placeholder="Title">
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
             <textarea type="text" class="form-control form-control-lg" v-model="registerUser[0].description"
                       placeholder="Description"> </textarea>
+            </div>
           </div>
         </div>
-      </div>
-    </transition>
+      </transition>
     </div>
     <!----->
     <div class="row mt-4">
@@ -116,7 +118,6 @@
     </div>
 
 
-
   </div>
 </template>
 
@@ -124,23 +125,20 @@
     export default {
         data() {
             return {
-                registerUser : [
+                registerUser: [
                     {
-                    description : null,
-                    sector : null,
-                    userType : 1,
-                    firstName : null,
-                    lastName : null,
-                    email : null,
-                    city  : null,
-                    birthDate  : null,
-                    gender  : "male",
-                    password  : null,
-                    phoneNumber  : null,
-                    experienceYear : null,
-                    experienceCompanies : null,
-                    employeeCount : null
-             }
+                        description: "",
+                        sector: "",
+                        userType: 0,
+                        firstName: "",
+                        lastName: "",
+                        email: "",
+                        city: "",
+                        birthDate: "",
+                        gender: "",
+                        password: "",
+                        phoneNumber: "",
+                    }
                 ],
                 currentPage: 1,
                 buttonPageName: "Next",
@@ -152,25 +150,25 @@
         },
         methods: {
             nextPage(currentPage) {
-                    if(currentPage <= 2){
-                    this.currentPage+=1;
+                if (currentPage <= 2) {
+                    this.currentPage += 1;
                     this.buttonPageName = "Next";
                     this.next();
-                    }else{
-                        this.buttonPageName = "Complete";
-                        this.$store.dispatch("registerUser", this.registerUser[0]);
-                        this.next();
+                } else {
+                    this.buttonPageName = "Complete";
+                    this.$store.dispatch("registerUser", this.registerUser[0]);
+                    this.next();
 
-                    }
-                },
+                }
+            },
             setGender(gender) {
                 this.selectedGender = gender;
                 this.registerUser[0].description = gender;
             },
 
             next() {
-                if(this.active !== 3){
-                    this.active +=1;
+                if (this.active !== 3) {
+                    this.active += 1;
                 }
             }
         },
@@ -222,26 +220,29 @@
     color: #ffffff;
     background-color: #60C4A9;
   }
-  textarea{
+
+  textarea {
     resize: none;
 
   }
-  .input-name{
+
+  .input-name {
     width: 300px;
     height: 40px;
-    padding-left:10px ;
-  }
-  .normal-input{
-    height: 40px;
-    padding-left:10px ;
+    padding-left: 10px;
   }
 
-  .singup-content{
+  .normal-input {
+    height: 40px;
+    padding-left: 10px;
+  }
+
+  .singup-content {
     height: 250px;
     margin-bottom: 85px;
   }
 
-  .gender-element{
+  .gender-element {
     width: 150px;
   }
 </style>

@@ -14,15 +14,15 @@
           <component :is="selected">
           </component>
 
-          <div v-show="selected=='appLogin'">
+          <div v-show="selected==='appLogin'">
             <p class="element-p-color element-p" @click="changeForm(selected)">Henüz bir hesabınız yok mu?</p>
             <p class="mt-n3 element-p-color element-p-color-opacity">Veya</p>
             <p class="mt-n3 element-p element-p-color">Şifremi unuttum</p>
           </div>
-          <div v-show="selected=='appSignup'">
+          <div v-show="selected==='appSignup'">
 
           </div>
-          <p v-show="selected=='appSignup'" class="element-p-color element-p" @click="changeForm(selected)">Zaten bir hesabın var mı?</p>
+          <p v-show="selected==='appSignup'" class="element-p-color element-p" @click="changeForm(selected)">Zaten bir hesabın var mı?</p>
 
         </div>
       </div>
