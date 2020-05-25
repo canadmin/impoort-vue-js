@@ -45,7 +45,7 @@
               </router-link>
               <router-link
                 active-class="active"
-                to="/index"
+                to="/discover"
                 tag="div"
                 exact>
                 <img src="../../assets/watch.png" class="messages-logo" width="25" height="25">

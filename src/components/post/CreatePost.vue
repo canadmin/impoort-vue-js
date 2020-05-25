@@ -9,26 +9,26 @@
       <hr>
     </div>
     <div v-outside class="new-post text-center mt-5 bg-white" v-show="createNewPost===true">
-      <textarea class="post-description" placeholder=" write something..."></textarea>
+      <textarea class="post-description" placeholder=" write something..." v-model="post.postDescription"></textarea>
       <button class="delete-image-button" @click="postSelectImage=null" v-if="postSelectImage!=null">X</button>
       <p class="">
         <img height="75" class="img-responsive text-center mt-2"
                        src="../../assets/pp.jpeg" v-show="postSelectImage != null" :src="postSelectImage">
       </p>
       <input ref="file" type="file" style="display: none;" @change="onChange($event)" class="form-control">
-      <el-upload
-        action="https://jsonplaceholder.typicode.com/posts/"
-        list-type="picture-card"
-        :on-preview="handlePictureCardPreview"
-        :on-remove="handleRemove">
-        <i class="el-icon-plus"></i>
-      </el-upload>
-      <el-dialog :visible.sync="dialogVisible">
-        <img width="100%" :src="dialogImageUrl" alt="">
-      </el-dialog>
+<!--      <el-upload-->
+<!--        action="https://jsonplaceholder.typicode.com/posts/"-->
+<!--        list-type="picture-card"-->
+<!--        :on-preview="handlePictureCardPreview"-->
+<!--        :on-remove="handleRemove">-->
+<!--        <i class="el-icon-plus"></i>-->
+<!--      </el-upload>-->
+<!--      <el-dialog :visible.sync="dialogVisible">-->
+<!--        <img width="100%" :src="dialogImageUrl" alt="">-->
+<!--      </el-dialog>-->
       <hr>
       <div class="mb-3">
-        <button class="share-button ">Share</button>
+        <button class="share-button" @click="sharePost()">Share</button>
       </div>
       <hr>
     </div>
@@ -36,18 +36,29 @@
 </template>
 
 <script>
+
+  import {indexRequest} from "../../http/indexRequests";
     export default {
         data() {
             return {
                 createNewPost: false,
                 closeNewPost: true,
-                postSelectImage: null
+                postSelectImage: null,
+                post : {
+                    postDescription : null,
+                    postType : 0,
+                    userId : null
+
+                }
             }
         },
         methods: {
             onChange(e) {
                 const file = e.target.files[0];
                 this.postSelectImage = URL.createObjectURL(file);
+            },
+            sharePost(){
+                indexRequest.shareNewPost(this.post);
             }
         },
         directives: {

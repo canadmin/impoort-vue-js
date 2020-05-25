@@ -1,6 +1,61 @@
 <template>
   <div>
     <div class="card-background">
+      <div id="myModal" class="modal-md">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div class="text-center">
+            <span>Update Profile</span>
+          </div>
+          <div>
+            <hr>
+          </div>
+          <div class="profile-update text-center mt-5">
+            <div class="mt-5">
+              <img src="../../assets/logo.png" width="80" height="80">
+              <p>
+                <button>change</button>
+              </p>
+            </div>
+            <div>
+              <label>First name</label>
+              <input v-model="user.firstName"></input>
+            </div>
+            <div class="mt-1">
+              <label>Last name</label>
+              <input v-model="user.lastName"></input>
+            </div>
+            <div class="mt-1">
+              <label>Location</label>
+              <input v-model="user.city"></input>
+            </div>
+            <div class="mt-1">
+              <label>Description</label>
+              <input v-model="user.description"></input>
+            </div>
+            <div>
+              <label>Experiences</label>
+              <div v-for="(index) in this.user.experiences">
+                <li>
+                  Company : {{index.companyName}} rol : {{index.department}} still Work ? {{index.stillWork}}
+                </li>
+              </div>
+              <div>
+                companyName<input v-model="companyName"/>
+                role : <input v-model="department">
+                still work? <input type="checkbox" v-model="stillWork"></input>
+              </div>
+              <button @click="addExperience()">Add Experiences</button>
+
+            </div>
+            <button @click="updateUser()">Update</button>
+          </div>
+        </div>
+
+      </div>
+
     </div>
     <div class="inner-card container-fluid">
       <div class="row ">
@@ -94,7 +149,7 @@
 
     import Post from "../post/Post";
     import User from "../common/User";
-
+    import {profileRequests} from "../../http/profile/profileRequest"
     export default {
         name: 'UserProfile',
         data() {
@@ -109,7 +164,13 @@
                 }],
                 reverse: true,
                 loadingActive: false,
-                showTab: "about"
+                showTab: "about",
+                experiences: [],
+                experiencesUpdateSize: 0,
+                companyName: null,
+                department: null,
+                stillWork: false,
+                user: null
             }
         },
         methods: {
@@ -130,9 +191,38 @@
                 } else {
                     this.$store.dispatch("changeHeaderBackground", false);
                 }
+            },
+            addExperience() {
+                console.log({
+                    companyName: this.companyName,
+                    department: this.department,
+                    stillWork: this.stillWork
+                })
+                this.experiences.push({
+                    companyId: "",
+                    companyName: this.companyName,
+                    department: this.department,
+                    stillWork: this.stillWork,
+                    experienceId: 0,
+                    workerId : JSON.parse(localStorage.getItem("user")).userId
+                })
+                this.user.experiences = this.experiences;
+                console.log(this.experiences)
+                this.companyName = null,
+                this.department = null,
+                this.stillWork = false,
+                this.experiencesUpdateSize += 1;
+
+            },
+            updateUser(){
+                profileRequests.updateProfile(this.user).then(response=>{
+                    console.log(response)
+                })
             }
         },
         created() {
+            this.user = JSON.parse(localStorage.getItem("user"));
+            console.log(this.user)
             this.activeTab = "about";
             this.$store.dispatch("activePPImage", true);
             this.$store.dispatch("changeHeaderBackground", false);
@@ -207,7 +297,7 @@
     height: 650px;
     position: sticky;
     position: -webkit-sticky;
-    z-index: 1;
+    z-index: 0;
     width: 300px;
     -webkit-box-shadow: 0px 0px 21px 11px rgba(40, 62, 74, 0.25);
     -moz-box-shadow: 0px 0px 21px 11px rgba(40, 62, 74, 0.25);
@@ -320,16 +410,59 @@
     }
   }
 
-  .common-board {
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 100; /* Stay on top */
+  /*.common-board {*/
+  /*  position: fixed; !* Fixed Sidebar (stay in place on scroll) *!*/
+  /*  z-index: 100; !* Stay on top *!*/
+  /*  top: 0;*/
+  /*  right: 0;*/
+  /*  margin-top: 58px;*/
+  /*  width: 700px;*/
+  /*  height: 100%;*/
+  /*  position: -webkit-sticky;*/
+  /*  opacity: 0.75;*/
+  /*  background: #f4f5f4;*/
+  /*}*/
+
+  /*modal*/
+
+  .modal-md {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
     top: 0;
-    right: 0;
-    margin-top: 58px;
-    width: 700px;
-    height: 100%;
-    position: -webkit-sticky;
-    opacity: 0.75;
-    background: #f4f5f4;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  label {
+    width: 100px;
   }
 </style>
