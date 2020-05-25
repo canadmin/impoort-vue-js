@@ -8,6 +8,7 @@ import Message from "./components/message/Message"
 import Profile from "./components/profile/Profile";
 import UserProfile from "./components/profile/UserProfile";
 import test from "./components/test";
+import Search from "./components/discover/Search";
 Vue.use(VueRouter);
 export const routes = [
   {path: "/", component: LoginPage},
@@ -19,7 +20,8 @@ export const routes = [
       {path: "/profile-me", component: UserProfile},
       {path: "/profile-me2", component: Profile},
       {path: "/test", component: test},
-      {path: "", component: Index}
+      {path: "", component: Index},
+      {path : "/discover",component : Search}
     ]
   },
   {path: "*", redirect: "/"}
