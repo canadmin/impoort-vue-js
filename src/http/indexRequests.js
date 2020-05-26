@@ -19,7 +19,28 @@ export const indexRequest = {
     })
       console.log("post shared",user)
   },
-  getAllPosts(){
+  getAllPosts(pageNumber,pageSize,profilePost,userId){
+    let token = localStorage.getItem("token");
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token.toString(),
+      "Access-Control-Allow-Origin": "*"
+    }
+    return axios.get(baseUrl.base+"api/v1/post",
+      {
+        params: {
+          pageNumber : pageNumber,
+          pageSize : pageSize,
+          userId : userId,
+          profilePost: profilePost,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token.toString(),
+          "Access-Control-Allow-Origin": "*"
+        },
+      })
 
   },
   getAllMessagesFromUser(){
@@ -31,10 +52,46 @@ export const indexRequest = {
   getSuggestedUser(){
 
   },
-  likePost(){
-
+  likePost(postId){
+    let user = JSON.parse(localStorage.getItem("user"));
+    let token = localStorage.getItem("token");
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token.toString(),
+      "Access-Control-Allow-Origin": "*"
+    }
+    return axios.post(baseUrl.base+'api/v1/post/'+postId+"/addNewLike", {
+      'user' : localStorage.getItem("userId")
+    },{
+      headers: headers
+    })
   },
-  unlikePost(){
+  unlikePost(postId){
+    let user = localStorage.getItem("userId");
+    let token = localStorage.getItem("token");
+    const data = {
+        "user" : localStorage.getItem("userId")
+    }
+    /*
+
+     headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token.toString(),
+        "Access-Control-Allow-Origin": "*"
+      }
+      */
+    return axios.post(baseUrl.base +"api/v1/post/deleteLikeWeb",{}, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token.toString(),
+        "Access-Control-Allow-Origin": "*"
+      },
+      params: {
+        "userId" : user,
+        "postId": postId
+      }
+    });
+
 
   },
   watchPost(){
@@ -43,8 +100,53 @@ export const indexRequest = {
   unWatchPost(){
 
   },
-  addCommentToPost(){
-
+  deleteComment(commentId,postId){
+    let user = JSON.parse(localStorage.getItem("user"));
+    let token = localStorage.getItem("token");
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token.toString(),
+      "Access-Control-Allow-Origin": "*"
+    }
+    return axios.post(baseUrl.base+'api/v1/post/'+postId+"/deleteComment", {
+      'commentId' : commentId,
+    },{
+      headers: headers
+    })
   },
+  addCommentToPost(postId,commentContent){
+    let user = JSON.parse(localStorage.getItem("user"));
+    let token = localStorage.getItem("token");
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token.toString(),
+      "Access-Control-Allow-Origin": "*"
+    }
+    console.log(token,commentContent)
+   return axios.post(baseUrl.base+'api/v1/post/'+postId+"/addComment", {
+      'commentText' : commentContent,
+      'user' : localStorage.getItem("userId")
+    },{
+      headers: headers
+    })
+  },
+  getSuggested() {
+    let token = localStorage.getItem("token");
 
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token.toString(),
+      "Access-Control-Allow-Origin": "*"
+    }
+    return axios.get(baseUrl.base+"api/v1/discover/suggested",
+      {
+        params: {
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token.toString(),
+          "Access-Control-Allow-Origin": "*"
+        },
+      })
+  }
 }

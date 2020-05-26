@@ -3,7 +3,7 @@
     <div>
       <div class="text-center mt-3 watch-single">
         <img src="../../assets/stonks.jpg" width="40" height="40" class="watch-image">
-        <span class="watch-name-single">Can Yardımcı</span>
+        <span class="watch-name-single">{{suggest.fullName}}</span>
         <button class="watch-button ml-5" v-text="useByComponent === 'index' ? '+' : '+ Watch'">+</button>
 
       </div>
@@ -18,7 +18,8 @@
 
             }
         },
-        props : ["useByComponent"],
+        props : ["useByComponent","suggest"],
+
     }
 
 </script>

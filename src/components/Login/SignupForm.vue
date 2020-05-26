@@ -97,7 +97,7 @@
           </div>
           <div class="row mt-2">
             <div class="col">
-              <input type="text" class="form-control form-control-lg normal-input" v-model="registerUser[0].sector"
+              <input type="text" class="form-control form-control-lg normal-input" v-model="registerUser[0].department"
                      placeholder="Title">
             </div>
           </div>

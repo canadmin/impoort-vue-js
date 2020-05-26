@@ -33,8 +33,8 @@ export const discoverRequests = {
         "Access-Control-Allow-Origin": "*"
       },
       params : {
-        watcherId :userId,
-        watchingId :  JSON.parse(localStorage.getItem("user")).userId
+        watcherId :JSON.parse(localStorage.getItem("user")).userId,
+        watchingId :  userId
       }
     })
   },

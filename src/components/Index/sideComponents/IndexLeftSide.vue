@@ -3,7 +3,9 @@
     <div>
       Suggested
       <hr>
-      <app-user :useByComponent="'index'" v-for="i in 5"></app-user>
+      <div v-for="suggest in suggestedList">
+        <app-user :useByComponent="'index'" :suggest="suggest"></app-user>
+      </div>
       <div class="mt-4">
        <span class="see-more">See More</span>
       </div>
@@ -18,7 +20,8 @@
 
         components: {
             appUser: User
-        }
+        },
+        props:["suggestedList"]
     }
 </script>
 
