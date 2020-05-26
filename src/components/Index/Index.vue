@@ -4,12 +4,12 @@
       <div class="row">
         <div class="col-4 mt-4">
           <app-messages-box></app-messages-box>
-          <app-left-side></app-left-side>
+          <app-left-side :suggestedList="suggestedList"></app-left-side>
         </div>
         <div class="col-4 mt-4">
           <app-create-post></app-create-post>
-          <div>
-            <app-post v-for="a in postList" class="mt-5"></app-post>
+          <div v-for="post in postList">
+            <app-post  class="mt-5" :post="post"></app-post>
           </div>
 
         </div>
@@ -27,12 +27,15 @@
     import IndexMessagesBox from "../common/chatBox/IndexMessagesBox";
     import IndexLeftSide from "./sideComponents/IndexLeftSide";
     import CreatePost from "../post/CreatePost";
+    import {profileRequests} from "../../http/profile/profileRequest";
+    import {indexRequest} from "../../http/indexRequests";
 
     export default {
         data() {
             return {
                 postList: [],
                 isIndex: true,
+                suggestedList :[]
 
             }
         },
@@ -78,6 +81,15 @@
             appCreatePost: CreatePost
         },
         created() {
+            indexRequest.getSuggested().then(response => {
+                this.suggestedList = response.data;
+                console.log(this.suggestedList)
+            });
+            indexRequest.getAllPosts(0,12,false,localStorage.getItem("userId"))
+                .then(response=> {
+                    console.log(response.data)
+                    this.postList = response.data.content
+                })
             this.$store.dispatch("activePPImage",false);
             window.addEventListener('scroll', this.scrollPage);
         },

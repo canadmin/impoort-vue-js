@@ -4,16 +4,11 @@
       <div class="col-12 main-post  card-body mb-n4">
         <img v-bind="mainProps" class="post-image" rounded="circle" alt="Circle image" src="../../assets/pp.jpeg"/>
 
-        <span> <b class="post-name">Can Yardımcı</b> </span>
+        <span> <b class="post-name">{{post.user.fullName}}</b> </span>
         <span class="float-right">5 gün önce</span>
         <hr>
         <div class="description-post">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate velit, ut sequi aliquid id impedit pariatur
-          hic soluta
-          at accusamus error expedita, deserunt ex quam quis maxime autem numquam consequuntur. Deleniti soluta, maiores
-          illum dicta sint
-          eniam tempora esse consequatur sed asperiores quasi eligendi eveniet cum doloribus excepturi molestias
-          delectus.
+          {{post.postDescription}}
         </div>
         <div class="post-description-image">
           <img src="../../assets/asd22.png" width="100%"
@@ -22,14 +17,14 @@
 
         <hr>
         <div class="row  text-center mt-n3 mb-n2">
-          <div class="col-4" @click="like = !like">
-            <img :src="like ? getImageUrl('like') : getImageUrl('liked')" height="25" width="25">
+          <div class="col-4" @click="likePost(post.postId)">
+            <img :src="post.isLiked ? getImageUrl('like') : getImageUrl('liked')" height="25" width="25">({{post.likeCount}})
           </div>
           <div class="col-4">
-            <img src="../../assets/comment.png" @click="expandComment =! expandComment" height="25" width="25"/>
+            <img src="../../assets/comment.png" @click="expandComment =! expandComment" height="25" width="25"/>({{post.commentCount}})
           </div>
           <div class="col-4" @click="watch = !watch">
-            <img :src="watch ? getImageUrl('watched') : getImageUrl('liked')" height="25" width="25"/>
+            <img :src="post.isWatched ? getImageUrl('watched') : getImageUrl('liked')" height="25" width="25"/>
           </div>
         </div>
         <!-- eger posta yorum yapılmışsa veya yorun yapılacaksa-->
@@ -38,15 +33,15 @@
             <div class="text-center mt-4">
               <span v-text="'Comments'"></span>
             </div>
-            <div class="comments-back pt-2">
-              <app-comment v-for="i in 2"></app-comment>
+            <div class="comments-back pt-2" v-for="comment in post.commentList">
+              <app-comment :comment="comment" :postId="post.postId"></app-comment>
             </div>
           </div>
           <!--- eğer yorum yapılacaksa-->
           <hr>
           <div class="add-comment mt-4">
             <div class="">
-              <input type="text" class="comment-input" placeholder="Yorum yaz">
+              <input type="text" v-model="comment" class="comment-input" placeholder="Yorum yaz" @keyup.enter="addComment(post.postId)">
             </div>
           </div>
         </div>
@@ -59,6 +54,7 @@
 
 <script>
     import Comment from "./Comment";
+    import {indexRequest} from "../../http/indexRequests";
 
     export default {
         data() {
@@ -66,7 +62,8 @@
                 mainProps: {blank: true, blankColor: '#777', width: 40, height: 40, class: 'm1',},
                 like: false,
                 watch: false,
-                expandComment: false
+                expandComment: false,
+                comment : null
 
             }
         },
@@ -75,11 +72,38 @@
                 var images = require.context('../../assets', false, /\.png$/);
                 return images('./' + image + '.png');
             },
+            addComment(postId){
+                indexRequest.addCommentToPost(postId,this.comment)
+                    .then(response=> {
+                        this.post.commentList.push(response.data)
+                    })
+                   this.comment = null;
+
+            },
+            likePost(postId){
+
+                if(!this.post.isLiked){
+                    console.log("console post ıd ",postId)
+                    indexRequest.likePost(postId).then(response=> {
+                            console.log(response)
+                            this.post.isLiked = true;
+                            this.post.likeCount += 1;
+                        }
+                    )
+                }else {
+                    indexRequest.unlikePost(postId).then(response=> {
+                        this.post.isLiked = false;
+                        this.post.likeCount -=1;
+                    })
+                }
+
+            }
 
         },
         components: {
             appComment: Comment
-        }
+        },
+        props:["post"]
     }
 </script>
 <style scoped>

@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="card-background">
-      <div id="myModal" class="modal-md">
+      <div id="myModal" class="modal-md" v-show="!profileSetting">
 
         <!-- Modal content -->
         <div class="modal-content">
-          <span class="close">&times;</span>
+          <span class="close" @click="profileSetting=!profileSetting">&times;</span>
           <div class="text-center">
             <span>Update Profile</span>
           </div>
@@ -16,7 +16,7 @@
             <div class="mt-5">
               <img src="../../assets/logo.png" width="80" height="80">
               <p>
-                <button>change</button>
+                <button class="watch-button">change</button>
               </p>
             </div>
             <div>
@@ -36,21 +36,60 @@
               <input v-model="user.description"></input>
             </div>
             <div>
+              <hr class="w-75">
+
               <label>Experiences</label>
-              <div v-for="(index) in this.user.experiences">
-                <li>
-                  Company : {{index.companyName}} rol : {{index.department}} still Work ? {{index.stillWork}}
-                </li>
+
+              <div class="table-div">
+                <table class="table">
+                  <thead>
+                  <th>Company Name</th>
+                  <th>Role</th>
+                  <th>Still Work ?</th>
+                  </thead>
+                  <tbody>
+                  <tr scope="row" v-for="index in this.user.experiences">
+                    <td>{{index.companyName}}</td>
+                    <td>{{index.department}}</td>
+                    <td>{{index.stillWork}}</td>
+                  </tr>
+                  </tbody>
+                </table>
               </div>
-              <div>
+
+              <div class="">
                 companyName<input v-model="companyName"/>
                 role : <input v-model="department">
                 still work? <input type="checkbox" v-model="stillWork"></input>
               </div>
-              <button @click="addExperience()">Add Experiences</button>
+              <button @click="addExperience()" class="watch-button mt-3">Add Experiences</button>
+            </div>
+
+            <div>
+              <hr class="w-75">
+              <label>Links</label>
+              <div class="table-div">
+                <table class="table">
+                  <thead>
+                  <th>Website</th>
+                  <th>Link</th>
+                  </thead>
+                  <tbody>
+                  <tr scope="row" v-for="(value,name) in this.user.links">
+                    <td>{{value}}</td>
+                    <td>{{name}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="">
+                Website<input v-model="linkName"/>
+                Link <input v-model="link">
+              </div>
+              <button @click="addLink()" class="watch-button mt-3">Add Link</button>
 
             </div>
-            <button @click="updateUser()">Update</button>
+            <button @click="updateUser()" class="watch-button mt-3">Update</button>
           </div>
         </div>
 
@@ -67,14 +106,26 @@
               <el-divider><i class="el-icon-star-on"></i></el-divider>
               <el-timeline :reverse="reverse" class="ml-n3">
                 <el-timeline-item
-                  v-for="(activity, index) in activities"
+                  v-for="(activity, index) in this.user.experiences"
                   :key="index"
-                  :color="activity.color"
+                  :color="activity.stillWork ? '#7eff55':''"
                   class="deneme"
-                  :timestamp="activity.timestamp">
-                  {{activity.content}}
+                  :timestamp="activity.department">
+                  {{activity.companyName}}
                 </el-timeline-item>
               </el-timeline>
+              <div class="text-center"><span>Links</span></div>
+              <el-divider><i class="el-icon-star-on"></i></el-divider>
+              <el-timeline :reverse="reverse" class="ml-n3">
+                <el-timeline-item
+                  v-for="(value,name) in this.user.links"
+                  :color="'#fffffff'"
+                  class="deneme"
+                  :timestamp="value">
+                  {{name}}
+                </el-timeline-item>
+              </el-timeline>
+
             </div>
           </div>
         </div>
@@ -85,7 +136,7 @@
               <div class="text-center">
                 <button class="mt-1 btn watch-button">Watch +</button>
                 <p class="user-name">Can Yardımcı</p>
-                <p>@Developer</p>
+                <p>@{{user.department}}</p>
               </div>
             </div>
 
@@ -150,18 +201,19 @@
     import Post from "../post/Post";
     import User from "../common/User";
     import {profileRequests} from "../../http/profile/profileRequest"
+
     export default {
         name: 'UserProfile',
         data() {
             return {
-                activities: [{
-                    content: 'Java Developer at Özgür Yazilim A.Ş.',
-                }, {
-                    content: 'Full Stack Developer at Impoort',
-                }, {
-                    content: 'Co - Founder Impoort',
-                    color: '#0bbd87'
-                }],
+                // activities: [{
+                //     content: 'Java Developer at Özgür Yazilim A.Ş.',
+                // }, {
+                //     content: 'Full Stack Developer at Impoort',
+                // }, {
+                //     content: 'Co - Founder Impoort',
+                //     color: '#0bbd87'
+                // }],
                 reverse: true,
                 loadingActive: false,
                 showTab: "about",
@@ -170,7 +222,10 @@
                 companyName: null,
                 department: null,
                 stillWork: false,
-                user: null
+                user: null,
+                linkName : null,
+                link : null,
+                profileSetting :false
             }
         },
         methods: {
@@ -193,31 +248,32 @@
                 }
             },
             addExperience() {
-                console.log({
-                    companyName: this.companyName,
-                    department: this.department,
-                    stillWork: this.stillWork
-                })
-                this.experiences.push({
+                this.user.experiences.push({
                     companyId: "",
                     companyName: this.companyName,
                     department: this.department,
                     stillWork: this.stillWork,
-                    experienceId: 0,
-                    workerId : JSON.parse(localStorage.getItem("user")).userId
+                    workerId: JSON.parse(localStorage.getItem("user")).userId
                 })
-                this.user.experiences = this.experiences;
                 console.log(this.experiences)
                 this.companyName = null,
-                this.department = null,
-                this.stillWork = false,
-                this.experiencesUpdateSize += 1;
+                    this.department = null,
+                    this.stillWork = false,
+                    this.experiencesUpdateSize += 1;
 
             },
-            updateUser(){
-                profileRequests.updateProfile(this.user).then(response=>{
-                    console.log(response)
-                })
+            addLink() {
+
+                this.user.links = {
+                    ...this.user.links,
+                    [this.linkName] : this.link
+                }
+                this.linkName = null;
+                this.link = null
+            },
+            updateUser() {
+                profileRequests.updateProfile(this.user)
+                // this.user =JSON.parse(localStorage.getItem("user"))
             }
         },
         created() {
@@ -244,6 +300,17 @@
 </script>
 
 <style scoped>
+  .table-div {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .exp {
+    width: 150px;
+    font-size: 10px;
+  }
+
   .card-background {
     width: 100%;
     height: 250px;
@@ -440,11 +507,13 @@
 
   /* Modal Content */
   .modal-content {
+    overflow-y: auto;
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
+    height: 80vh;
   }
 
   /* The Close Button */
@@ -464,5 +533,23 @@
 
   label {
     width: 100px;
+    text-align: right;
+  }
+
+  .modal-content::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5;
+  }
+
+  .modal-content::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+  }
+
+  .modal-content::-webkit-scrollbar-thumb {
+    background-color: #0ae;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%,
+    color-stop(.5, rgba(255, 255, 255, .2)),
+    color-stop(.5, transparent), to(transparent));
   }
 </style>

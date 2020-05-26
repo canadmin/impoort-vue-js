@@ -3,23 +3,23 @@
     <div class="text-center">
       <img src="../../../assets/pp.jpeg" class="left-image" width="50" height="50">
       <div class="mt-2">
-        <span class="right-name">Can Yardımcı</span>
+        <span class="right-name">{{user.fullName}}</span>
       </div>
       <div class="text-center">
-        <span class="right-title">Full Stack Developer</span>
+        <span class="right-title">{{user.department}}</span>
       </div>
     </div>
     <hr>
 
     <div class="mt-5">
       <div class="text-left mt-2">
-        <span class="right-title">280 Watcher</span>
+        <span class="right-title">{{user.watcherCount}} Watcher</span>
       </div>
       <div class="text-left mt-2">
-        <span class="right-title">214 Watching</span>
+        <span class="right-title">{{user.watchingCount}} Watching</span>
       </div>
       <div class="text-left mt-2">
-        <span class="right-title">17 Watched Post</span>
+        <span class="right-title">{{user.watchingPostCount}} Watched Post</span>
       </div>
       <div class="text-center discover">
         <span class="right-name">+</span>
@@ -34,8 +34,11 @@
         data(){
             return {
                 username : null,
-
+                user : null
             }
+        },
+        created() {
+            this.user = JSON.parse(localStorage.getItem("user"));
         }
     }
 </script>
