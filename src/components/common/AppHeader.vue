@@ -12,14 +12,11 @@
                 </transition>
               </div>
               <div class="pp-bar-image-action" v-show="ppBarImageAction">
-                <div class=" ">
-                  <div class="">
+                <div class="text-center mt-3">
+                  <div class="" style="cursor: pointer;" @click="showProfile('profile')">
                     Profile
                   </div>
-                  <div class="">
-                    Settings
-                  </div>
-                  <div class="">
+                  <div class=" mt-2">
                     Logout
                   </div>
                 </div>
@@ -40,8 +37,6 @@
                 tag="div"
                 exact>
                 <img src="../../assets/messages.png" class="messages-logo" width="25" height="25">
-
-
               </router-link>
               <router-link
                 active-class="active"
@@ -50,14 +45,10 @@
                 exact>
                 <img src="../../assets/watch.png" class="messages-logo" width="25" height="25">
               </router-link>
-              <router-link
-                active-class="active"
-                to="/profile-me"
-                tag="div"
-                exact>
+              <div @click="showProfile('asd')">
                 <img src="../../assets/profil.png" class="messages-logo" width="25" height="25">
 
-              </router-link>
+              </div>
             </div>
             </b-collapse>
           </div>
@@ -118,6 +109,13 @@
         methods: {
             openSearch() {
                 this.searchStatus = true;
+            },
+            showProfile(actionType){
+                this.$store.dispatch('showProfile',localStorage.getItem("userId")).then(response=>{
+                    this.$router.push({name : "profile", params : {
+                            myProfile : true
+                        }})
+                });
             }
         },
         directives: {
@@ -241,7 +239,7 @@
 
   .pp-bar-image-action {
     width: 250px;
-    height: 130px;
+    height: 95px;
     padding-left: 10px;
     position: fixed;
     margin-top: 10px;

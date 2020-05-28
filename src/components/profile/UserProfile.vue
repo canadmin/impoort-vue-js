@@ -16,7 +16,7 @@
             <div class="mt-5">
               <img src="../../assets/logo.png" width="80" height="80">
               <p>
-                <button class="watch-button">change</button>
+                <button class="watch-button mt-2">change</button>
               </p>
             </div>
             <div>
@@ -58,9 +58,9 @@
               </div>
 
               <div class="">
-                companyName<input v-model="companyName"/>
-                role : <input v-model="department">
-                still work? <input type="checkbox" v-model="stillWork"></input>
+                Company Name<input v-model="companyName"/>
+                Role : <input v-model="department">
+                Still work? <input type="checkbox" v-model="stillWork"></input>
               </div>
               <button @click="addExperience()" class="watch-button mt-3">Add Experiences</button>
             </div>
@@ -76,14 +76,20 @@
                   </thead>
                   <tbody>
                   <tr scope="row" v-for="(value,name) in this.user.links">
-                    <td>{{value}}</td>
                     <td>{{name}}</td>
+
+                    <td>{{value}}</td>
                   </tr>
                   </tbody>
                 </table>
               </div>
               <div class="">
-                Website<input v-model="linkName"/>
+                <select v-model="linkName">
+                  <option disabled value="" selected>Select Link</option>
+                  <option style="background-image: url('../../assets/links/github.png')">Github</option>
+                  <option>Twitter</option>
+                  <option>Facebook</option>
+                </select>
                 Link <input v-model="link">
               </div>
               <button @click="addLink()" class="watch-button mt-3">Add Link</button>
@@ -116,26 +122,26 @@
               </el-timeline>
               <div class="text-center"><span>Links</span></div>
               <el-divider><i class="el-icon-star-on"></i></el-divider>
-              <el-timeline :reverse="reverse" class="ml-n3">
-                <el-timeline-item
-                  v-for="(value,name) in this.user.links"
-                  :color="'#fffffff'"
-                  class="deneme"
-                  :timestamp="value">
-                  {{name}}
-                </el-timeline-item>
-              </el-timeline>
+              <div class="link-div" v-for="(value,name) in this.user.links">
+                <div class="link-item">
+                  <img :src="getImageUrl(name)" class="link-icon">
+                  <span>{{value}}</span>
+                </div>
 
+              </div>
             </div>
           </div>
         </div>
         <div class="center-card pt-4  col-8">
           <div class="">
             <div class="img-div">
-              <img src="../../assets/pp.jpeg">
+              <img class="pp-img" src="../../assets/pp.jpeg">
               <div class="text-center">
-                <button class="mt-1 btn watch-button">Watch +</button>
-                <p class="user-name">Can Yardımcı</p>
+                <button class="mt-1 btn watch-button" v-show="!myProfile">Watch +</button>
+                <p class="user-name">{{user.fullName}}
+                <img class="settings-button" @click="profileSetting=!profileSetting"  v-show="myProfile">
+                </img>
+                </p>
                 <p>@{{user.department}}</p>
               </div>
             </div>
@@ -168,12 +174,7 @@
 
           <div class="text-center   d-flex justify-content-center" v-if="showTab == 'about'">
             <div class="user-description ">
-              <p class="desc"> Lorem Ipsum is dummy text used in the typesetting and printing industry. Lorem Ipsum has
-                been used as industry-standard counterfeit texts since the 1500s, when an unknown printer took a gallery
-                of fonts to create a sample book. Not only has it survived for five hundred years, it has also spread
-                unchanged to electronic typesetting. It became popular in the 1960s with the publication of Letraset
-                sheets, including Lorem Ipsum passages, and more recently with desktop publishing software including
-                versions of Lorem Ipsum, such as Aldus PageMaker. </p>
+              <p class="desc"> {{user.description}} </p>
             </div>
           </div>
 
@@ -190,9 +191,7 @@
         </div>
       </div>
     </div>
-    <!--    <div class="common-board">-->
 
-    <!--    </div>-->
   </div>
 </template>
 
@@ -223,9 +222,9 @@
                 department: null,
                 stillWork: false,
                 user: null,
-                linkName : null,
+                linkName : "Github",
                 link : null,
-                profileSetting :false
+                profileSetting :true
             }
         },
         methods: {
@@ -253,7 +252,7 @@
                     companyName: this.companyName,
                     department: this.department,
                     stillWork: this.stillWork,
-                    workerId: JSON.parse(localStorage.getItem("user")).userId
+                    workerId: JSON.parse(localStorage.getItem("visUser")).userId
                 })
                 console.log(this.experiences)
                 this.companyName = null,
@@ -268,16 +267,26 @@
                     ...this.user.links,
                     [this.linkName] : this.link
                 }
-                this.linkName = null;
+                this.linkName = "Github";
                 this.link = null
             },
             updateUser() {
                 profileRequests.updateProfile(this.user)
+                this.profileSetting=!this.profileSetting
                 // this.user =JSON.parse(localStorage.getItem("user"))
-            }
+            },
+            getImageUrl(image) {
+                var images = require.context('../../assets/links', false, /\.png$/);
+                return images('./' + image.toLowerCase() + '.png');
+            },
+
         },
-        created() {
-            this.user = JSON.parse(localStorage.getItem("user"));
+        created(){
+
+            this.user = JSON.parse(localStorage.getItem("visUser"));
+            if(localStorage.getItem("userId") === localStorage.getItem("visUserId")){
+                this.myProfile = true
+            }
             console.log(this.user)
             this.activeTab = "about";
             this.$store.dispatch("activePPImage", true);
@@ -290,20 +299,35 @@
             window.removeEventListener('scroll', this.scrollPage);
 
         },
+        props : ['myProfile'],
+
         components: {
             appPost: Post,
             appUser: User,
 
-        }
+        },
+
 
     }
 </script>
 
 <style scoped>
+  link-item{
+    display: inline-block;
+  }
+  .link-div{
+    margin-top: 20px;
+    margin-left: 15px;
+  }
+  .link-icon{
+    width: 30px;
+    height: 30px;
+  }
   .table-div {
     width: 80%;
     margin-right: auto;
     margin-left: auto;
+
   }
 
   .exp {
@@ -331,6 +355,14 @@
     background-color: #283e4a;
     cursor: pointer;
   }
+.settings-button{
+  background-image: url("../../assets/setting.png");
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  border: 0;
+  cursor: pointer;
+}
 
   .inner-card {
     margin-top: -50px;
@@ -345,7 +377,7 @@
     box-shadow: 0px 0px 21px -8px rgba(0, 0, 0, 0.75);
   }
 
-  img {
+  .pp-img {
     width: 150px;
     height: 150px;
     border-radius: 50%;
