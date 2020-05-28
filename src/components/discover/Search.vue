@@ -5,20 +5,33 @@
         <div class="text-center pt-5">
           <span class="">Search by Username</span>
           <input class="search-input" v-model="searchInput"/>
-          <button class="search-button" @click="search()">asdasd</button>
+          <button class="search-button" @click="search()">Search</button>
         </div>
       </div>
-      <div class="text-center font-weight-bold">
-        SUGGESTED
+      <div class="text-center font-weight-bold mt-2">
+
+        <select v-model="activePage">
+          <option value="User">User</option>
+          <option value="Post">Post</option>
+        </select>
       </div>
       <div class="result-user text-center">
         <hr>
         <div class="grid-container mt-5">
-          <div v-for="user in users">
+          <div v-for="user in users" v-show="activePage == 'User'">
             <div class="grid-item">
               <img src="../../../build/logo.png" width="80px">
               <div>
                 {{user.fullName}}
+              </div>
+              <button class="watch-button" @click="watch(user.userId)">Watch +</button>
+            </div>
+          </div>
+          <div v-for="user in users" v-show="activePage == 'Post'">
+            <div class="grid-item">
+              <img src="../../../build/logo.png" width="80px">
+              <div>
+                {{user.fullName}}ss
               </div>
               <button class="watch-button" @click="watch(user.userId)">Watch +</button>
             </div>
@@ -41,17 +54,18 @@
             return {
                 users: [],
                 searchInput: null,
-
+                activePage: 'User'
             }
         },
         methods: {
             search() {
                 discoverRequests.searchUser(this.searchInput).then(response => {
+                    this.activePage = 'User'
                     this.users = response.data
                 })
             },
-            watch(userId){
-                discoverRequests.watchUser(userId).then(response=> {
+            watch(userId) {
+                discoverRequests.watchUser(userId).then(response => {
                     console.log(response)
                 })
             }

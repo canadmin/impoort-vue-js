@@ -2,8 +2,20 @@ import axios from "axios";
 import {baseUrl} from "../configurations";
 
 export const profileRequests = {
-  getProfile(myId,userId){
-
+  getProfile(userId){
+    let token = localStorage.getItem("token");
+    let myId = localStorage.getItem("userId");
+    return axios.get(baseUrl.base+"api/v1/user/profile/"+userId,{
+      headers : {
+        'Content-Type': 'application/json',
+        'Authorization': token.toString(),
+        "Access-Control-Allow-Origin": "*"
+      },
+      params : {
+        'userId' : userId,
+        'myId' : myId
+      }
+    })
   },
   watchUser(userId) {
 

@@ -1,9 +1,9 @@
 <template>
   <div>
     <div>
-      <div class="text-center mt-3 watch-single">
+      <div class="text-center mt-3 watch-single" @click="showProfile(user.userId)">
         <img src="../../assets/stonks.jpg" width="40" height="40" class="watch-image">
-        <span class="watch-name-single">{{suggest.fullName}}</span>
+        <span class="watch-name-single">{{user.fullName}}</span>
         <button class="watch-button ml-5" v-text="useByComponent === 'index' ? '+' : '+ Watch'">+</button>
 
       </div>
@@ -18,7 +18,16 @@
 
             }
         },
-        props : ["useByComponent","suggest"],
+        methods:{
+          showProfile(userId){
+              this.$store.dispatch('showProfile',userId).then(response=>{
+                  this.$router.push({name : "profile", params : {
+                          myProfile : false
+                      }})
+              });
+          }
+        },
+        props : ["useByComponent","user"],
 
     }
 

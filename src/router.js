@@ -17,8 +17,7 @@ export const routes = [
       next();
     },children: [
       {path: "/messages", component: Message},
-      {path: "/profile-me", component: UserProfile},
-      {path: "/profile-me2", component: Profile},
+      {path :"/profile" ,name : "profile", component : UserProfile, props :true},
       {path: "/test", component: test},
       {path: "", component: Index},
       {path : "/discover",component : Search}

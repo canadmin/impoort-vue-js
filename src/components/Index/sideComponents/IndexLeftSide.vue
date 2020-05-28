@@ -4,7 +4,7 @@
       Suggested
       <hr>
       <div v-for="suggest in suggestedList">
-        <app-user :useByComponent="'index'" :suggest="suggest"></app-user>
+        <app-user :useByComponent="'index'" :user="suggest"></app-user>
       </div>
       <div class="mt-4">
        <span class="see-more">See More</span>
