@@ -41,6 +41,38 @@ export const profileRequests = {
        localStorage.setItem("user",JSON.stringify(response.data))
      })
 
-  }
+  },
+  getWatcher(myId,pageNumber,pageSize,userId){
+    let token = localStorage.getItem("token");
+      return axios.get(baseUrl.base+"api/v1/watch/watcher/"+userId,{
+        headers : {
+          'Content-Type': 'application/json',
+          'Authorization': token.toString(),
+          "Access-Control-Allow-Origin": "*"
+        },
+        params : {
+          'myId' : myId,
+          'pageNumber' : pageNumber,
+          'pageSize' : pageSize,
+          'userId' : userId,
+        }
+    })
+  },
+  getWatching(myId,pageNumber,pageSize,userId){
+    let token = localStorage.getItem("token");
+    return axios.get(baseUrl.base+"api/v1/watch/watching/"+userId,{
+      headers : {
+        'Content-Type': 'application/json',
+        'Authorization': token.toString(),
+        "Access-Control-Allow-Origin": "*"
+      },
+      params : {
+        'myId' : myId,
+        'pageNumber' : pageNumber,
+        'pageSize' : pageSize,
+        'userId' : userId,
+      }
+    })
+  },
 
 }

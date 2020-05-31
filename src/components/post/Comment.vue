@@ -23,7 +23,6 @@
         },
         methods : {
             deleteComment(commentId){
-
                 indexRequest.deleteComment(commentId,this.postId).then(response=>{
                     this.deleted = false
                 })

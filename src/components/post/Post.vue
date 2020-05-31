@@ -23,8 +23,8 @@
           <div class="col-4">
             <img src="../../assets/comment.png" @click="expandComment =! expandComment" height="25" width="25"/>({{post.commentCount}})
           </div>
-          <div class="col-4" @click="watch = !watch">
-            <img :src="post.isWatched ? getImageUrl('watched') : getImageUrl('liked')" height="25" width="25"/>
+          <div class="col-4"  @click="savePost(post.postId)">
+            <img :src="post.isWatched ? getImageUrl('save') : getImageUrl('save1')" height="25" width="25"/>
           </div>
         </div>
         <!-- eger posta yorum yapılmışsa veya yorun yapılacaksa-->
@@ -94,6 +94,18 @@
                     indexRequest.unlikePost(postId).then(response=> {
                         this.post.isLiked = false;
                         this.post.likeCount -=1;
+                    })
+                }
+
+            },
+            savePost(postId){
+                if(this.post.isWatched){
+                    indexRequest.unWatchPost(postId);
+                    this.post.isWatched = false;
+                }else {
+                    indexRequest.watchPost(postId).then(response => {
+                        console.log("Post Başarı ile kaydedildi")
+                        this.post.isWatched = true;
                     })
                 }
 
