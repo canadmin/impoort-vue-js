@@ -72,10 +72,8 @@
               <button class="search-filter-button">Just a User</button>
               <div class="search-field-button text-center">
                 <el-collapse-transition>
-
                 <button class="search-field-button-search">Search</button>
                 </el-collapse-transition>
-
               </div>
             </div>
             </transition>

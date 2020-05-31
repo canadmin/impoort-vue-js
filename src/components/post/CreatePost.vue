@@ -59,6 +59,7 @@
             },
             sharePost(){
                 indexRequest.shareNewPost(this.post);
+                this.$emit('addLocalPost',this.post)
             }
         },
         directives: {

@@ -40,7 +40,6 @@ export const discoverRequests = {
   },
   searchUser(fullName){
     let token = localStorage.getItem("token");
-
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': token.toString(),

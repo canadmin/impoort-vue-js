@@ -94,10 +94,40 @@ export const indexRequest = {
 
 
   },
-  watchPost(){
+  watchPost(postId){
+    let userId = localStorage.getItem("userId");
+    let token = localStorage.getItem("token");
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token.toString(),
+      "Access-Control-Allow-Origin": "*"
+    }
+    return axios.post(baseUrl.base+'api/v1/post/'+postId+"/watch",{},{
+      headers: headers,
+      params : {
+        userId : userId,
+        postId : postId
+      }
+    })
 
   },
-  unWatchPost(){
+  unWatchPost(postId){
+    let userId = localStorage.getItem("userId");
+    let token = localStorage.getItem("token");
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token.toString(),
+      "Access-Control-Allow-Origin": "*"
+    }
+    axios.post(baseUrl.base+'api/v1/post/'+postId+"/unWatchPost",{},{
+      headers :headers,
+      params: {
+        postId : postId,
+        userId : userId
+      }
+    })
 
   },
   deleteComment(commentId,postId){

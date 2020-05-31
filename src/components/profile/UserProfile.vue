@@ -87,8 +87,8 @@
                 <select v-model="linkName">
                   <option disabled value="" selected>Select Link</option>
                   <option style="background-image: url('../../assets/links/github.png')">Github</option>
-                  <option>Twitter</option>
-                  <option>Facebook</option>
+                  <option>twitter</option>
+                  <option>facebook</option>
                 </select>
                 Link <input v-model="link">
               </div>
@@ -179,13 +179,18 @@
           </div>
 
           <div class="show-post" v-if="showTab == 'posts'">
-            <div class="" v-for="i in 4">
-              <app-post class="mt-5"></app-post>
+            <div class="" v-for="post in profilePost">
+              <app-post :post="post" class="mt-5"></app-post>
             </div>
           </div>
           <div class="show-post" v-if="showTab == 'watcher'">
-            <div class="" v-for="i in 4">
-              <app-user :useByComponent="'profile'"></app-user>
+            <div class="" v-for="watch in watcher">
+              <app-user :useByComponent="'profile'" :user="watch.user" ></app-user>
+            </div>
+          </div>
+          <div class="show-post" v-if="showTab == 'watching'">
+            <div class="" v-for="watch in watching">
+              <app-user :useByComponent="'profile'" :user="watch.user" ></app-user>
             </div>
           </div>
         </div>
@@ -200,6 +205,7 @@
     import Post from "../post/Post";
     import User from "../common/User";
     import {profileRequests} from "../../http/profile/profileRequest"
+    import {indexRequest} from "../../http/indexRequests";
 
     export default {
         name: 'UserProfile',
@@ -224,19 +230,49 @@
                 user: null,
                 linkName : "Github",
                 link : null,
-                profileSetting :true
+                profileSetting :true,
+                profilePost : [],
+                watcher : [],
+                watching : []
             }
         },
         methods: {
             selectedTabs(value) {
                 this.activeTab = value;
                 this.showTab = "";
+                switch (value) {
+                    case "posts":
+                        indexRequest.getAllPosts(0,12,true,this.user.userId).then(response=>{
+                            this.profilePost = response.data.content;
+                        })
+                        break;
+                    case "watcher":
+                        profileRequests.getWatcher(localStorage.getItem("userId"),
+                        0,12,localStorage.getItem("visUserId")).then(
+                            response => {
+                                console.log(response)
+                                this.watcher = response.data.content;
+                            }
+                        )
+                        break;
+                    case "watching" :
+                        profileRequests.getWatching(localStorage.getItem("userId"),
+                            0,12,localStorage.getItem("visUserId")).then(
+                            response => {
+                                console.log(response)
+                                this.watching = response.data.content;
+                            }
+                        );
+                        break;
+
+                }
                 setTimeout(() => {
                     this.loadingActive = false;
                     this.showTab = value;
 
                 }, 2000);
                 this.loadingActive = true;
+
             },
             scrollPage(event) {
                 let currentScrollHeight = document.documentElement.scrollTop;

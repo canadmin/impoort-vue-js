@@ -7,7 +7,7 @@
           <app-left-side :suggestedList="suggestedList"></app-left-side>
         </div>
         <div class="col-4 mt-4">
-          <app-create-post></app-create-post>
+          <app-create-post @addLocalPost="addLocal"></app-create-post>
           <div v-for="post in postList">
             <app-post  class="mt-5" :post="post"></app-post>
           </div>
@@ -65,6 +65,20 @@
                 }else{
                     this.$store.dispatch("activePPImage",false)
                 }
+            },
+            addLocal(post){
+               this.getPosts()
+            },
+            getPosts(){
+                indexRequest.getSuggested().then(response => {
+                    this.suggestedList = response.data;
+                    console.log(this.suggestedList)
+                });
+                indexRequest.getAllPosts(0,12,false,localStorage.getItem("userId"))
+                    .then(response=> {
+                        console.log(response.data)
+                        this.postList = response.data.content.reverse()
+                    })
             }
 
         },
@@ -81,15 +95,7 @@
             appCreatePost: CreatePost
         },
         created() {
-            indexRequest.getSuggested().then(response => {
-                this.suggestedList = response.data;
-                console.log(this.suggestedList)
-            });
-            indexRequest.getAllPosts(0,12,false,localStorage.getItem("userId"))
-                .then(response=> {
-                    console.log(response.data)
-                    this.postList = response.data.content
-                })
+           this.getPosts();
             this.$store.dispatch("activePPImage",false);
             window.addEventListener('scroll', this.scrollPage);
         },
