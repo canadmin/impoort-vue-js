@@ -12,23 +12,15 @@
               </div>
             </div>
             <div class="general-user mt-3 ml-4">
+              <div v-for="user in inbox">
+                <div class="general-user-single mb-3" @click="selectUserForMessage(nameMerger(user.firstName,user.lastName),user.userId)">
+                  <img src="../../assets/pp.jpeg" class="general-user-single-img " width="50" height="50">
+                  <span class="ml-3 general-user-single-name" v-text="nameMerger(user.firstName,user.lastName)"></span>
+                  <span class="ml-3 general-user-single-name l-message" v-text="lastMessage(user.lastMessage)"></span>
 
-              <div class="general-user-single mb-3" @click="selectUserForMessage('Can Yardımcı')">
-                <img src="../../assets/pp.jpeg" class="general-user-single-img " width="50" height="50">
-                <span class="ml-3 general-user-single-name">Can Yardımcı</span>
+                </div>
               </div>
-              <div class="general-user-single mb-3" @click="selectUserForMessage('Yusuf Ali Ezik')">
-                <img src="../../assets/pp.jpeg" class="general-user-single-img" width="50" height="50">
-                <span class="ml-3 general-user-single-name">Yusuf Ali Ezik</span>
-              </div>
-              <div class="general-user-single mb-3" @click="selectUserForMessage('Hasan Cerit')">
-                <img src="../../assets/pp.jpeg" class="general-user-single-img" width="50" height="50">
-                <span class="ml-3 general-user-single-name">Hasan Cerit</span>
-              </div>
-              <div class="general-user-single mb-3" @click="selectUserForMessage('Mehmet Burak')">
-                <img src="../../assets/pp.jpeg" class="general-user-single-img" width="50" height="50">
-                <span class="ml-3 general-user-single-name">Mehmet Burak</span>
-              </div>
+
 
             </div>
           </div>
@@ -77,49 +69,125 @@
 </template>
 
 <script>
-    export default {
+
+  import {messageRequests} from "../../http/messages/messageRequests";
+
+  export default {
         data() {
             return {
                 showButton: false,
                 messageText: null,
                 messagesList: [],
-                user: null
+                user: null,
+                inbox : [],
+                receiverId : null,
+                globalInterval : null,
+                biseyler : 0
             }
         },
         methods: {
 
-            selectUserForMessage(user) {
-
+            selectUserForMessage(user,userId) {
+                clearInterval(this.globalInterval)
+                this.messagesList = []
+                this.receiverId = userId;
+                let senderId = localStorage.getItem("userId");
+                messageRequests.getSpesChat(senderId,this.receiverId).then(response=>{
+                    response.data.forEach(data=>{
+                        console.log(data)
+                        if (data.messageSenderUserId === senderId){
+                            this.messagesList.push({
+                                key : data.messageId,
+                                value : {
+                                    byWho : "me",
+                                    messagePayload : data.messageText
+                                }
+                            })
+                        }else{
+                            this.messagesList.push({
+                                key : data.messageId,
+                                value : {
+                                    byWho : user,
+                                    messagePayload : data.messageText
+                                }
+                            })
+                        }
+                    })
+                })
                 this.user = {
-                    selectedUserId: "123",
+                    selectedUserId: userId,
                     selectedUserName: user,
                 }
 
+               this.messageListener()
             },
-            initialMessage() {
-                this.messagesList.push({
-                    key: 1,
-                    value: {
-                        byWho: "yusuf",
-                        messagePayload: "Merhaba Can Nasılsı asdasdasdasdasd asd asd asd asda sdas dasd asn"
-                    }
-                });
-                this.messagesList.push({
-                    key: 2,
-                    value: {byWho: "me", messagePayload: "Merhaba, Teşekkürler sen nasılsın"}
-                });
+            messageListener(){
+              var vm = this;
+                this.globalInterval = setInterval(()=>{
+                 this.receiverId = this.user.selectedUserId;
+                 let senderId = localStorage.getItem("userId");
+                 messageRequests.getSpesChat(senderId,this.receiverId).then(response=>{
+                     response.data.forEach(data=>{
+                         var isNotExist = true
+                         vm.messagesList.forEach(message=>{
+                             if(data.messageId === message.key){
+                                 isNotExist = false
+                             }
+                         })
+                          if(isNotExist){
+                              if (data.messageSenderUserId === senderId){
+                                  this.messagesList.push({
+                                      key : data.messageId,
+                                      value : {
+                                          byWho : "me",
+                                          messagePayload : data.messageText
+                                      }
+                                  })
+                              }else{
+                                  this.messagesList.push({
+                                      key : data.messageId,
+                                      value : {
+                                          byWho : vm.user.selectedUserName,
+                                          messagePayload : data.messageText
+                                      }
+                                  })
+                              }
+                          }
+                     })
 
+                 })
+              },5000)
             },
             sendMessage(event) {
-                let lastIndex = this.messagesList.length;
-                let key = this.messagesList[lastIndex - 1].key;
-                this.messagesList.push({key: key, value: {byWho: "me", messagePayload: event.target.value}});
-                this.messagesList.push({key: key + 1, value: {byWho: "yusuf", messagePayload: "Merhaba Can Nasılsın"}});
+                let senderId = localStorage.getItem("userId");
+                messageRequests.sendMessage(this.receiverId,senderId,event.target.value).then(response => {
+                    console.log(response.data)
+                    this.messagesList.push({
+                        key : response.data.messageId,
+                        value : {
+                            byWho : "me",
+                            messagePayload : response.data.messageText
+                        }
+                    })
+                } )
                 this.messageText = "";
             },
+            getInbox(){
+                let userId = localStorage.getItem("userId");
+                messageRequests.getInbox(userId).then(response => {
+                    console.log(response.data)
+                    this.inbox = response.data
+                })
+            },
+            nameMerger(fName,lName){
+                return fName + ' ' + lName;
+            },
+            lastMessage(lastMessage){
+                return lastMessage.substring(0,10)
+            }
         },
         created() {
-            this.initialMessage();
+            this.getInbox()
             this.$store.dispatch("activePPImage", true);
         },
         watch: {
@@ -146,7 +214,9 @@
     transition: box-shadow 83ms;
 
   }
-
+.l-message{
+  opacity: 0.5;
+}
   .message-row {
     margin-top: 4.5rem;
     margin-left: 150px;
