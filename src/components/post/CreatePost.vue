@@ -94,6 +94,7 @@
                               this.url = url;
                               this.picture =url;
                               this.post.mediaUrl =this.url;
+                              this.post.postType = 1;
                               indexRequest.shareNewPost(this.post);
                               this.$emit('addLocalPost',this.post)
                         });
