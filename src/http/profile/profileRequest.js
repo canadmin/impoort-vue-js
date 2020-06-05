@@ -74,5 +74,21 @@ export const profileRequests = {
       }
     })
   },
+  updateProfileImage(profileImg){
+    let token = localStorage.getItem("token");
+    let userId = localStorage.getItem("userId")
+    return axios.post(baseUrl.base+"api/v1/user/updateProfileImg",{
+    },{
+      headers :{
+        'Content-Type': 'application/json',
+        'Authorization': token.toString(),
+        "Access-Control-Allow-Origin": "*"
+      },
+      params :{
+        'userId':userId,
+        "url": profileImg,
+      }
+    })
+  }
 
 }

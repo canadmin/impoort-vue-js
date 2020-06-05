@@ -13,8 +13,9 @@
             </div>
             <div class="general-user mt-3 ml-4">
               <div v-for="user in inbox">
-                <div class="general-user-single mb-3" @click="selectUserForMessage(nameMerger(user.firstName,user.lastName),user.userId)">
-                  <img src="../../assets/pp.jpeg" class="general-user-single-img " width="50" height="50">
+                <div class="general-user-single mb-3" @click="selectUserForMessage(nameMerger(user.firstName,user.lastName),user.userId,user.profileImgUrl)">
+                  <img :src="user.profileImgUrl !== null? user.profileImgUrl: ''" width="50" height="50"class="general-user-single-img">
+
                   <span class="ml-3 general-user-single-name" v-text="nameMerger(user.firstName,user.lastName)"></span>
                   <span class="ml-3 general-user-single-name l-message" v-text="lastMessage(user.lastMessage)"></span>
 
@@ -27,7 +28,7 @@
           <div class="col-9  bg-white message-box" v-if="user != null">
             <!-- Message Box header-->
             <div class="message-box-header mt-3 text-right mr-5">
-              <img class="general-user-single-img" src="../../assets/pp.jpeg" width="50" height="50">
+              <img :src="user.imgUrl !== null? user.imgUrl: ''" width="50" height="50"class="general-user-single-img">
               <span class="mr-5 general-user-single-name">{{user.selectedUserName}}</span>
             </div>
             <hr>
@@ -54,7 +55,7 @@
               <input type="text" v-model="messageText" @keydown.enter="sendMessage"
                      :class="!showButton ? 'message-input-text': 'message-input-with-button'"
                      placeholder="Write a message ...">
-              <button class=" send-button ml-4" v-show="showButton"> Gönder</button>
+              <button class=" send-button ml-4" v-show="showButton" @click="sendMessage"> Gönder</button>
             </div>
 
           </div>
@@ -87,7 +88,7 @@
         },
         methods: {
 
-            selectUserForMessage(user,userId) {
+            selectUserForMessage(user,userId,profileImg) {
                 clearInterval(this.globalInterval)
                 this.messagesList = []
                 this.receiverId = userId;
@@ -117,6 +118,7 @@
                 this.user = {
                     selectedUserId: userId,
                     selectedUserName: user,
+                    imgUrl : profileImg
                 }
 
                this.messageListener()

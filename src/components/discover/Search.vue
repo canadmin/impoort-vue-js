@@ -20,7 +20,7 @@
         <div class="grid-container mt-5">
           <div v-for="user in users" v-show="activePage == 'User'">
             <div class="grid-item">
-              <img src="../../../build/logo.png" width="80px">
+              <img :src="user.profileImgUrl !== null? user.profileImgUrl: ''" width="80" height="80" class="pp-img">
               <div>
                 {{user.fullName}}
               </div>
@@ -29,7 +29,8 @@
           </div>
           <div v-for="user in users" v-show="activePage == 'Post'">
             <div class="grid-item">
-              <img src="../../../build/logo.png" width="80px">
+              <img :src="user.profileImgUrl !== null? user.profileImgUrl: ''" width="80" height="80" class="pp-img">
+
               <div>
                 {{user.fullName}}ss
               </div>
@@ -149,4 +150,10 @@
     background-color: #60C4A9;
     color: #fffeff;
   }
+  .pp-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+
 </style>

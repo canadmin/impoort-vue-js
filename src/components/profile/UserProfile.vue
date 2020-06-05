@@ -14,9 +14,15 @@
           </div>
           <div class="profile-update text-center mt-5">
             <div class="mt-5">
-              <img src="../../assets/logo.png" width="80" height="80">
+              <img :src="user.profileImgUrl !== null? user.profileImgUrl: ''" width="80" height="80">
               <p>
-                <button class="watch-button mt-2">change</button>
+              <div >
+                <input type="file" @change="previewImage"  accept="image/*" >
+              </div>
+              <div v-if="imageData!=null">
+                <img class="preview" :src="picture" height="50" width="50">
+              </div>
+                <button class="watch-button mt-2" @click="onUpload">change</button>
               </p>
             </div>
             <div>
@@ -160,7 +166,7 @@
         <div class="center-card pt-4  col-8">
           <div class="">
             <div class="img-div">
-              <img class="pp-img" src="../../assets/pp.jpeg">
+              <img :src="user.profileImgUrl !== null? user.profileImgUrl: ''" width="80" height="80" class="pp-img">
               <div class="text-center bio">
                 <button class="mt-1 btn watch-button" v-show="!myProfile">Watch +</button>
                 <div class="text-center">
@@ -168,10 +174,12 @@
                     <img class="settings-button" @click="profileSetting=!profileSetting"
                          v-show="myProfile">
                     </img>
+                    <img src="../../assets/messageSs.png" width="25" height="25"
+                         style="cursor: pointer"
+                         v-show="!myProfile" @click="messageModalStatus=!messageModalStatus">
                   </p>
                   <p>@{{user.department}}</p>
                 </div>
-
               </div>
             </div>
 
@@ -240,19 +248,12 @@
     import {profileRequests} from "../../http/profile/profileRequest"
     import {indexRequest} from "../../http/indexRequests";
     import {messageRequests} from "../../http/messages/messageRequests";
+    import firebase from 'firebase'
 
     export default {
         name: 'UserProfile',
         data() {
             return {
-                // activities: [{
-                //     content: 'Java Developer at Özgür Yazilim A.Ş.',
-                // }, {
-                //     content: 'Full Stack Developer at Impoort',
-                // }, {
-                //     content: 'Co - Founder Impoort',
-                //     color: '#0bbd87'
-                // }],
                 reverse: true,
                 loadingActive: false,
                 showTab: "about",
@@ -268,8 +269,9 @@
                 profilePost : [],
                 watcher : [],
                 watching : [],
-                messageModalStatus : false,
-                messageBody : "Hey. !"
+                messageModalStatus : true,
+                messageBody : "Hey. !",
+
             }
         },
         methods: {
@@ -318,6 +320,13 @@
                     this.$store.dispatch("changeHeaderBackground", false);
                 }
             },
+            previewImage(event) {
+                this.uploadValue=0;
+                this.picture=null;
+                this.imageData = event.target.files[0];
+                console.log(this.imageData)
+
+            },
             addExperience() {
                 this.user.experiences.push({
                     companyId: "",
@@ -359,6 +368,24 @@
                         console.log("mesaj gönderildi")
                     })
 
+            },
+            onUpload(){
+                this.picture=null;
+                const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+                storageRef.on(`state_changed`,snapshot=>{
+                        this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+                    }, error=>{console.log(error.message)},
+                    ()=>{this.uploadValue=100;
+                        storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+                            this.url = url;
+                            this.picture =url;
+                            console.log("url falan",url)
+                               profileRequests.updateProfileImage(url).then(()=>{
+                                this.user.profileImgUrl = url;
+                            });
+                        });
+                    }
+                );
             }
 
         },
