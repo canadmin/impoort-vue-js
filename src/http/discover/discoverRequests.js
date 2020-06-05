@@ -53,5 +53,16 @@ export const discoverRequests = {
     }
     return axios.post(baseUrl.base+"api/v1/search",
       searchRequest,{headers:headers})
+  },
+  getPopularPosts(){
+    let token = localStorage.getItem("token");
+
+    return axios.get(baseUrl.base+"api/v1/discover/post",{
+      headers : {
+        'Content-Type': 'application/json',
+        'Authorization': token.toString(),
+        "Access-Control-Allow-Origin": "*"
+      }
+    })
   }
 }

@@ -17,8 +17,8 @@
       </div>
       <div class="result-user text-center">
         <hr>
-        <div class="grid-container mt-5">
-          <div v-for="user in users" v-show="activePage == 'User'">
+        <div class="grid-container mt-5"  v-show="activePage == 'User'">
+          <div v-for="user in users">
             <div class="grid-item">
               <img :src="user.profileImgUrl !== null? user.profileImgUrl: ''" width="80" height="80" class="pp-img">
               <div>
@@ -27,18 +27,17 @@
               <button class="watch-button" @click="watch(user.userId)">Watch +</button>
             </div>
           </div>
-          <div v-for="user in users" v-show="activePage == 'Post'">
-            <div class="grid-item">
-              <img :src="user.profileImgUrl !== null? user.profileImgUrl: ''" width="80" height="80" class="pp-img">
+        </div>
+        <div class="grid-container-post" v-show="activePage == 'Post'">
+          <div v-for="post in posts" >
+            <div class="post-grid-item">
+              <span><img src="../../assets/user.png">{{post.user.fullName}}</span>
 
-              <div>
-                {{user.fullName}}ss
-              </div>
-              <button class="watch-button" @click="watch(user.userId)">Watch +</button>
+              <img :src="post.mediaUrl !== null? post.mediaUrl: ''" width="100%" height="100%" class="">
+
+                <span><img src="../../assets/like.png">{{post.likeCount}}</span>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
@@ -55,7 +54,8 @@
             return {
                 users: [],
                 searchInput: null,
-                activePage: 'User'
+                activePage: 'User',
+                posts : []
             }
         },
         methods: {
@@ -69,12 +69,29 @@
                 discoverRequests.watchUser(userId).then(response => {
                     console.log(response)
                 })
+            },
+            getPopularPost(){
+                console.log("asdads")
+                discoverRequests.getPopularPosts().then(response => {
+                    console.log(response)
+                    this.posts = response.data;
+
+                })
             }
         },
         created() {
             let suggestedUser = discoverRequests.getSuggested().then(response => {
                 this.users = response.data
             });
+        },
+        watch:{
+            activePage(val){
+                if(val === 'Post'){
+                    console.log("asdasd")
+                  this.getPopularPost();
+                }
+                console.log(val)
+            }
         }
     }
 </script>
@@ -97,6 +114,7 @@
     width: 100%;
     height: 80vh;
     justify-items: center;
+    overflow-y: auto;
 
   }
 
@@ -140,7 +158,20 @@
     text-align: center;
     height: 250px;
   }
-
+  .grid-container-post{
+    overflow-y: auto;
+    display: inline-grid;
+    grid-template-rows: 500px 500px ;
+    grid-template-columns: 500px 500px;
+    grid-gap: 20px;
+  }
+  .post-grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    font-size: 20px;
+    text-align: center;
+    height: 350px;
+  }
   .watch-button {
     border-radius: 5px;
     background-color: white;
