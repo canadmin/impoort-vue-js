@@ -14,9 +14,15 @@
           </div>
           <div class="profile-update text-center mt-5">
             <div class="mt-5">
-              <img src="../../assets/logo.png" width="80" height="80">
+              <img :src="user.profileImgUrl !== null? user.profileImgUrl: ''" width="80" height="80">
               <p>
-                <button class="watch-button mt-2">change</button>
+              <div >
+                <input type="file" @change="previewImage"  accept="image/*" >
+              </div>
+              <div v-if="imageData!=null">
+                <img class="preview" :src="picture" height="50" width="50">
+              </div>
+                <button class="watch-button mt-2" @click="onUpload">change</button>
               </p>
             </div>
             <div>
@@ -101,6 +107,31 @@
 
       </div>
 
+
+      <div id="messageModal" class="modal-md-message" v-show="!messageModalStatus">
+
+        <!-- Modal content -->
+        <div class="modal-content-message">
+          <span class="close" @click="messageModalStatus=!messageModalStatus">&times;</span>
+          <div class="text-center">
+            <span>Send Message to {{user.fullName}}</span>
+          </div>
+          <div>
+            <hr>
+            <div>
+              <div class="text-center">
+                <input class="message-input" v-model="messageBody"/>
+              </div>
+              <div class="text-center mt-5">
+                <button class="btn btn-secondary" @click="sendMessage()">Send Message</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
     <div class="inner-card container-fluid">
       <div class="row ">
@@ -135,28 +166,38 @@
         <div class="center-card pt-4  col-8">
           <div class="">
             <div class="img-div">
-              <img class="pp-img" src="../../assets/pp.jpeg">
-              <div class="text-center">
+              <img :src="user.profileImgUrl !== null? user.profileImgUrl: ''" width="80" height="80" class="pp-img">
+              <div class="text-center bio">
                 <button class="mt-1 btn watch-button" v-show="!myProfile">Watch +</button>
-                <p class="user-name">{{user.fullName}}
-                <img class="settings-button" @click="profileSetting=!profileSetting"  v-show="myProfile">
-                </img>
-                </p>
-                <p>@{{user.department}}</p>
+                <div class="text-center">
+                  <p class="user-name">{{user.fullName}}
+                    <img class="settings-button" @click="profileSetting=!profileSetting"
+                         v-show="myProfile">
+                    </img>
+                    <img src="../../assets/messageSs.png" width="25" height="25"
+                         style="cursor: pointer"
+                         v-show="!myProfile" @click="messageModalStatus=!messageModalStatus">
+                  </p>
+                  <p>@{{user.department}}</p>
+                </div>
               </div>
             </div>
 
             <div class="row   mt-5 d-flex justify-content-center text-center">
-              <div :class="activeTab === 'about'? 'active-tab':'watch-select'" @click="selectedTabs('about')">
+              <div :class="activeTab === 'about'? 'active-tab':'watch-select'"
+                   @click="selectedTabs('about')">
                 About
               </div>
-              <div :class="activeTab === 'posts'? 'active-tab':'watch-select'" @click="selectedTabs('posts')">
+              <div :class="activeTab === 'posts'? 'active-tab':'watch-select'"
+                   @click="selectedTabs('posts')">
                 Posts (12)
               </div>
-              <div :class="activeTab === 'watcher'? 'active-tab':'watch-select'" @click="selectedTabs('watcher')">
+              <div :class="activeTab === 'watcher'? 'active-tab':'watch-select'"
+                   @click="selectedTabs('watcher')">
                 Watcher (256)
               </div>
-              <div :class="activeTab === 'watching'? 'active-tab':'watch-select'" @click="selectedTabs('watching')">
+              <div :class="activeTab === 'watching'? 'active-tab':'watch-select'"
+                   @click="selectedTabs('watching')">
                 Watching (195)
               </div>
             </div>
@@ -206,19 +247,13 @@
     import User from "../common/User";
     import {profileRequests} from "../../http/profile/profileRequest"
     import {indexRequest} from "../../http/indexRequests";
+    import {messageRequests} from "../../http/messages/messageRequests";
+    import firebase from 'firebase'
 
     export default {
         name: 'UserProfile',
         data() {
             return {
-                // activities: [{
-                //     content: 'Java Developer at Özgür Yazilim A.Ş.',
-                // }, {
-                //     content: 'Full Stack Developer at Impoort',
-                // }, {
-                //     content: 'Co - Founder Impoort',
-                //     color: '#0bbd87'
-                // }],
                 reverse: true,
                 loadingActive: false,
                 showTab: "about",
@@ -233,7 +268,10 @@
                 profileSetting :true,
                 profilePost : [],
                 watcher : [],
-                watching : []
+                watching : [],
+                messageModalStatus : true,
+                messageBody : "Hey. !",
+
             }
         },
         methods: {
@@ -282,6 +320,13 @@
                     this.$store.dispatch("changeHeaderBackground", false);
                 }
             },
+            previewImage(event) {
+                this.uploadValue=0;
+                this.picture=null;
+                this.imageData = event.target.files[0];
+                console.log(this.imageData)
+
+            },
             addExperience() {
                 this.user.experiences.push({
                     companyId: "",
@@ -315,6 +360,33 @@
                 var images = require.context('../../assets/links', false, /\.png$/);
                 return images('./' + image.toLowerCase() + '.png');
             },
+            sendMessage(){
+                let receiverId = localStorage.getItem("visUserId");
+                let senderId = localStorage.getItem("userId");
+                messageRequests.sendMessage(receiverId,senderId,this.messageBody)
+                    .then(response => {
+                        console.log("mesaj gönderildi")
+                    })
+
+            },
+            onUpload(){
+                this.picture=null;
+                const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+                storageRef.on(`state_changed`,snapshot=>{
+                        this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+                    }, error=>{console.log(error.message)},
+                    ()=>{this.uploadValue=100;
+                        storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+                            this.url = url;
+                            this.picture =url;
+                            console.log("url falan",url)
+                               profileRequests.updateProfileImage(url).then(()=>{
+                                this.user.profileImgUrl = url;
+                            });
+                        });
+                    }
+                );
+            }
 
         },
         created(){
@@ -382,7 +454,11 @@
     -o-animation: AnimationName 54s ease infinite;
     animation: AnimationName 54s ease infinite;
   }
-
+  .bio{
+    width: 500px;
+    margin-left: -180px;
+    margin-top: 15px;
+  }
   .active-tab {
     padding: 12px;
     width: 150px;
@@ -463,6 +539,9 @@
     font-weight: 700;
     color: #3c4858;
     font-size: 24px;
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .watch-select {
@@ -545,21 +624,6 @@
     }
   }
 
-  /*.common-board {*/
-  /*  position: fixed; !* Fixed Sidebar (stay in place on scroll) *!*/
-  /*  z-index: 100; !* Stay on top *!*/
-  /*  top: 0;*/
-  /*  right: 0;*/
-  /*  margin-top: 58px;*/
-  /*  width: 700px;*/
-  /*  height: 100%;*/
-  /*  position: -webkit-sticky;*/
-  /*  opacity: 0.75;*/
-  /*  background: #f4f5f4;*/
-  /*}*/
-
-  /*modal*/
-
   .modal-md {
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -573,15 +637,46 @@
     background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
   }
 
-  /* Modal Content */
+  .modal-md-message {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  }
   .modal-content {
     overflow-y: auto;
+    background-color: #fefefe;
+    margin: auto;
+
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    height: 80vh;
+  }
+
+  /* Modal Content */
+  .modal-content-message {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
-    height: 80vh;
+    height: 30vh;
+  }
+  .message-input{
+    width: 75%;
+    height: 50px;
+    border: 0;
+    -webkit-box-shadow: 0px 0px 21px 11px rgba(40, 62, 74, 0.25);
+    -moz-box-shadow: 0px 0px 21px 11px rgba(40, 62, 74, 0.25);
+    box-shadow: 0px 0px 21px 11px rgba(40, 62, 74, 0.25);
+    padding: 10px;
   }
 
   /* The Close Button */

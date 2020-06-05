@@ -1,7 +1,7 @@
 <template>
   <div class="right-side card-body mt-5  ">
     <div class="text-center">
-      <img src="../../../assets/pp.jpeg" class="left-image" width="50" height="50">
+      <img :src="user.profileImgUrl !== null? user.profileImgUrl: ''" width="40" height="40" class="left-image">
       <div class="mt-2">
         <span class="right-name">{{user.fullName}}</span>
       </div>

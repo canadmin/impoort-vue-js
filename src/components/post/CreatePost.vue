@@ -10,12 +10,17 @@
     </div>
     <div v-outside class="new-post text-center mt-5 bg-white" v-show="createNewPost===true">
       <textarea class="post-description" placeholder=" write something..." v-model="post.postDescription"></textarea>
+      <div >
+        <input type="file" @change="previewImage"  accept="image/*" >
+      </div>
+      <div v-if="imageData!=null">
+        <img class="preview" :src="picture" height="50" width="50">
+        <br>
+        <button @click="onUpload">Upload</button>
+      </div>
+
       <button class="delete-image-button" @click="postSelectImage=null" v-if="postSelectImage!=null">X</button>
-      <p class="">
-        <img height="75" class="img-responsive text-center mt-2"
-                       src="../../assets/pp.jpeg" v-show="postSelectImage != null" :src="postSelectImage">
-      </p>
-      <input ref="file" type="file" style="display: none;" @change="onChange($event)" class="form-control">
+
 <!--      <el-upload-->
 <!--        action="https://jsonplaceholder.typicode.com/posts/"-->
 <!--        list-type="picture-card"-->
@@ -36,7 +41,7 @@
 </template>
 
 <script>
-
+  import firebase from 'firebase'
   import {indexRequest} from "../../http/indexRequests";
     export default {
         data() {
@@ -47,19 +52,53 @@
                 post : {
                     postDescription : null,
                     postType : 0,
-                    userId : null
+                    userId : null,
+                    mediaUrl : null
 
-                }
+                },
+                imageData: null,
+                picture: null,
+                uploadValue: 0,
+                url : null
             }
         },
         methods: {
             onChange(e) {
-                const file = e.target.files[0];
+                const file = e.target.filems[0];
                 this.postSelectImage = URL.createObjectURL(file);
             },
             sharePost(){
+                if(this.imageData === null){
+                    console.log("null falan")
                 indexRequest.shareNewPost(this.post);
                 this.$emit('addLocalPost',this.post)
+                }else{
+                    this.onUpload();
+                }
+            },
+            previewImage(event) {
+                this.uploadValue=0;
+                this.picture=null;
+                this.imageData = event.target.files[0];
+                console.log(this.imageData)
+
+            },
+            onUpload(){
+                this.picture=null;
+                const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+                    storageRef.on(`state_changed`,snapshot=>{
+                        this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+                    }, error=>{console.log(error.message)},
+                    ()=>{this.uploadValue=100;
+                          storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+                              this.url = url;
+                              this.picture =url;
+                              this.post.mediaUrl =this.url;
+                              indexRequest.shareNewPost(this.post);
+                              this.$emit('addLocalPost',this.post)
+                        });
+                    }
+                );
             }
         },
         directives: {

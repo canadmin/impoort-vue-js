@@ -2,17 +2,17 @@
   <div class="container ">
     <div class="row ">
       <div class="col-12 main-post  card-body mb-n4">
-        <img v-bind="mainProps" class="post-image" rounded="circle" alt="Circle image" src="../../assets/pp.jpeg"/>
+        <img :src="post.user.profileImgUrl !== null? post.user.profileImgUrl: ''" width="80" height="80" class="pp-img">
 
         <span> <b class="post-name">{{post.user.fullName}}</b> </span>
-        <span class="float-right">5 gün önce</span>
+        <span class="float-right">2 minute ago</span>
         <hr>
         <div class="description-post">
           {{post.postDescription}}
         </div>
         <div class="post-description-image">
-          <img src="../../assets/asd22.png" width="100%"
-               height="300">
+          <img :src="post.mediaUrl" width="100%"
+               height="300" v-show="post.mediaUrl !== null ">
         </div>
 
         <hr>
@@ -131,7 +131,7 @@
 
   .post-name {
     margin-top: 15px;
-    font-size: 12px;
+    font-size: 24px;
   }
 
   img {
@@ -155,4 +155,8 @@
     background-color: #f5f5f5;
     border-radius: 5px;
   }
+  .pp-img {
+    border-radius: 50%;
+  }
+
 </style>

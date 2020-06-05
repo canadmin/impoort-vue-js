@@ -2,7 +2,8 @@
   <div>
     <div>
       <div class="text-center mt-3 watch-single" @click="showProfile(user.userId)">
-        <img src="../../assets/stonks.jpg" width="40" height="40" class="watch-image">
+        <img :src="user.profileImgUrl !== null? user.profileImgUrl: ''" width="40" height="40" class="watch-image">
+
         <span class="watch-name-single">{{user.fullName}}</span>
         <button class="watch-button ml-5" v-text="useByComponent === 'index' ? '+' : '+ Watch'">+</button>
 
